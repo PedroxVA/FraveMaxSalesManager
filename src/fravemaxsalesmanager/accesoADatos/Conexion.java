@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
     //Atributos propios de la base de datos necesarios para la conexión
     private static final String URL="jdbc:mariadb://localhost/";
-    private static final String DB="universidadulp";
+    private static final String DB="fravemaxsalesdb";//fravemaxsalesdb, nombre de la bd;
     private static final String USUARIO="root";
     private static final String PASSWORD="";
     private static Connection connection;
