@@ -56,7 +56,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "idVenta=" + idVenta + ", idCliente=" + idCliente + ", fechaVenta=" + fechaVenta + '}';
+        return "ID " + idVenta + " - Cliente N°" + idCliente + " (" + fechaVenta+")";
     }
     
     // Hashcode & Equals

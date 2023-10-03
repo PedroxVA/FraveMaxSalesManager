@@ -75,7 +75,7 @@ public class DetalleVenta {
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "idDetalleVenta=" + idDetalleVenta + ", cantidad=" + cantidad + ", idVenta=" + idVenta + ", precioVenta=" + precioVenta + ", idProducto=" + idProducto + '}';
+        return "ID " + idDetalleVenta + " - " + cantidad+ " unidades, Venta N°" + idVenta + ", $" + precioVenta + ", ID del Producto: " + idProducto;
     }
     
     // Hashcode & Equals

@@ -7,32 +7,67 @@ import java.util.Objects;
 public class Producto {
 //atributos
     private int idProducto;
-    private String nombtre; 
+    private String categoria; //Heladera, televisores, hornos, celulares
+    private String nombreProducto; 
+    private String marca;
+    private String modelo;
     private String descripcion;
     private double precioActual;
     private int stock;
     private Boolean activo;
+    
+    
 
 //constructores
 private Producto(){}
 
-    public Producto(int idProducto, String nombtre, String descripcion, double precioActual, int stock, Boolean activo) {
+    public Producto(int idProducto, String categoria, String nombreProducto, String marca, String modelo, String descripcion, double precioActual, int stock, Boolean activo) {
         this.idProducto = idProducto;
-        this.nombtre = nombtre;
+        this.categoria = categoria;
+        this.nombreProducto = nombreProducto;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descripcion = descripcion;
+        this.precioActual = precioActual;
+        this.stock = stock;
+        this.activo = activo;
+    }
+    public Producto(String categoria, String nombreProducto, String marca, String modelo, String descripcion, double precioActual, int stock, Boolean activo) {
+        this.categoria = categoria;
+        this.nombreProducto = nombreProducto;
+        this.marca = marca;
+        this.modelo = modelo;
         this.descripcion = descripcion;
         this.precioActual = precioActual;
         this.stock = stock;
         this.activo = activo;
     }
 
-    public Producto(String nombtre, String descripcion, double precioActual, int stock, Boolean activo) {
-        this.nombtre = nombtre;
-        this.descripcion = descripcion;
-        this.precioActual = precioActual;
-        this.stock = stock;
-        this.activo = activo;
+    //Getters & Setters  
+    public String getCategoria() {
+        return categoria;
     }
-     //Getters & Setters
+
+    public void setCategoria(String categoria) {    
+        this.categoria = categoria;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 
     public int getIdProducto() {
         return idProducto;
@@ -42,12 +77,12 @@ private Producto(){}
         this.idProducto = idProducto;
     }
 
-    public String getNombtre() {
-        return nombtre;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombtre(String nombtre) {
-        this.nombtre = nombtre;
+    public void setNombreProducto(String nombtre) {
+        this.nombreProducto = nombtre;
     }
 
     public String getDescripcion() {
@@ -86,7 +121,7 @@ private Producto(){}
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombtre=" + nombtre + ", descripcion=" + descripcion + ", precioActual=" + precioActual + ", stock=" + stock + ", activo=" + activo + '}';
+        return "ID "+idProducto+" - "+nombreProducto+", $"+precioActual;
     }
     
      //Método HashCode & Equals;
@@ -95,7 +130,7 @@ private Producto(){}
     public int hashCode() {
         int hash = 5;
         hash = 59 * hash + this.idProducto;
-        hash = 59 * hash + Objects.hashCode(this.nombtre);
+        hash = 59 * hash + Objects.hashCode(this.nombreProducto);
         hash = 59 * hash + Objects.hashCode(this.descripcion);
         hash = 59 * hash + (int) (Double.doubleToLongBits(this.precioActual) ^ (Double.doubleToLongBits(this.precioActual) >>> 32));
         hash = 59 * hash + this.stock;
@@ -124,7 +159,7 @@ private Producto(){}
         if (this.stock != other.stock) {
             return false;
         }
-        if (!Objects.equals(this.nombtre, other.nombtre)) {
+        if (!Objects.equals(this.nombreProducto, other.nombreProducto)) {
             return false;
         }
         if (!Objects.equals(this.descripcion, other.descripcion)) {
