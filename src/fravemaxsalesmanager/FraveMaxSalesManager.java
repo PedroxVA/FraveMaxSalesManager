@@ -9,8 +9,8 @@ public class FraveMaxSalesManager {
 
     public static void main(String[] args) {
     //Prueba de los métodos de ProductoData
-    ProductoData ProData = new ProductoData();
-    //Alta
+    ProductoData proData = new ProductoData();
+    //----------Alta-----------
     String categoria = "Electrodomestico";
     String nombreProducto = "Heladera";
     String marca = "Whirpool";
@@ -20,11 +20,18 @@ public class FraveMaxSalesManager {
     int stock = 10;
     Boolean estado = true;
     
-    Producto producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precio, stock, estado);
-    /*ProData.altaProducto(producto);*/
-    //Baja
-    //Modificar
-    int idProducto = producto.getIdProducto();
+    Producto producto = new Producto(2, categoria, nombreProducto, marca, modelo, descripcion, precio, stock, estado);
+    //proData.altaProducto(producto);
+    //proData.altaProductoLogica(producto);
+    
+    //------------Baja--------------
+    //proData.bajaProductoPorID(1);
+    //proData.bajaProductoPorNombre("Heladera");
+    //proData.bajaProductoPorModelo("Ultra Frost");
+    //proData.bajaProductoPorCategoria("Electrodomestico");
+    
+    //--------------Modificar--------------
+    int idProducto = 1;
     String categoriaM = "Electrodomestico";
     String nombreProductoM = "Heladera";
     String marcaM = "Siam";
@@ -35,6 +42,6 @@ public class FraveMaxSalesManager {
     Boolean estadoM = true;
     
     Producto productoM = new Producto(idProducto, categoriaM, nombreProductoM, marcaM, modeloM, descripcionM, precioM, stockM, estadoM);
-    ProData.modificarProducto(productoM);
+    //proData.modificarProducto(productoM);
     }
 }

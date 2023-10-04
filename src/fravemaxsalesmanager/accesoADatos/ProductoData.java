@@ -3,11 +3,14 @@ package fravemaxsalesmanager.accesoADatos;
 
 import fravemaxsalesmanager.entidades.Producto;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -34,7 +37,7 @@ public class ProductoData {
             ps.setString(5, producto.getDescripcion());
             ps.setDouble(6, producto.getPrecioActual());
             ps.setInt(7, producto.getStock());
-            ps.setBoolean(8, producto.getActivo());
+            ps.setBoolean(8, true);
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -49,19 +52,38 @@ public class ProductoData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto");
         }
     }
-    // 1+
+    
+    public void altaProductoLogica(Producto producto){
+        String sql = "UPDATE producto set estado = 1 WHERE idProducto = ? AND estado = 0";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, producto.getIdProducto());
+            int exito = ps.executeUpdate();
+            
+            if(exito==1){
+                JOptionPane.showMessageDialog(null, "Producto Agregado al catálogo.");
+            }else{ JOptionPane.showMessageDialog(null, "Elemento no encontrado.");
+            
+        }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
+        }  
+    }
     //Método para eliminar un producto - 3;
     public void bajaProductoPorID(int idProducto){
-        String sql = "UPDATE producto set estado= 0 WHERE idProducto = ?";
+        String sql = "UPDATE producto set estado= 0 WHERE idProducto = ? AND estado = 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idProducto);
-            int exito = ps.executeUpdate();
+            int filasCambiadas = ps.executeUpdate();
             
-            if(exito==1){
+            if(filasCambiadas>=1){
                 JOptionPane.showMessageDialog(null, "Producto Eliminado del catálogo.");
-            }
+            }else{ JOptionPane.showMessageDialog(null, "Elemento no encontrado.");
+            
+        }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
@@ -69,16 +91,18 @@ public class ProductoData {
     }
     
     public void bajaProductoPorNombre(String nombre){
-        String sql = "UPDATE producto set estado= 0 WHERE nombreProducto = ?";
+        String sql = "UPDATE producto set estado= 0 WHERE nombreProducto = ? AND estado = 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
-            int exito = ps.executeUpdate();
+            int filasCambiadas = ps.executeUpdate();
             
-            if(exito==1){
+            if(filasCambiadas>=1){
                 JOptionPane.showMessageDialog(null, "Producto Eliminado del catálogo.");
-            }
+            }else{ JOptionPane.showMessageDialog(null, "Elemento no encontrado.");
+            
+        }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
@@ -86,16 +110,19 @@ public class ProductoData {
     }
     
     public void bajaProductoPorCategoria(String categoria){
-        String sql = "UPDATE producto set estado= 0 WHERE categoria = ?";
+        String sql = "UPDATE producto set estado = 0 WHERE categoria = ? AND estado = 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, categoria);
-            int exito = ps.executeUpdate();
+            int filasCambiadas = ps.executeUpdate();
             
-            if(exito==1){
+            if(filasCambiadas>=1){
                 JOptionPane.showMessageDialog(null, "Producto Eliminado del catálogo.");
-            }
+            }else{ 
+                JOptionPane.showMessageDialog(null, "Elemento no encontrado.");
+            
+        }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
@@ -103,16 +130,18 @@ public class ProductoData {
     }
     
     public void bajaProductoPorModelo(String modelo){
-        String sql = "UPDATE producto set estado= 0 WHERE modelo = ?";
+        String sql = "UPDATE producto set estado = 0 WHERE modelo = ? AND estado = 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, modelo);
-            int exito = ps.executeUpdate();
+            int filasCambiadas = ps.executeUpdate();
             
-            if(exito==1){
+            if(filasCambiadas>=1){
                 JOptionPane.showMessageDialog(null, "Producto Eliminado del catálogo.");
-            }
+            }else{ JOptionPane.showMessageDialog(null, "Elemento no encontrado.");
+            
+        }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
@@ -149,7 +178,35 @@ public class ProductoData {
     }
     
     //Métodos de busqueda de productos - 1;
-    public void buscarProductoPorFechaDeVenta(LocalDate fechaVenta){
-        String sql= "";
+    public List<Producto> buscarProductoPorFechaDeVenta(LocalDate fechaVenta){
+        ArrayList<Producto> listaProductos = new ArrayList();
+        
+        String sql= "SELECT p.nombreProducto "
+                + "FROM producto as p "
+                + "JOIN detalleventa AS dv ON (dv.idProducto=p.idProducto) "
+                + "JOIN venta AS v ON (dv.idVenta=v.idVenta) "
+                + "WHERE v.fechaVenta = ?;";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fechaVenta));
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                Producto producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                listaProductos.add(producto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla productos)");
+        }
+        return listaProductos;
     }
 }
