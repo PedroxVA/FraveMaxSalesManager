@@ -178,6 +178,32 @@ public class ProductoData {
     }
     
     //Métodos de busqueda de productos - 1;
+    public Producto buscarProductoPorId(int id){
+        Producto producto = null;
+        
+        String sql = "SELECT * FROM producto WHERE producto.idProducto = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+        }
+
+        return producto;
+    }
+    
     public List<Producto> buscarProductoPorFechaDeVenta(LocalDate fechaVenta){
         ArrayList<Producto> listaProductos = new ArrayList();
         
@@ -205,7 +231,7 @@ public class ProductoData {
                 listaProductos.add(producto);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla productos)");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
         }
         return listaProductos;
     }

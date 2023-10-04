@@ -20,7 +20,7 @@ public class FraveMaxSalesManager {
     int stock = 10;
     Boolean estado = true;
     
-    Producto producto = new Producto(2, categoria, nombreProducto, marca, modelo, descripcion, precio, stock, estado);
+    Producto producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precio, stock, estado);
     //proData.altaProducto(producto);
     //proData.altaProductoLogica(producto);
     
