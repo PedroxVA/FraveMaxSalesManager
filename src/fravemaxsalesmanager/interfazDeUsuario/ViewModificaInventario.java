@@ -16,11 +16,11 @@ import javax.swing.JOptionPane;
  *
  * @author jfneg
  */
-public class modificaInventario extends javax.swing.JInternalFrame {
+public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
     ProductoData proData = new ProductoData();
     
-    public modificaInventario() {
+    public ViewModificaInventario() {
         initComponents();
      
     }

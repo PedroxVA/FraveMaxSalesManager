@@ -17,14 +17,14 @@ import javax.swing.JDesktopPane;
  *
  * @author jfneg
  */
-public class menuPrincipal extends javax.swing.JFrame {
+public class ViewMenuPrincipal extends javax.swing.JFrame {
 
     private JDesktopPane desktopPane;
     private JButton btnAbrirJBInventario;
     
     
     
-    public menuPrincipal() {
+    public ViewMenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -115,7 +115,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
       /*jDesktopPane1.removeAll();
       jDesktopPane1.repaint();
-      Inventario inventario = new Inventario();
+      ViewAltaInventario inventario = new ViewAltaInventario();
       inventario.setVisible(true);
       jDesktopPane1.add(inventario);
       inventario.moveToFront();*/
@@ -125,7 +125,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
       jDesktopPane1.removeAll();
       jDesktopPane1.repaint();
-      Inventario inventario = new Inventario();
+      ViewAltaInventario inventario = new ViewAltaInventario();
       inventario.setVisible(true);
       jDesktopPane1.add(inventario);
       inventario.moveToFront();  
@@ -134,7 +134,7 @@ public class menuPrincipal extends javax.swing.JFrame {
     private void jMbajaymodificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMbajaymodificacionActionPerformed
       jDesktopPane1.removeAll();
       jDesktopPane1.repaint();
-      modificaInventario modificacion = new modificaInventario();
+      ViewModificaInventario modificacion = new ViewModificaInventario();
       modificacion.setVisible(true);
       jDesktopPane1.add(modificacion);
       modificacion.moveToFront();
@@ -157,20 +157,21 @@ public class menuPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menuPrincipal().setVisible(true);
+                new ViewMenuPrincipal().setVisible(true);
             }
         });
     }
