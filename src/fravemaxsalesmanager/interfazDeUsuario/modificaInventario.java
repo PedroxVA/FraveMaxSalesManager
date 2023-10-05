@@ -38,6 +38,7 @@ public class modificaInventario extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTproductoSeleccionado = new javax.swing.JTable();
         jTbuscarID = new javax.swing.JTextField();
+        jBBuscar = new javax.swing.JButton();
 
         jLbuscarProducto.setText("Buscar producto por ID: ");
 
@@ -61,9 +62,10 @@ public class modificaInventario extends javax.swing.JInternalFrame {
             jTproductoSeleccionado.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jTbuscarID.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTbuscarIDKeyTyped(evt);
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
             }
         });
 
@@ -73,12 +75,14 @@ public class modificaInventario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jTbuscarID)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jBBuscar)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -87,36 +91,24 @@ public class modificaInventario extends javax.swing.JInternalFrame {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBBuscar))
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTbuscarIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTbuscarIDKeyTyped
-
-        try {      
-       int id = Integer.parseInt( jTbuscarID.getText());
-      
-       
-       Producto producto = proData.buscarProductoPorId(id);
-       jTproductoSeleccionado.editCellAt(0,1);
-       jTproductoSeleccionado.e
-               
-       
-       
-       
-            
-        } catch (NumberFormatException e ) {
-            JOptionPane.showMessageDialog(null, "Ha ingresado una Id Inválida");
-        }
-    }//GEN-LAST:event_jTbuscarIDKeyTyped
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+        cargarDatosTabla();
+    }//GEN-LAST:event_jBBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JLabel jLbuscarProducto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTbuscarID;
@@ -124,5 +116,23 @@ public class modificaInventario extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
  
+    private void cargarDatosTabla(){
+       try {      
+       int id = Integer.parseInt(jTbuscarID.getText().replace(" ", ""));
+       Producto producto = proData.buscarProductoPorId(id);
+       
+       jTproductoSeleccionado.setValueAt(producto.getIdProducto(), 0, 1);
+       jTproductoSeleccionado.setValueAt(producto.getCategoria(), 1, 1);
+       jTproductoSeleccionado.setValueAt(producto.getNombreProducto(), 2, 1);
+       jTproductoSeleccionado.setValueAt(producto.getMarca(), 3, 1);
+       jTproductoSeleccionado.setValueAt(producto.getModelo(), 4, 1);
+       jTproductoSeleccionado.setValueAt(producto.getDescripcion(), 5, 1);
+       jTproductoSeleccionado.setValueAt(producto.getPrecioActual(), 6, 1);
+       jTproductoSeleccionado.setValueAt(producto.getStock(), 7, 1);
+    
+        } catch (NumberFormatException e ) {
+            JOptionPane.showMessageDialog(null, "Ha ingresado una Id Inválida");
+        }
+    }
 }
 

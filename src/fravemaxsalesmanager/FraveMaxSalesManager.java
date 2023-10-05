@@ -11,17 +11,17 @@ public class FraveMaxSalesManager {
     //Prueba de los métodos de ProductoData
     ProductoData proData = new ProductoData();
     //----------Alta-----------
-    String categoria = "Electrodomestico";
-    String nombreProducto = "Heladera";
-    String marca = "Whirpool";
-    String modelo = "Ultra Frost";
+    String categoria = "Tecnología";
+    String nombreProducto = "Celular";
+    String marca = "Samsung";
+    String modelo = "Galaxy A1";
     String descripcion = "Ergonómico, compacto eco-friendly, negro, con wifi incluido";
-    Double precio = 1000000.00;
-    int stock = 10;
+    Double precio = 199999.00;
+    int stock = 19;
     Boolean estado = true;
     
     Producto producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precio, stock, estado);
-    //proData.altaProducto(producto);
+    proData.altaProducto(producto);
     //proData.altaProductoLogica(producto);
     
     //------------Baja--------------
