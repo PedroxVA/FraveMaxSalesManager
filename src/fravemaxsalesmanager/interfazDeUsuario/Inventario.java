@@ -7,6 +7,10 @@ package fravemaxsalesmanager.interfazDeUsuario;
 
 import fravemaxsalesmanager.accesoADatos.ProductoData;
 import fravemaxsalesmanager.entidades.Producto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +23,11 @@ public class Inventario extends javax.swing.JInternalFrame {
    
     public Inventario() {
         proData = new ProductoData();
+        
+            
         initComponents();
+        cargarCombo();
+        
     }
 
     /**
@@ -38,7 +46,6 @@ public class Inventario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTcategoria = new javax.swing.JTextField();
         jTnombreProducto = new javax.swing.JTextField();
         jTmarca = new javax.swing.JTextField();
         jTmodelo = new javax.swing.JTextField();
@@ -46,6 +53,8 @@ public class Inventario extends javax.swing.JInternalFrame {
         jTprecio = new javax.swing.JTextField();
         jTstock = new javax.swing.JTextField();
         jBaltaProducto = new javax.swing.JButton();
+        jCcategoria = new javax.swing.JComboBox<>();
+        jBSalir = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -63,12 +72,6 @@ public class Inventario extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Stock:");
 
-        jTcategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcategoriaActionPerformed(evt);
-            }
-        });
-
         jTdescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTdescripcionActionPerformed(evt);
@@ -79,6 +82,20 @@ public class Inventario extends javax.swing.JInternalFrame {
         jBaltaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBaltaProductoActionPerformed(evt);
+            }
+        });
+
+        jCcategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCcategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCcategoriaActionPerformed(evt);
+            }
+        });
+
+        jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
             }
         });
 
@@ -109,21 +126,25 @@ public class Inventario extends javax.swing.JInternalFrame {
                     .addComponent(jTmodelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(jTmarca, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTnombreProducto, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTcategoria, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTstock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTprecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTdescripcion))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(jBaltaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
+                    .addComponent(jTdescripcion)
+                    .addComponent(jCcategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(264, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBaltaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCcategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -144,30 +165,26 @@ public class Inventario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jTstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jBaltaProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(jBaltaProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTcategoriaActionPerformed
 
     private void jTdescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTdescripcionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTdescripcionActionPerformed
 
     private void jBaltaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaltaProductoActionPerformed
-        String categoria = jTcategoria.getText();
+        String categoria = (String)jCcategoria.getSelectedItem();
         String nombreProducto = jTnombreProducto.getText();
         String marca = jTmarca.getText();
         String modelo = jTmodelo.getText();
@@ -191,9 +208,19 @@ public class Inventario extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBaltaProductoActionPerformed
 
+    private void jCcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCcategoriaActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBSalir;
     private javax.swing.JButton jBaltaProducto;
+    private javax.swing.JComboBox<String> jCcategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -203,7 +230,6 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JTextField jTcategoria;
     private javax.swing.JTextField jTdescripcion;
     private javax.swing.JTextField jTmarca;
     private javax.swing.JTextField jTmodelo;
@@ -211,4 +237,16 @@ public class Inventario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTprecio;
     private javax.swing.JTextField jTstock;
     // End of variables declaration//GEN-END:variables
+
+    public void cargarCombo ()
+    {
+        List<String> categ = new ArrayList<>();
+        categ.add("Electrodomésticos");
+        categ.add("Celulares y accesorios");
+        categ.add("Tecnología");
+        categ.add("Pequeño Electro");
+        
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(categ.toArray(new String[0]));    
+        jCcategoria.setModel(comboBoxModel);
+    }
 }

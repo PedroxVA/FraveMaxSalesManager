@@ -42,6 +42,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMbajaymodificacion = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -73,6 +74,14 @@ public class menuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMbajaymodificacion.setText("Baja y Modificación de Proctos");
+        jMbajaymodificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMbajaymodificacionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMbajaymodificacion);
 
         jMenuBar2.add(jMenu1);
 
@@ -122,6 +131,15 @@ public class menuPrincipal extends javax.swing.JFrame {
       inventario.moveToFront();  
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMbajaymodificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMbajaymodificacionActionPerformed
+      jDesktopPane1.removeAll();
+      jDesktopPane1.repaint();
+      modificaInventario modificacion = new modificaInventario();
+      modificacion.setVisible(true);
+      jDesktopPane1.add(modificacion);
+      modificacion.moveToFront();
+    }//GEN-LAST:event_jMbajaymodificacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -159,6 +177,7 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jMbajaymodificacion;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
