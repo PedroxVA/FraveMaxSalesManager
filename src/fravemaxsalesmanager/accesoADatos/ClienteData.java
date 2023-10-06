@@ -8,8 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ClienteData {
+    private DetalleVentaData deVenData = new DetalleVentaData();
+    private VentaData venData = new VentaData();
     private Connection connection;
 
     public ClienteData(Connection connection) {
@@ -44,16 +47,32 @@ public class ClienteData {
     }
 
     // Método para eliminar un cliente de la base de datos
-    public void eliminarCliente(int clienteId) throws SQLException {
-        String sql = "DELETE FROM Cliente WHERE idCliente=?";
+    public void eliminarCliente(int clienteId) {
+        int resultado = JOptionPane.showConfirmDialog(null, "¿Estas seguro?¡Se eliminaran todas las ventas y detallesVentas relacionadas!");
+        if(resultado==1){
+            deVenData.bajaDetalleVentaPorIdCliente(clienteId);
+            venData.bajaVentaPorIdCliente(clienteId);
+            
+            
+            String sql = "DELETE FROM Cliente WHERE idCliente=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clienteId);
-            statement.executeUpdate();
+            
+            int filasEliminadas = statement.executeUpdate();
+            if(filasEliminadas!=0){
+                JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente.");
+            }
+        }   catch (SQLException ex) {
+               JOptionPane.showMessageDialog(null, "Error al cargar la tabla cliente");
+            }
         }
+        
+        
+        
     }
 
     // Método para obtener un cliente por su ID
-    public Cliente obtenerClientePorId(int clienteId) throws SQLException {
+    public Cliente obtenerClientePorId(int clienteId) {
         
         String sql = "SELECT * FROM Cliente WHERE idCliente=?";
       
@@ -65,18 +84,20 @@ public class ClienteData {
                     cliente.setIdCliente(resultSet.getInt("idCliente"));
                     cliente.setApellido(resultSet.getString("apellido"));
                     cliente.setNombre(resultSet.getString("nombre"));
-                   // cliente.setTelef(resultSet.getString("telef"));
+                    cliente.setTelef(resultSet.getString("telefono"));
                     cliente.setEmail(resultSet.getString("email"));
                     cliente.setCuil(resultSet.getString("cuil"));
                     return cliente;
                 }
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
         return null;
     }
 
     // Método para obtener todos los clientes
-    public List<Cliente> obtenerTodosLosClientes() throws SQLException {
+    public List<Cliente> obtenerTodosLosClientes() {
         List<Cliente> clientes = new ArrayList<>();
         String sql = "SELECT * FROM Cliente";
         try (PreparedStatement statement = connection.prepareStatement(sql);
@@ -92,6 +113,8 @@ public class ClienteData {
                 cliente.setCuil(resultSet.getString("cuil"));
                 clientes.add(cliente);
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
         }
         return clientes;
     }

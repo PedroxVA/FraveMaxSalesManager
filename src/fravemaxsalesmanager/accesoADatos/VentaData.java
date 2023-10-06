@@ -23,7 +23,7 @@ public class VentaData {
         deVenData = new DetalleVentaData();
     }
     ///----------------------------------------------------------------------------------------------------//
-    //Método para agregar un producto-  1;
+    //Método para agregar una venta-  1;
     public void altaVenta(Venta venta){
         String sql = "INSERT INTO venta(idCliente, fechaVenta)"
                 + "VALUES (? ,? )";
@@ -47,7 +47,7 @@ public class VentaData {
         }
     }
 
-    //Método para eliminar un producto - 1;    
+    //Método para eliminar na venta - 1;    
     public void bajaVentaPorID(int idVenta){
         int result = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar esta Venta? ¡Esto eliminará todos los DetallesVenta relacionados!");
         
@@ -96,7 +96,7 @@ public class VentaData {
         
         
     }  
-    //Método para modificar un producto - 1;
+    //Método para modificar na venta - 1;
     public void modificarVenta(Venta Venta){
         String sql = "UPDATE venta SET "
                 + "idCliente= ?,fechaVenta= ? "
@@ -122,7 +122,7 @@ public class VentaData {
         }
     }
     
-        //Métodos de busqueda de productos - 1;
+    //Métodos de busqueda de ventas - 1;
     public Venta buscarVentaPorId(int id){
         Venta venta = null;
         

@@ -14,7 +14,10 @@ public class Cliente {
     private String cuil;
 
     ///Constructores
-    private Cliente(){}
+
+    public Cliente() {
+    }
+     
 
     public Cliente(int idCliente, String apellido, String nombre, String telef, String email, String cuil) {
         this.idCliente = idCliente;
@@ -69,6 +72,14 @@ public class Cliente {
 
     public void setCuil(String cuil) {
         this.cuil = cuil;
+    }
+
+    public String getTelef() {
+        return telef;
+    }
+
+    public void setTelef(String telef) {
+        this.telef = telef;
     }
     
     ///Método toString;

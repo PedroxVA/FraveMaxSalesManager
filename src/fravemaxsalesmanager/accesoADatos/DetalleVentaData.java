@@ -18,7 +18,7 @@ public class DetalleVentaData {
         con = Conexion.getConexion();
     }
     ///----------------------------------------------------------------------------------------------------//
-    //Método para agregar un producto-  1;   
+    //Método para agregar un detalleVenta-  1;   
     public void altaDetalleVenta(DetalleVenta DetalleVenta){
         String sql = "INSERT INTO detalleventa(cantidad, idVenta, precioVenta, idProducto)"
                 + "VALUES (? ,? , ?, ?)";
@@ -44,7 +44,7 @@ public class DetalleVentaData {
         }
     }
     
-    //Método para eliminar un producto - 3;    
+    //Método para eliminar un detalleVenta - 3;    
     public void bajaDetalleVentaPorID(int idDetalleVenta){
         String sql = "DELETE * FROM detalleventa WHERE idDetalleVenta = ?";
         
@@ -102,7 +102,7 @@ public class DetalleVentaData {
         }
     }  
     
-    //Método para modificar un producto - 1;  
+    //Método para modificar un detalleVenta - 1;  
     public void modificarDetalleVenta(DetalleVenta detalleVenta){
         String sql = "UPDATE detalleVenta SET "
                 + "cantidad= ?,idVenta= ?,precioVenta= ?, idProducto= ? "
@@ -130,7 +130,7 @@ public class DetalleVentaData {
         }
     }
     
-    //Métodos de busqueda de productos - 1;
+    //Métodos de busqueda de detallesVenta- 1;
     public DetalleVenta buscarDetalleVentaPorId(int id){
         DetalleVenta detalleVenta = null;
         
