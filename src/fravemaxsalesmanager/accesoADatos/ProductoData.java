@@ -166,7 +166,7 @@ public class ProductoData {
             if(exito==1){
                 JOptionPane.showMessageDialog(null, "Producto modificado con exito.");
             }else{
-                JOptionPane.showMessageDialog(null, "error");
+                JOptionPane.showMessageDialog(null, "Error al modificar");
             }
             
             ps.close();
@@ -185,6 +185,7 @@ public class ProductoData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
+                int idProducto = rs.getInt("idProducto");
                 String categoria = rs.getString("categoria");
                 String nombreProducto = rs.getString("nombreProducto");
                 String marca = rs.getString("marca");
@@ -193,7 +194,7 @@ public class ProductoData {
                 Double precioActual = rs.getDouble("precioActual");
                 int stock = rs.getInt("stock");
                 
-                producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                producto = new Producto(idProducto ,categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
@@ -217,6 +218,7 @@ public class ProductoData {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
+                int idProducto = rs.getInt("idProducto");
                 String categoria = rs.getString("categoria");
                 String nombreProducto = rs.getString("nombreProducto");
                 String marca = rs.getString("marca");
@@ -225,7 +227,7 @@ public class ProductoData {
                 Double precioActual = rs.getDouble("precioActual");
                 int stock = rs.getInt("stock");
                 
-                Producto producto = new Producto(categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                Producto producto = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
                 listaProductos.add(producto);
             }
         } catch (SQLException ex) {
