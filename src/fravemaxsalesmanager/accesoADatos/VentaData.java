@@ -47,14 +47,14 @@ public class VentaData {
         }
     }
 
-    //Método para eliminar na venta - 1;    
+    //Método para eliminar una venta - 1;    
     public void bajaVentaPorID(int idVenta){
         int result = JOptionPane.showConfirmDialog(null, "¿Esta seguro de eliminar esta Venta? ¡Esto eliminará todos los DetallesVenta relacionados!");
         
-        if(result==1){
+        if(result==0){
             deVenData.bajaDetalleVentaPorIdVenta(idVenta);
             
-            String sql = "DELETE * FROM venta WHERE idVenta = ?";
+            String sql = "DELETE FROM venta WHERE idVenta = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class VentaData {
     public void bajaVentaPorIdCliente(int idCliente){
             deVenData.bajaDetalleVentaPorIdCliente(idCliente);
             
-            String sql = "DELETE * FROM venta WHERE idCliente = ?";
+            String sql = "DELETE FROM venta WHERE idCliente = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);

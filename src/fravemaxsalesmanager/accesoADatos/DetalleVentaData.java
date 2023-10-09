@@ -45,11 +45,10 @@ public class DetalleVentaData {
                     producto.setStock(producto.getStock() - 1);
                     proData.modificarProducto(producto);
                 }
-
-                ps.close();
             }else{
                 JOptionPane.showMessageDialog(null, "No hay stock");
             }
+            ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla detalleventa");
@@ -58,7 +57,7 @@ public class DetalleVentaData {
 
     //Método para eliminar un detalleVenta - 3;    
     public void bajaDetalleVentaPorID(int idDetalleVenta) {
-        String sql = "DELETE * FROM detalleventa WHERE idDetalleVenta = ?";
+        String sql = "DELETE FROM detalleventa WHERE idDetalleVenta = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -78,7 +77,7 @@ public class DetalleVentaData {
     }
 
     public void bajaDetalleVentaPorIdVenta(int idVenta) {
-        String sql = "DELETE * FROM detalleventa WHERE idVenta = ?";
+        String sql = "DELETE FROM detalleventa WHERE idVenta = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -98,7 +97,7 @@ public class DetalleVentaData {
     }
 
     public void bajaDetalleVentaPorIdCliente(int idCliente) {
-        String sql = "DELETE * FROM detalleventa WHERE idCliente = ?";
+        String sql = "DELETE FROM detalleventa WHERE idCliente = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -146,7 +145,7 @@ public class DetalleVentaData {
 
     //Métodos de busqueda de detallesVenta- 1;
     public DetalleVenta buscarDetalleVentaPorId(int id) {
-        DetalleVenta detalleVenta = null;
+        DetalleVenta detalleVenta = new DetalleVenta();
 
         String sql = "SELECT * FROM detalleVenta WHERE detalleVenta.idDetalleVenta = ?";
         try {

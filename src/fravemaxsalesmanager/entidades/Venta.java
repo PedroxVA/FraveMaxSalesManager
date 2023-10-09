@@ -13,7 +13,7 @@ public class Venta {
     
 // Constructores
 
-    private Venta() {}
+    public Venta() {}
 
     public Venta(int idVenta, int idCliente, LocalDate fechaVenta) {
         this.idVenta = idVenta;

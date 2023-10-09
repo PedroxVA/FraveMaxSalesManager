@@ -12,7 +12,7 @@ public class DetalleVenta {
     
     //constructores
 
-    private DetalleVenta() {}
+    public DetalleVenta() {}
 
     public DetalleVenta(int idDetalleVenta, int cantidad, int idVenta, double precioVenta, int idProducto) {
         this.idDetalleVenta = idDetalleVenta;

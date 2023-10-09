@@ -12,6 +12,7 @@ import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Ubicacion;
 import fravemaxsalesmanager.entidades.Venta;
 import java.time.LocalDate;
+import java.time.Month;
 
 /* @author PedroxVA */
 public class FraveMaxSalesManager {
@@ -40,13 +41,17 @@ public class FraveMaxSalesManager {
     //ubiData.altaUbicacion(new Ubicacion("sucasa", "suciudad", "4512", "Jujuy", "Argentina"));
     //cliData.altaCliente(new Cliente("Vides", "Pedro", "3886123123", "pedro@pedromail", "123123123", ubiData.buscarUbicacionPorId(1)));
     //venData.altaVenta(new Venta(6, LocalDate.now()));
-    deVenData.altaDetalleVenta(new DetalleVenta(1, 2, 19999, 2));
+    //deVenData.altaDetalleVenta(new DetalleVenta(1, 2, 19999, 4)); //Salen dos carteles;
+    
     
     //------------Baja--------------
     //proData.bajaProductoPorID(1);
     //proData.bajaProductoPorNombre("Heladera");
     //proData.bajaProductoPorModelo("Ultra Frost");
     //proData.bajaProductoPorCategoria("Electrodomestico");
+    //deVenData.bajaDetalleVentaPorID(4);
+    //venData.bajaVentaPorID(2);
+    cliData.eliminarCliente(6);
     
     //--------------Modificar--------------
     int idProducto = 1;
@@ -61,5 +66,17 @@ public class FraveMaxSalesManager {
     
     Producto productoM = new Producto(idProducto, categoriaM, nombreProductoM, marcaM, modeloM, descripcionM, precioM, stockM, estadoM);
     //proData.modificarProducto(productoM);
+    Ubicacion ubicacion = ubiData.buscarUbicacionPorId(2);
+    ubicacion.setDireccion("laCasaAlFrente");
+    //ubiData.modificarUbicacion(ubicacion);
+    Cliente cliente = cliData.obtenerClientePorId(6);
+    //cliente.setApellido("Vides Aparicio");
+    //cliData.modificarCliente(cliente); //no se puede usar / dentro de syntaxis sql;
+    Venta venta = venData.buscarVentaPorId(2);
+    //venta.setFechaVenta(LocalDate.of(2001, Month.MARCH, 23)); //venta eliminada previamente;
+    //venData.modificarVenta(venta);
+    DetalleVenta detalleVenta = deVenData.buscarDetalleVentaPorId(3);
+    detalleVenta.setPrecioVenta(1000000);
+    //deVenData.modificarDetalleVenta(detalleVenta);
     }
 }

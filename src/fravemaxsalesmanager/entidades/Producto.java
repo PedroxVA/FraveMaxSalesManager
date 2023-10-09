@@ -19,7 +19,7 @@ public class Producto {
     
 
 //constructores
-private Producto(){}
+public Producto(){}
 
     public Producto(int idProducto, String categoria, String nombreProducto, String marca, String modelo, String descripcion, double precioActual, int stock, Boolean activo) {
         this.idProducto = idProducto;

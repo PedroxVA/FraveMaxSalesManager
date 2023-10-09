@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class ClienteData {
     private DetalleVentaData deVenData = new DetalleVentaData();
     private VentaData venData = new VentaData();
+    private UbicacionData ubiData = new UbicacionData();
     private Connection connection;
 
     public ClienteData() {
@@ -38,33 +39,37 @@ public class ClienteData {
     }
 
     // Método para actualizar un cliente en la base de datos
-    public void modificarCliente(Cliente cliente) throws SQLException {
-        String sql = "UPDATE Cliente SET apellido=?, nombre=?, telef=?, email=?, cuil=? WHERE idCliente=?";
+    public void modificarCliente(Cliente cliente) {
+        String sql = "UPDATE cliente SET apellido= ?, nombre= ?, telefono= ?, email= ?, cuil= ?, idUbicacion = ? WHERE idCliente=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, cliente.getApellido());
             statement.setString(2, cliente.getNombre());
-            //statement.setString(3, cliente.getTelef());
-            //statement.setString(4, cliente.getEmail());
+            statement.setString(3, cliente.getTelef());
+            statement.setString(4, cliente.getEmail());
             statement.setString(5, cliente.getCuil());
-            statement.setInt(6, cliente.getIdCliente());
+            statement.setInt(7, cliente.getIdCliente());
+            statement.setInt(6, cliente.getUbicacion().getIdUbicacion());
             statement.executeUpdate();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente.");
         }
     }
 
     // Método para eliminar un cliente de la base de datos
     public void eliminarCliente(int clienteId) {
         int resultado = JOptionPane.showConfirmDialog(null, "¿Estas seguro?¡Se eliminaran todas las ventas y detallesVentas relacionadas!");
-        if(resultado==1){
-            deVenData.bajaDetalleVentaPorIdCliente(clienteId);
+        if(resultado==0){
+            for
+            deVenData.bajaDetalleVentaPorIdVenta(venData.buscarVentaPorCliente(clienteId));
             venData.bajaVentaPorIdCliente(clienteId);
             
             
-            String sql = "DELETE FROM Cliente WHERE idCliente=?";
+            String sql = "DELETE FROM cliente WHERE idCliente= ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clienteId);
             
             int filasEliminadas = statement.executeUpdate();
-            if(filasEliminadas!=0){
+            if(filasEliminadas>0){
                 JOptionPane.showMessageDialog(null, "El cliente se ha eliminado correctamente.");
             }
         }   catch (SQLException ex) {
@@ -92,6 +97,7 @@ public class ClienteData {
                     cliente.setTelef(resultSet.getString("telefono"));
                     cliente.setEmail(resultSet.getString("email"));
                     cliente.setCuil(resultSet.getString("cuil"));
+                    cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
                     return cliente;
                 }
             }

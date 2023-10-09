@@ -177,7 +177,7 @@ public class ProductoData {
     
     //Métodos de busqueda de productos - 1;
     public Producto buscarProductoPorId(int id){
-        Producto producto = null;
+        Producto producto = new Producto();
         
         String sql = "SELECT * FROM producto WHERE producto.idProducto = ?";
         try {
