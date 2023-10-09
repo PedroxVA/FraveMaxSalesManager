@@ -96,9 +96,9 @@ public class UbicacionData {
     
     //Métodos de busqueda de ubicaciones - 1;
     public Ubicacion buscarUbicacionPorId(int id){
-        Ubicacion ubicacion = null;
+        Ubicacion ubicacion = new Ubicacion();
         
-        String sql = "SELECT * FROM ubicacion WHERE ubicacion.idUbicacion = ?";
+        String sql = "SELECT * FROM ubicacion WHERE idUbicacion = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -110,12 +110,11 @@ public class UbicacionData {
                 String codigoPostal = rs.getString("codigoPostal");
                 String provincia = rs.getString("provincia");
                 String pais = rs.getString("pais");
-                int stock = rs.getInt("stock");
                 
                 ubicacion = new Ubicacion(idUbicacion, direccion, localidad, codigoPostal, provincia, pais);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla Ubicacion)");
         }
 
         return ubicacion;

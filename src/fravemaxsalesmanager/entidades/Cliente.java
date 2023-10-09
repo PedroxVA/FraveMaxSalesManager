@@ -12,6 +12,7 @@ public class Cliente {
     private String telef;
     private String email;
     private String cuil;
+    private Ubicacion ubicacion;
 
     ///Constructores
 
@@ -19,27 +20,41 @@ public class Cliente {
     }
      
 
-    public Cliente(int idCliente, String apellido, String nombre, String telef, String email, String cuil) {
+    public Cliente(int idCliente, String apellido, String nombre, String telef, String email, String cuil, Ubicacion ubicacion) {
         this.idCliente = idCliente;
         this.apellido = apellido;
         this.nombre = nombre;
         this.telef = telef;
         this.email = email;
         this.cuil = cuil;
+        this.ubicacion = ubicacion;
     }
 
-    public Cliente(String apellido, String nombre, String telef, String email, String cuil) {
+    public Cliente(String apellido, String nombre, String telef, String email, String cuil, Ubicacion ubicacion) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.telef = telef;
         this.email = email;
         this.cuil = cuil;
+        this.ubicacion = ubicacion;
     }
     
     
     ///Getters & Setters
     public int getIdCliente() {
         return idCliente;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setIdCliente(int idCliente) {

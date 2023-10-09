@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ClienteData {
@@ -15,20 +17,23 @@ public class ClienteData {
     private VentaData venData = new VentaData();
     private Connection connection;
 
-    public ClienteData(Connection connection) {
-        this.connection = connection;
+    public ClienteData() {
+        this.connection = Conexion.getConexion();
     }
 
     // Método para insertar un cliente en la base de datos
-    public void altaCliente(Cliente cliente) throws SQLException {
-        String sql = "INSERT INTO Cliente (apellido, nombre, telef, email, cuil) VALUES (?, ?, ?, ?, ?)";
+    public void altaCliente(Cliente cliente) {
+        String sql = "INSERT INTO cliente (apellido, nombre, telefono, email, cuil, idUbicacion) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, cliente.getApellido());
             statement.setString(2, cliente.getNombre());
-            //statement.setString(3, cliente.getTelef());
-            //statement.setString(4, cliente.getEmail());
+            statement.setString(3, cliente.getTelef());
+            statement.setString(4, cliente.getEmail());
             statement.setString(5, cliente.getCuil());
+            statement.setInt(6, cliente.getUbicacion().getIdUbicacion());
             statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
