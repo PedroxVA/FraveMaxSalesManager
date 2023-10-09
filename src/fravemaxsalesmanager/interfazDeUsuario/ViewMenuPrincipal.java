@@ -44,6 +44,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMbajaymodificacion = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
@@ -82,10 +83,20 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMbajaymodificacion);
+        jMbajaymodificacion.getAccessibleContext().setAccessibleName("Baja y Modificación de Productos");
 
         jMenuBar2.add(jMenu1);
 
         jMenu3.setText("Clientes");
+
+        jMenuItem2.setText("Alta de Clientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Ventas");
@@ -140,6 +151,15 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       modificacion.moveToFront();
     }//GEN-LAST:event_jMbajaymodificacionActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+      jDesktopPane1.removeAll();
+      jDesktopPane1.repaint();
+      ViewClienteNuevo cliente = new ViewClienteNuevo();
+      cliente.setVisible(true);
+      jDesktopPane1.add(cliente);
+      cliente.moveToFront(); 
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,5 +205,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
