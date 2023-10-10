@@ -2,6 +2,7 @@
 package fravemaxsalesmanager.accesoADatos;
 
 import fravemaxsalesmanager.entidades.Cliente;
+import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -78,9 +79,6 @@ public class ClienteData {
                JOptionPane.showMessageDialog(null, "Error al cargar la tabla cliente");
             }
         }
-        
-        
-        
     }
 
     // Método para obtener un cliente por su ID
@@ -125,6 +123,7 @@ public class ClienteData {
                 cliente.setTelef(resultSet.getString("telef"));
                 cliente.setEmail(resultSet.getString("email"));
                 cliente.setCuil(resultSet.getString("cuil"));
+                cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
@@ -158,4 +157,33 @@ public class ClienteData {
         return null;
 }
 
+    //Mostrar que clientes compraron el producto X.
+    public List<Cliente> obtenerClientesPorProducto(Producto producto) {
+        List<Cliente> clientes = new ArrayList<>();
+        String sql = "SELECT c.idCliente, c.apellido, c.nombre, c.telefono, c.email, c.cuil, c.idUbicacion FROM cliente AS c " +
+                "JOIN venta AS v ON (c.idCliente=v.idCliente)" +
+                "JOIN detalleventa AS dv ON (v.idVenta=dv.idVenta)" +
+                "WHERE dv.idProducto = ?";
+        
+        try {
+             PreparedStatement statement = connection.prepareStatement(sql);
+             statement.setInt(1, producto.getIdProducto());
+             ResultSet resultSet = statement.executeQuery() ;
+            while (resultSet.next()) {
+                Cliente cliente = new Cliente();
+                
+                cliente.setIdCliente(resultSet.getInt("idCliente"));
+                cliente.setApellido(resultSet.getString("apellido"));
+                cliente.setNombre(resultSet.getString("nombre"));
+                cliente.setTelef(resultSet.getString("telef"));
+                cliente.setEmail(resultSet.getString("email"));
+                cliente.setCuil(resultSet.getString("cuil"));
+                cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
+                clientes.add(cliente);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+        return clientes;
+    }
 }

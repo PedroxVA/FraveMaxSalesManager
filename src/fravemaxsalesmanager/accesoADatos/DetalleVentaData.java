@@ -35,7 +35,7 @@ public class DetalleVentaData {
             ps.setDouble(6, DetalleVenta.getIVA());
             ps.setInt(7, DetalleVenta.getIdProducto());
 
-            if (proData.buscarProductoPorId(DetalleVenta.getIdProducto()).getStock() > 0) {
+            if (proData.buscarProductoPorId(DetalleVenta.getIdProducto()).getStock() > 0) {//cartel innecesario
                 ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
 

@@ -39,9 +39,9 @@ public class FraveMaxSalesManager {
     //proData.altaProducto(producto);
     //proData.altaProductoLogica(producto);
     //ubiData.altaUbicacion(new Ubicacion("sucasa", "suciudad", "4512", "Jujuy", "Argentina"));
-    //cliData.altaCliente(new Cliente("Vides", "Pedro", "3886123123", "pedro@pedromail", "123123123", ubiData.buscarUbicacionPorId(1)));
-    //venData.altaVenta(new Venta(6, LocalDate.now()));
-    //deVenData.altaDetalleVenta(new DetalleVenta(1, 2, 19999, 4)); //Salen dos carteles;
+    //cliData.altaCliente(new Cliente("Vides", "Pedro", "3886123123", "pedro@pedromail", "123123123", ubiData.buscarUbicacionPorId(2)));
+    //venData.altaVenta(new Venta(7, LocalDate.now()));
+    deVenData.altaDetalleVenta(new DetalleVenta(1, 5, 19999, 19999, 0, (0.21*19999), 4)); //Salen dos carteles;
     
     
     //------------Baja--------------
