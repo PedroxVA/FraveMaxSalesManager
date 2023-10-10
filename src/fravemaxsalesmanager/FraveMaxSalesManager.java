@@ -51,7 +51,8 @@ public class FraveMaxSalesManager {
     //proData.bajaProductoPorCategoria("Electrodomestico");
     //deVenData.bajaDetalleVentaPorID(4);
     //venData.bajaVentaPorID(2);
-    cliData.eliminarCliente(6);
+    //cliData.eliminarCliente(6);
+    //ubiData.bajaUbicacionPorID(2);
     
     //--------------Modificar--------------
     int idProducto = 1;
@@ -67,7 +68,7 @@ public class FraveMaxSalesManager {
     Producto productoM = new Producto(idProducto, categoriaM, nombreProductoM, marcaM, modeloM, descripcionM, precioM, stockM, estadoM);
     //proData.modificarProducto(productoM);
     Ubicacion ubicacion = ubiData.buscarUbicacionPorId(2);
-    ubicacion.setDireccion("laCasaAlFrente");
+    //ubicacion.setDireccion("laCasaAlFrente");
     //ubiData.modificarUbicacion(ubicacion);
     Cliente cliente = cliData.obtenerClientePorId(6);
     //cliente.setApellido("Vides Aparicio");

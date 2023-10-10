@@ -47,7 +47,7 @@ public class UbicacionData {
     
     //Método para eliminar un ubicacion - 1;   
     public void bajaUbicacionPorID(int idUbicacion){
-        String sql = "DELETE * FROM ubicacion WHERE idUbicacion = ?";
+        String sql = "DELETE FROM ubicacion WHERE idUbicacion = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);

@@ -124,7 +124,7 @@ public class VentaData {
     
     //Métodos de busqueda de ventas - 1;
     public Venta buscarVentaPorId(int id){
-        Venta venta = null;
+        Venta venta = new Venta();
         
         String sql = "SELECT * FROM venta WHERE venta.idVenta = ?";
         try {

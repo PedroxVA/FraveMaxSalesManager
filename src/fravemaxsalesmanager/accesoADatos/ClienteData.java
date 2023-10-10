@@ -2,6 +2,7 @@
 package fravemaxsalesmanager.accesoADatos;
 
 import fravemaxsalesmanager.entidades.Cliente;
+import fravemaxsalesmanager.entidades.Venta;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,8 +60,9 @@ public class ClienteData {
     public void eliminarCliente(int clienteId) {
         int resultado = JOptionPane.showConfirmDialog(null, "¿Estas seguro?¡Se eliminaran todas las ventas y detallesVentas relacionadas!");
         if(resultado==0){
-            for
-            deVenData.bajaDetalleVentaPorIdVenta(venData.buscarVentaPorCliente(clienteId));
+            List<Venta> listaVentas = venData.buscarVentaPorCliente(clienteId);
+            for (Venta venta : listaVentas) {
+                deVenData.bajaDetalleVentaPorIdVenta(venta.getIdVenta());}
             venData.bajaVentaPorIdCliente(clienteId);
             
             
@@ -82,6 +84,7 @@ public class ClienteData {
     }
 
     // Método para obtener un cliente por su ID
+    
     public Cliente obtenerClientePorId(int clienteId) {
         
         String sql = "SELECT * FROM Cliente WHERE idCliente=?";
@@ -129,4 +132,30 @@ public class ClienteData {
         }
         return clientes;
     }
+    //Método para obtener un cliente segun CUIL;
+    public Cliente obtenerClientePorCuil(int cuil) {
+        
+        String sql = "SELECT * FROM Cliente WHERE cuil = ?";
+      
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, cuil);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Cliente cliente = new Cliente();
+                    cliente.setIdCliente(resultSet.getInt("idCliente"));
+                    cliente.setApellido(resultSet.getString("apellido"));
+                    cliente.setNombre(resultSet.getString("nombre"));
+                    cliente.setTelef(resultSet.getString("telefono"));
+                    cliente.setEmail(resultSet.getString("email"));
+                    cliente.setCuil(resultSet.getString("cuil"));
+                    cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
+                    return cliente;
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+        return null;
+}
+
 }
