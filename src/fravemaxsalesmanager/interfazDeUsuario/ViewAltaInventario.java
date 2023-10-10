@@ -79,6 +79,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
             }
         });
 
+        jBaltaProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/iconoGuardar.png"))); // NOI18N
         jBaltaProducto.setText("Grabar");
         jBaltaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +94,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
             }
         });
 
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrar.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

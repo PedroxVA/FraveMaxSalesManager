@@ -167,6 +167,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBaltaProducto">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/fravemaxsalesmanager/recursos/iconoGuardar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Grabar"/>
       </Properties>
       <Events>
@@ -193,6 +196,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBSalir">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/fravemaxsalesmanager/recursos/cerrar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>

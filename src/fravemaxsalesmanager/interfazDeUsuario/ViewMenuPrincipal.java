@@ -58,7 +58,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 567, Short.MAX_VALUE)
+            .addGap(0, 566, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Inventario");
@@ -102,6 +102,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Ventas");
         jMenuBar2.add(jMenu4);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrarSesion.png"))); // NOI18N
         jMenu2.setText("Salir");
         jMenuBar2.add(jMenu2);
 
