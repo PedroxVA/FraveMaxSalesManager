@@ -8,29 +8,38 @@ public class DetalleVenta {
     private int cantidad;
     private int idVenta;
     private double precioVenta;
+    private double importeBruto;
+    private double descuentos;
+    private double IVA;
     private int idProducto;
     
     //constructores
 
     public DetalleVenta() {}
 
-    public DetalleVenta(int idDetalleVenta, int cantidad, int idVenta, double precioVenta, int idProducto) {
+    public DetalleVenta(int idDetalleVenta, int cantidad, int idVenta, double precioVenta, double importeBruto, double descuentos, double IVA, int idProducto) {
         this.idDetalleVenta = idDetalleVenta;
         this.cantidad = cantidad;
         this.idVenta = idVenta;
         this.precioVenta = precioVenta;
+        this.importeBruto = importeBruto;
+        this.descuentos = descuentos;
+        this.IVA = IVA;
         this.idProducto = idProducto;
     }
 
-    public DetalleVenta(int cantidad, int idVenta, double precioVenta, int idProducto) {
+    public DetalleVenta(int cantidad, int idVenta, double precioVenta, double importeBruto, double descuentos, double IVA, int idProducto) {
         this.cantidad = cantidad;
         this.idVenta = idVenta;
         this.precioVenta = precioVenta;
+        this.importeBruto = importeBruto;
+        this.descuentos = descuentos;
+        this.IVA = IVA;
         this.idProducto = idProducto;
     }
+
     
     // Getters & Setters
-
     public int getIdDetalleVenta() {
         return idDetalleVenta;
     }
@@ -63,6 +72,30 @@ public class DetalleVenta {
         this.precioVenta = precioVenta;
     }
 
+    public double getImporteBruto() {
+        return importeBruto;
+    }
+
+    public void setImporteBruto(double importeBruto) {
+        this.importeBruto = importeBruto;
+    }
+
+    public double getDescuentos() {
+        return descuentos;
+    }
+
+    public void setDescuentos(double descuentos) {
+        this.descuentos = descuentos;
+    }
+
+    public double getIVA() {
+        return IVA;
+    }
+
+    public void setIVA(double IVA) {
+        this.IVA = IVA;
+    }
+
     public int getIdProducto() {
         return idProducto;
     }
@@ -82,12 +115,15 @@ public class DetalleVenta {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.idDetalleVenta;
-        hash = 67 * hash + this.cantidad;
-        hash = 67 * hash + this.idVenta;
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.precioVenta) ^ (Double.doubleToLongBits(this.precioVenta) >>> 32));
-        hash = 67 * hash + this.idProducto;
+        int hash = 3;
+        hash = 53 * hash + this.idDetalleVenta;
+        hash = 53 * hash + this.cantidad;
+        hash = 53 * hash + this.idVenta;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.precioVenta) ^ (Double.doubleToLongBits(this.precioVenta) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.importeBruto) ^ (Double.doubleToLongBits(this.importeBruto) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.descuentos) ^ (Double.doubleToLongBits(this.descuentos) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.IVA) ^ (Double.doubleToLongBits(this.IVA) >>> 32));
+        hash = 53 * hash + this.idProducto;
         return hash;
     }
 
@@ -115,11 +151,22 @@ public class DetalleVenta {
         if (Double.doubleToLongBits(this.precioVenta) != Double.doubleToLongBits(other.precioVenta)) {
             return false;
         }
+        if (Double.doubleToLongBits(this.importeBruto) != Double.doubleToLongBits(other.importeBruto)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.descuentos) != Double.doubleToLongBits(other.descuentos)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.IVA) != Double.doubleToLongBits(other.IVA)) {
+            return false;
+        }
         if (this.idProducto != other.idProducto) {
             return false;
         }
         return true;
     }
+
+
     
     
     

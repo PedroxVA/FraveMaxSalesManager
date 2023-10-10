@@ -3,7 +3,6 @@ package fravemaxsalesmanager.accesoADatos;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,15 +22,18 @@ public class DetalleVentaData {
     ///----------------------------------------------------------------------------------------------------//
     //Método para agregar un detalleVenta-  1;   
     public void altaDetalleVenta(DetalleVenta DetalleVenta) {
-        String sql = "INSERT INTO detalleventa(cantidad, idVenta, precioVenta, idProducto)"
-                + "VALUES (? ,? , ?, ?)";
+        String sql = "INSERT INTO detalleventa(cantidad, idVenta, precioVenta, importeBruto, descuentos, IVA, idProducto)"
+                + "VALUES (? ,? ,? ,? ,? ,? ,? )";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, DetalleVenta.getCantidad());
             ps.setInt(2, DetalleVenta.getIdVenta());
             ps.setDouble(3, DetalleVenta.getPrecioVenta());
-            ps.setInt(4, DetalleVenta.getIdProducto());
+            ps.setDouble(4, DetalleVenta.getImporteBruto());
+            ps.setDouble(5, DetalleVenta.getDescuentos());
+            ps.setDouble(6, DetalleVenta.getIVA());
+            ps.setInt(7, DetalleVenta.getIdProducto());
 
             if (proData.buscarProductoPorId(DetalleVenta.getIdProducto()).getStock() > 0) {
                 ps.executeUpdate();
@@ -119,7 +121,7 @@ public class DetalleVentaData {
     //Método para modificar un detalleVenta - 1;  
     public void modificarDetalleVenta(DetalleVenta detalleVenta) {
         String sql = "UPDATE detalleVenta SET "
-                + "cantidad= ?,idVenta= ?,precioVenta= ?, idProducto= ? "
+                + "cantidad = ?,idVenta = ?,precioVenta = ?,importeBruto = ?, descuentos = ?, IVA = ?, idProducto = ? "
                 + "WHERE idDetalleVenta = ?";
 
         try {
@@ -127,8 +129,11 @@ public class DetalleVentaData {
             ps.setInt(1, detalleVenta.getCantidad());
             ps.setInt(2, detalleVenta.getIdVenta());
             ps.setDouble(3, detalleVenta.getPrecioVenta());
-            ps.setInt(4, detalleVenta.getIdProducto());
-            ps.setInt(5, detalleVenta.getIdDetalleVenta());
+            ps.setDouble(4, detalleVenta.getImporteBruto());
+            ps.setDouble(5, detalleVenta.getDescuentos());
+            ps.setDouble(6, detalleVenta.getIVA());
+            ps.setInt(7, detalleVenta.getIdProducto());
+            ps.setInt(8, detalleVenta.getIdDetalleVenta());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
@@ -155,10 +160,15 @@ public class DetalleVentaData {
             if (rs.next()) {
                 int cantidad = rs.getInt("cantidad");
                 int idVenta = rs.getInt("idVenta");
-                int precioVenta = rs.getInt("precioVenta");
+                Double precioVenta = rs.getDouble("precioVenta");
+                Double importeBruto = rs.getDouble("importeBruto");
+                Double descuentos = rs.getDouble("descuentos");
+                Double IVA = rs.getDouble("IVA");
                 int idProducto = rs.getInt("idProducto");
 
-                detalleVenta = new DetalleVenta(id, cantidad, idVenta, precioVenta, idProducto);
+                detalleVenta = new DetalleVenta(id, cantidad, idVenta, precioVenta, importeBruto, descuentos, IVA, idProducto);
+            }else{
+                JOptionPane.showMessageDialog(null, "Error, detalleVenta no encontrado");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla detalleVenta)");
