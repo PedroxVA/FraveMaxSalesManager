@@ -47,6 +47,8 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMGestionDeVentas = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +61,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 662, Short.MAX_VALUE)
+            .addGap(0, 664, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Inventario");
@@ -111,6 +113,18 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu4.add(jMGestionDeVentas);
 
         jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("Listados");
+
+        jMenuItem3.setText("Listado de Prueba");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem3);
+
+        jMenuBar2.add(jMenu5);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrarSesion.png"))); // NOI18N
         jMenu2.setText("Salir");
@@ -186,10 +200,21 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       
     }//GEN-LAST:event_jMGestionDeVentasActionPerformed
 
+
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+      jDesktopPane1.removeAll();
+      jDesktopPane1.repaint();
+      ViewListados listado = new ViewListados();
+      listado.setVisible(true);
+      jDesktopPane1.add(listado);
+      listado.moveToFront();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -235,8 +260,10 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
