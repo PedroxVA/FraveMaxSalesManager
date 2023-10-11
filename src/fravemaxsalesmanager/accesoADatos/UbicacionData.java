@@ -36,7 +36,7 @@ public class UbicacionData {
             
             if(rs.next()){
                 ubicacion.setIdUbicacion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se ha registrado la ubicación exitosamente.");
+                JOptionPane.showMessageDialog(null, "Se ha registrado exitosamente.");
             } 
             
             ps.close();

@@ -20,14 +20,16 @@ import javax.swing.JOptionPane;
 public class ViewAltaInventario extends javax.swing.JInternalFrame {
 
     private ProductoData proData = null;
-   
+
     public ViewAltaInventario() {
         proData = new ProductoData();
         
-            
+          
         initComponents();
-        cargarCombo();
+        cargarComboCategoria();
+        cargarComboNombreProducto();
         cargarComboMarca();
+        cargarComboModelo();
         
     }
 
@@ -47,8 +49,6 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTnombreProducto = new javax.swing.JTextField();
-        jTmodelo = new javax.swing.JTextField();
         jTdescripcion = new javax.swing.JTextField();
         jTprecio = new javax.swing.JTextField();
         jTstock = new javax.swing.JTextField();
@@ -56,6 +56,8 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         jCcategoria = new javax.swing.JComboBox<>();
         jBSalir = new javax.swing.JButton();
         jCcomboMarca = new javax.swing.JComboBox<>();
+        jCnombreProducto = new javax.swing.JComboBox<>();
+        jCmodelo = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -109,6 +111,15 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
             }
         });
 
+        jCnombreProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jCmodelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCmodelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCmodeloActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Alta");
         jMenuBar1.add(jMenu1);
 
@@ -133,13 +144,13 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
                         .addGap(57, 57, 57)))
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTmodelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                    .addComponent(jTnombreProducto, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTstock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTprecio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTdescripcion)
-                    .addComponent(jCcategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCcomboMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jCcategoria, 0, 120, Short.MAX_VALUE)
+                    .addComponent(jCcomboMarca, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCnombreProducto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCmodelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(264, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,7 +169,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTnombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCnombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -166,7 +177,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCmodelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -183,7 +194,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBSalir, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(jBaltaProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,9 +206,9 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
 
     private void jBaltaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaltaProductoActionPerformed
         String categoria = (String)jCcategoria.getSelectedItem();
-        String nombreProducto = jTnombreProducto.getText();
+        String nombreProducto = (String)jCnombreProducto.getSelectedItem();
         String marca = (String)jCcomboMarca.getSelectedItem();
-        String modelo = jTmodelo.getText();
+        String modelo = (String)jCmodelo.getSelectedItem();
         String descripcion =jTdescripcion.getText();
        
         //****************************************************************************//   
@@ -219,7 +230,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBaltaProductoActionPerformed
 
     private void jCcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriaActionPerformed
-        // TODO add your handling code here:
+        cargarComboNombreProducto();
     }//GEN-LAST:event_jCcategoriaActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
@@ -227,8 +238,14 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jCcomboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcomboMarcaActionPerformed
-        // TODO add your handling code here:
+        cargarComboNombreProducto();
+        cargarComboMarca();
     }//GEN-LAST:event_jCcomboMarcaActionPerformed
+
+    private void jCmodeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmodeloActionPerformed
+        cargarComboMarca();
+        cargarComboModelo();
+    }//GEN-LAST:event_jCmodeloActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -236,6 +253,8 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBaltaProducto;
     private javax.swing.JComboBox<String> jCcategoria;
     private javax.swing.JComboBox<String> jCcomboMarca;
+    private javax.swing.JComboBox<String> jCmodelo;
+    private javax.swing.JComboBox<String> jCnombreProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -246,13 +265,11 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField jTdescripcion;
-    private javax.swing.JTextField jTmodelo;
-    private javax.swing.JTextField jTnombreProducto;
     private javax.swing.JTextField jTprecio;
     private javax.swing.JTextField jTstock;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarCombo ()
+    private void cargarComboCategoria ()
     {
         List<String> categ = new ArrayList<>();
         categ.add("Electrodomésticos");
@@ -262,19 +279,94 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(categ.toArray(new String[0]));    
         jCcategoria.setModel(comboBoxModel);
+        
+     
+        
+        jCcategoria.addActionListener(jCnombreProducto);
+         
+    }
+    
+        private void cargarComboNombreProducto ()
+    {
+        String categoriaSeleccionada = (String) jCcategoria.getSelectedItem();
+        
+        List<String> nprod = new ArrayList<>();
+        
+        if (categoriaSeleccionada.equals("Electrodomésticos")){
+        
+        nprod.add("Heladeras");
+        nprod.add("Lavarropas");
+        nprod.add("Televisores");
+        nprod.add("Cocinas");
+        }
+        
+        else if (categoriaSeleccionada.equals("Tecnología")){
+        nprod.add("Notebook");
+        nprod.add("Tablets");
+        }
+        
+        else if (categoriaSeleccionada.equals("Celulares y accesorios")){
+        nprod.add("Teléfonos");
+        }
+
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(nprod.toArray(new String[0]));    
+        jCnombreProducto.setModel(comboBoxModel);
+        
+        jCnombreProducto.addActionListener(jCcomboMarca);
     }
     
         private void cargarComboMarca ()
     {
+        String productoSeleccionado = (String) jCnombreProducto.getSelectedItem();
+        
         List<String> marca = new ArrayList<>();
+        
+        if (productoSeleccionado.equals("Heladeras")) {
+        
+            
         marca.add("Whirpool");
         marca.add("Siam");
+        }
+        else if (productoSeleccionado.equals("Teléfonos")) {
         marca.add("LG");
         marca.add("Samsung");
         marca.add("Motorola");
         marca.add("Nokia");
         
+        }
+        
+        else if (productoSeleccionado.equals("Tablets")){
+        marca.add("Apple");
+        }
+        
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(marca.toArray(new String[0]));    
         jCcomboMarca.setModel(comboBoxModel);
+        
+        jCcomboMarca.addActionListener(jCmodelo);
     }
+        
+     private void cargarComboModelo ()
+    {
+        String marcaSeleccionada = (String) jCcomboMarca.getSelectedItem();
+        
+        List<String> modelo = new ArrayList<>();
+        
+        if (marcaSeleccionada.equals("Whirpool")) {
+        
+        modelo.add("WRE85AB");
+        modelo.add("WRM57K2");
+        modelo.add("WRM53JK");
+        
+        }
+        else if (marcaSeleccionada.equals("Samsung")){
+        modelo.add("Galaxy A51");
+        modelo.add("Galaxy A04");
+        modelo.add("Galaxy 24");
+        }
+        
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.toArray(new String[0]));    
+        jCmodelo.setModel(comboBoxModel);
+        
+        jCmodelo.addActionListener(jCmodelo);
+    }   
 }

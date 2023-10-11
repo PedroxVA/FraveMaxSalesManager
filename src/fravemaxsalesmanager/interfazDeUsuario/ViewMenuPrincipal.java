@@ -46,6 +46,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMGestionDeVentas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +59,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 566, Short.MAX_VALUE)
+            .addGap(0, 662, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Inventario");
@@ -100,6 +101,15 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Ventas");
+
+        jMGestionDeVentas.setText("Gestión de Ventas");
+        jMGestionDeVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMGestionDeVentasActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMGestionDeVentas);
+
         jMenuBar2.add(jMenu4);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrarSesion.png"))); // NOI18N
@@ -161,6 +171,16 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       cliente.moveToFront(); 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMGestionDeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionDeVentasActionPerformed
+      jDesktopPane1.removeAll();
+      jDesktopPane1.repaint();
+      ViewGestionDeVentas ventas = new ViewGestionDeVentas();
+      ventas.setVisible(true);
+      jDesktopPane1.add(ventas);
+      ventas.moveToFront();
+      
+    }//GEN-LAST:event_jMGestionDeVentasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -199,6 +219,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jMGestionDeVentas;
     private javax.swing.JMenuItem jMbajaymodificacion;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
