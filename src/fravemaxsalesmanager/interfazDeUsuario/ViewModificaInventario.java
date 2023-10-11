@@ -19,10 +19,10 @@ import javax.swing.JOptionPane;
 public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
     ProductoData proData = new ProductoData();
-    
+
     public ViewModificaInventario() {
         initComponents();
-     
+
     }
 
     /**
@@ -46,7 +46,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
             new Object [][] {
                 {"Id Producto", ""},
                 {"Categoría", ""},
-                {"Nombre", null},
+                {"Nombre", ""},
                 {"Marca", null},
                 {"Modelo", null},
                 {"Descripción", null},
@@ -54,7 +54,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
                 {"Stock", null}
             },
             new String [] {
-                "null", "Producto Seleccionado"
+                "", "Producto Seleccionado"
             }
         ));
         jScrollPane1.setViewportView(jTproductoSeleccionado);
@@ -115,24 +115,34 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTproductoSeleccionado;
     // End of variables declaration//GEN-END:variables
 
- 
-    private void cargarDatosTabla(){
-       try {      
-       int id = Integer.parseInt(jTbuscarID.getText().replace(" ", ""));
-       Producto producto = proData.buscarProductoPorId(id);
-       
-       jTproductoSeleccionado.setValueAt(producto.getIdProducto(), 0, 1);
-       jTproductoSeleccionado.setValueAt(producto.getCategoria(), 1, 1);
-       jTproductoSeleccionado.setValueAt(producto.getNombreProducto(), 2, 1);
-       jTproductoSeleccionado.setValueAt(producto.getMarca(), 3, 1);
-       jTproductoSeleccionado.setValueAt(producto.getModelo(), 4, 1);
-       jTproductoSeleccionado.setValueAt(producto.getDescripcion(), 5, 1);
-       jTproductoSeleccionado.setValueAt(producto.getPrecioActual(), 6, 1);
-       jTproductoSeleccionado.setValueAt(producto.getStock(), 7, 1);
-    
-        } catch (NumberFormatException e ) {
+    private void cargarDatosTabla() {
+        try {
+            int id = Integer.parseInt(jTbuscarID.getText().replace(" ", ""));
+
+            Producto producto = proData.buscarProductoPorId(id);
+            if (producto.getIdProducto() == 0) { 
+                jTproductoSeleccionado.setValueAt(null, 0, 1);
+                jTproductoSeleccionado.setValueAt(null, 1, 1);
+                jTproductoSeleccionado.setValueAt(null, 2, 1);
+                jTproductoSeleccionado.setValueAt(null, 3, 1);
+                jTproductoSeleccionado.setValueAt(null, 4, 1);
+                jTproductoSeleccionado.setValueAt(null, 5, 1);
+                jTproductoSeleccionado.setValueAt(null, 6, 1);
+                jTproductoSeleccionado.setValueAt(null, 7, 1);
+                JOptionPane.showMessageDialog(null, "Error, producto no encontrado.");
+            } else {
+                jTproductoSeleccionado.setValueAt(producto.getIdProducto(), 0, 1);
+                jTproductoSeleccionado.setValueAt(producto.getCategoria(), 1, 1);
+                jTproductoSeleccionado.setValueAt(producto.getNombreProducto(), 2, 1);
+                jTproductoSeleccionado.setValueAt(producto.getMarca(), 3, 1);
+                jTproductoSeleccionado.setValueAt(producto.getModelo(), 4, 1);
+                jTproductoSeleccionado.setValueAt(producto.getDescripcion(), 5, 1);
+                jTproductoSeleccionado.setValueAt(producto.getPrecioActual(), 6, 1);
+                jTproductoSeleccionado.setValueAt(producto.getStock(), 7, 1);
+            }
+
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Ha ingresado una Id Inválida");
         }
     }
 }
-

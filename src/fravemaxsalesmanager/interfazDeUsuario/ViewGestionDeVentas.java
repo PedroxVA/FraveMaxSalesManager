@@ -5,21 +5,28 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
+import fravemaxsalesmanager.accesoADatos.ClienteData;
+import fravemaxsalesmanager.entidades.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author jfneg
  */
 public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
+    private ClienteData cliData = new ClienteData();
+    private DefaultTableModel modelo = new DefaultTableModel();
 
     /**
      * Creates new form ViewGestionDeVentas
      */
     public ViewGestionDeVentas() {
         initComponents();
+        armarTablaCliente();
         cargarComboCliente();
         cargarComboCategoria();
         cargarComboNombreProducto();
@@ -38,10 +45,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jCBuscarCliente = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablaCliente = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jCCategoriaProducto = new javax.swing.JComboBox<>();
         jCTipoProducto = new javax.swing.JComboBox<>();
@@ -54,6 +60,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jTFBuscar = new javax.swing.JTextField();
 
         jLabel2.setText("jLabel2");
 
@@ -66,11 +73,14 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         jCBuscarCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jLabel4.setText("jLabel4");
+        jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Buscar");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -86,7 +96,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablaCliente);
 
         jLabel5.setText("Buscar Producto por:");
 
@@ -150,10 +160,10 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jCBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(50, 50, 50)
-                                        .addComponent(jButton1))
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(57, 57, 57)
+                                        .addComponent(jBBuscar))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(27, 27, 27)
@@ -187,11 +197,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jBBuscar)
+                    .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCCategoriaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,16 +222,37 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addGap(69, 69, 69))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        // TODO add your handling code here:
+        try {
+            String claveString = jTFBuscar.getText().replace(" ", "");
+            int clave = Integer.parseInt(claveString);
+            
+            String metodoDeBusqueda = (String) jCBuscarCliente.getSelectedItem();
+            if(metodoDeBusqueda.equals("ID Cliente")){
+                Cliente cliente = cliData.obtenerClientePorId(clave);
+                cargarTablaCliente(cliente);
+            }else if(metodoDeBusqueda.equals("CUIT Cliente")){
+                Cliente cliente = cliData.obtenerClientePorCuil(clave);
+                cargarTablaCliente(cliente);
+            }
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "ID no valida");
+        }
+        
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBBuscar;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jCBuscarCliente;
     private javax.swing.JComboBox<String> jCCategoriaProducto;
@@ -229,76 +260,78 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTFBuscar;
+    private javax.swing.JTable jTablaCliente;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 
-            private void cargarComboCliente ()
-    {
+    private void cargarComboCliente() {
         List<String> buscar = new ArrayList<>();
         buscar.add("ID Cliente");
         buscar.add("CUIT Cliente");
 
-        
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(buscar.toArray(new String[0]));    
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(buscar.toArray(new String[0]));
         jCBuscarCliente.setModel(comboBoxModel);
     }
-    
-        private void cargarComboCategoria ()
-    {
+
+    private void cargarComboCategoria() {
         List<String> categ = new ArrayList<>();
         categ.add("Electrodomésticos");
         categ.add("Celulares y accesorios");
         categ.add("Tecnología");
         categ.add("Pequeño Electro");
-        
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(categ.toArray(new String[0]));    
+
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(categ.toArray(new String[0]));
         jCCategoriaProducto.setModel(comboBoxModel);
-        
-     
-        
+
         jCCategoriaProducto.addActionListener(jCTipoProducto);
-         
-    }        
 
-            private void cargarComboNombreProducto ()
-    {
+    }
+
+    private void cargarComboNombreProducto() {
         String categoriaSeleccionada = (String) jCCategoriaProducto.getSelectedItem();
-        
+
         List<String> nprod = new ArrayList<>();
-        
-        if (categoriaSeleccionada.equals("Electrodomésticos")){
-        
-        nprod.add("Heladeras");
-        nprod.add("Lavarropas");
-        nprod.add("Televisores");
-        nprod.add("Cocinas");
-        }
-        
-        else if (categoriaSeleccionada.equals("Tecnología")){
-        nprod.add("Notebook");
-        nprod.add("Tablets");
-        }
-        
-        else if (categoriaSeleccionada.equals("Celulares y accesorios")){
-        nprod.add("Teléfonos");
+
+        if (categoriaSeleccionada.equals("Electrodomésticos")) {
+
+            nprod.add("Heladeras");
+            nprod.add("Lavarropas");
+            nprod.add("Televisores");
+            nprod.add("Cocinas");
+        } else if (categoriaSeleccionada.equals("Tecnología")) {
+            nprod.add("Notebook");
+            nprod.add("Tablets");
+        } else if (categoriaSeleccionada.equals("Celulares y accesorios")) {
+            nprod.add("Teléfonos");
         }
 
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(nprod.toArray(new String[0]));    
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(nprod.toArray(new String[0]));
         jCTipoProducto.setModel(comboBoxModel);
-        
-        
-    }    
 
+    }
+
+    private void armarTablaCliente(){
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Cuil");
+        modelo.addColumn("Domicilio");
+        modelo.addColumn("Provincia");
+        jTablaCliente.setModel(modelo);
+    }
+    
+    private void cargarTablaCliente(Cliente cliente){
+        modelo.setRowCount(0);
+        modelo.addRow(new Object[]{cliente.getNombre(), cliente.getApellido(), cliente.getCuil(), cliente.getUbicacion().getDireccion(), cliente.getUbicacion().getProvincia()});
+    }
 
 }

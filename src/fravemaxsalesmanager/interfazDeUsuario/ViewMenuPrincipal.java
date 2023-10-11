@@ -114,6 +114,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrarSesion.png"))); // NOI18N
         jMenu2.setText("Salir");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar2.add(jMenu2);
 
         setJMenuBar(jMenuBar2);
@@ -180,6 +185,11 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       ventas.moveToFront();
       
     }//GEN-LAST:event_jMGestionDeVentasActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
