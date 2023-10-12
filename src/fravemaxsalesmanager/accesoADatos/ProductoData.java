@@ -175,7 +175,7 @@ public class ProductoData {
         }
     }
     
-    //Métodos de busqueda de productos - 1;
+    //Métodos de busqueda de productos - 3;
     public Producto buscarProductoPorId(int id){
         Producto producto = new Producto();
         
@@ -215,6 +215,38 @@ public class ProductoData {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, Date.valueOf(fechaVenta));
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                int idProducto = rs.getInt("idProducto");
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                Producto producto = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                listaProductos.add(producto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+        }
+        return listaProductos;
+    }
+    
+    public List<Producto> buscarProductoPorNombreProducto(String nombreP){
+        ArrayList<Producto> listaProductos = new ArrayList();
+        
+        String sql= "SELECT * "
+                + "FROM producto as p "
+                + "WHERE p.nombreProducto = ? "
+                + "AND p.stock >= 1";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombreP);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

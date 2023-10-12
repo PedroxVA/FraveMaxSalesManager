@@ -6,7 +6,9 @@
 package fravemaxsalesmanager.interfazDeUsuario;
 
 import fravemaxsalesmanager.accesoADatos.ClienteData;
+import fravemaxsalesmanager.accesoADatos.ProductoData;
 import fravemaxsalesmanager.entidades.Cliente;
+import fravemaxsalesmanager.entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -18,8 +20,11 @@ import javax.swing.table.DefaultTableModel;
  * @author jfneg
  */
 public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
+
     private ClienteData cliData = new ClienteData();
-    private DefaultTableModel modelo = new DefaultTableModel();
+    private ProductoData proData = new ProductoData();
+    private DefaultTableModel modeloCliente = new DefaultTableModel();
+    private DefaultTableModel modeloVenta = new DefaultTableModel();
 
     /**
      * Creates new form ViewGestionDeVentas
@@ -27,9 +32,18 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     public ViewGestionDeVentas() {
         initComponents();
         armarTablaCliente();
+        armarTablaVenta();
         cargarComboCliente();
         cargarComboCategoria();
         cargarComboNombreProducto();
+        //--------
+        String tipoProducto = (String)jCTipoProducto.getSelectedItem();
+        List<Producto> listaP = proData.buscarProductoPorNombreProducto(tipoProducto);
+        modeloVenta.setRowCount(0);
+        for (Producto producto : listaP) {
+            cargarTablaVenta(producto);
+        }
+        //----
     }
 
     /**
@@ -52,7 +66,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jCCategoriaProducto = new javax.swing.JComboBox<>();
         jCTipoProducto = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTablaVenta = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -63,6 +77,8 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jTFBuscar = new javax.swing.JTextField();
 
         jLabel2.setText("jLabel2");
+
+        setBorder(null);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
@@ -101,10 +117,20 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jLabel5.setText("Buscar Producto por:");
 
         jCCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCCategoriaProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCCategoriaProductoActionPerformed(evt);
+            }
+        });
 
         jCTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCTipoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCTipoProductoActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -123,7 +149,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(jTablaVenta);
 
         jLabel6.setText("Sub-Total: ");
 
@@ -170,7 +196,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                                         .addComponent(jCCategoriaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(34, 34, 34)
                                         .addComponent(jCTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 19, Short.MAX_VALUE))
+                        .addGap(0, 35, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -222,7 +248,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                 .addGap(69, 69, 69))
         );
 
@@ -234,22 +260,60 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         try {
             String claveString = jTFBuscar.getText().replace(" ", "");
             int clave = Integer.parseInt(claveString);
-            
+
             String metodoDeBusqueda = (String) jCBuscarCliente.getSelectedItem();
-            if(metodoDeBusqueda.equals("ID Cliente")){
+            if (metodoDeBusqueda.equals("ID Cliente")) {
                 Cliente cliente = cliData.obtenerClientePorId(clave);
                 cargarTablaCliente(cliente);
-            }else if(metodoDeBusqueda.equals("CUIT Cliente")){
+            } else if (metodoDeBusqueda.equals("CUIT Cliente")) {
                 Cliente cliente = cliData.obtenerClientePorCuil(clave);
                 cargarTablaCliente(cliente);
             }
-            
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "ID no valida");
         }
-        
+
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void jCCategoriaProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCCategoriaProductoActionPerformed
+        // TODO add your handling code here:
+        String categoriaSeleccionada = (String) jCCategoriaProducto.getSelectedItem();
+
+        // Limpia el JComboBox jCTipoProducto
+        jCTipoProducto.removeAllItems();
+
+        // Carga los productos relacionados en jCTipoProducto basados en la categoría seleccionada
+        if (categoriaSeleccionada.equals("Electrodomésticos")) {
+            // Asumiendo que tngo una lista de productos para esta categoría
+            List<String> productos = obtenerProductosElectrodomesticos();
+            for (String producto : productos) {
+                jCTipoProducto.addItem(producto);
+            }
+        } else if (categoriaSeleccionada.equals("Tecnología")) {
+            // Asumiendo que tienes una lista de productos para esta categoría
+            List<String> productos = obtenerProductosTecnologia();
+            for (String producto : productos) {
+                jCTipoProducto.addItem(producto);
+            }
+        } else if (categoriaSeleccionada.equals("Celulares y accesorios")) {
+            // Asumiendo que tienes una lista de productos para esta categoría
+            List<String> productos = obtenerProductosCelulares();
+            for (String producto : productos) {
+                jCTipoProducto.addItem(producto);
+            }
+        }
+    }//GEN-LAST:event_jCCategoriaProductoActionPerformed
+
+    private void jCTipoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCTipoProductoActionPerformed
+        // TODO add your handling code here:
+        String tipoProducto = (String)jCTipoProducto.getSelectedItem();
+        List<Producto> listaP = proData.buscarProductoPorNombreProducto(tipoProducto);
+        modeloVenta.setRowCount(0);
+        for (Producto producto : listaP) {
+            cargarTablaVenta(producto);
+        }
+    }//GEN-LAST:event_jCTipoProductoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBuscar;
@@ -268,7 +332,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFBuscar;
     private javax.swing.JTable jTablaCliente;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTablaVenta;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -320,18 +384,62 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
     }
 
-    private void armarTablaCliente(){
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Apellido");
-        modelo.addColumn("Cuil");
-        modelo.addColumn("Domicilio");
-        modelo.addColumn("Provincia");
-        jTablaCliente.setModel(modelo);
-    }
-    
-    private void cargarTablaCliente(Cliente cliente){
-        modelo.setRowCount(0);
-        modelo.addRow(new Object[]{cliente.getNombre(), cliente.getApellido(), cliente.getCuil(), cliente.getUbicacion().getDireccion(), cliente.getUbicacion().getProvincia()});
+    private void armarTablaCliente() {
+        modeloCliente.addColumn("Nombre");
+        modeloCliente.addColumn("Apellido");
+        modeloCliente.addColumn("Cuil");
+        modeloCliente.addColumn("Domicilio");
+        modeloCliente.addColumn("Provincia");
+        jTablaCliente.setModel(modeloCliente);
     }
 
+    private void cargarTablaCliente(Cliente cliente) {
+        modeloCliente.setRowCount(0);
+        modeloCliente.addRow(new Object[]{cliente.getNombre(), cliente.getApellido(), cliente.getCuil(), cliente.getUbicacion().getDireccion(), cliente.getUbicacion().getProvincia()});
+    }
+    
+    private void armarTablaVenta() {
+        modeloVenta.addColumn("Producto");
+        modeloVenta.addColumn("Marca");
+        modeloVenta.addColumn("Modelo");
+        modeloVenta.addColumn("Precio Unitario");
+        modeloVenta.addColumn("Unidades");
+        modeloVenta.addColumn("Total");
+        jTablaVenta.setModel(modeloVenta);
+    }
+    private void cargarTablaVenta(Producto producto){
+        String prod = producto.getNombreProducto();
+        String marca = producto.getMarca();
+        String modelo = producto.getModelo();
+        Double precioU = producto.getPrecioActual();
+        int unidades = producto.getStock();
+        Double total = unidades*precioU;
+        
+        modeloVenta.addRow(new Object[] {prod, marca, modelo, precioU, unidades, total});
+    }
+
+    // Métodos para obtener los productos de cada categoría
+    private List<String> obtenerProductosElectrodomesticos() {
+        List<String> productos = new ArrayList<>();
+        productos.add("Heladeras");
+        productos.add("Lavarropas");
+        productos.add("Televisores");
+        productos.add("Cocinas");
+        return productos;
+    }
+
+    private List<String> obtenerProductosTecnologia() {
+        List<String> productos = new ArrayList<>();
+        productos.add("Notebook");
+        productos.add("Tablets");
+        return productos;
+    }
+
+    private List<String> obtenerProductosCelulares() {
+        List<String> productos = new ArrayList<>();
+        productos.add("Teléfonos");
+        return productos;
 }
+
+}
+

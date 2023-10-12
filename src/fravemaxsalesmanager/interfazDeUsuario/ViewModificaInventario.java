@@ -24,6 +24,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
     public ViewModificaInventario() {
       
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
         setBorder(null);
     
     }
@@ -43,6 +44,8 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTproductoSeleccionado = new javax.swing.JTable();
+
+        setBorder(null);
 
         jPanel.setDoubleBuffered(false);
         jPanel.setOpaque(false);
@@ -81,7 +84,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(155, Short.MAX_VALUE)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,7 +113,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

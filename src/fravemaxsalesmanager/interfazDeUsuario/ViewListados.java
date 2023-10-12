@@ -5,11 +5,7 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -22,7 +18,8 @@ public class ViewListados extends javax.swing.JInternalFrame {
      */
     public ViewListados() {
         initComponents();
-        setBorder(null);
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+        setBorder(null);        
 
     }
 
@@ -38,7 +35,9 @@ public class ViewListados extends javax.swing.JInternalFrame {
         jPanel = new fravemaxsalesmanager.interfazDeUsuario.BackgroundPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setFrameIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/1.png"))); // NOI18N
+        setBorder(null);
+        setTitle("Listado de Prueba");
+        setFrameIcon(null);
 
         jPanel.setDoubleBuffered(false);
         jPanel.setOpaque(false);
@@ -62,16 +61,14 @@ public class ViewListados extends javax.swing.JInternalFrame {
             .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
