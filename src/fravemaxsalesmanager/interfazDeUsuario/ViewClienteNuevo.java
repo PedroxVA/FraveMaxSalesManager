@@ -11,6 +11,7 @@ import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.Ubicacion;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -189,8 +190,7 @@ public class ViewClienteNuevo extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
