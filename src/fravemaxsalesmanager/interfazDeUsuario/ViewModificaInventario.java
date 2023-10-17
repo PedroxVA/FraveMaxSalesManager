@@ -43,6 +43,8 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTproductoSeleccionado = new javax.swing.JTable();
+        jBModificar = new javax.swing.JButton();
+        jBBaja = new javax.swing.JButton();
 
         jPanel.setDoubleBuffered(false);
         jPanel.setOpaque(false);
@@ -76,25 +78,46 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
             jTproductoSeleccionado.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        jBModificar.setText("Modificar y Guardar");
+        jBModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBModificarActionPerformed(evt);
+            }
+        });
+
+        jBBaja.setText("Baja");
+        jBBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBajaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+            .addGroup(jPanelLayout.createSequentialGroup()
                 .addContainerGap(139, Short.MAX_VALUE)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
-                        .addComponent(jBBuscar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(180, 180, 180))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64)
+                                .addComponent(jBBuscar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(180, 180, 180))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                        .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jBBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLbuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -102,7 +125,11 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
                     .addComponent(jBBuscar))
                 .addGap(122, 122, 122)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                    .addComponent(jBModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(80, 80, 80))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,7 +143,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 4, Short.MAX_VALUE)
                 .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -128,9 +155,46 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         cargarDatosTabla();
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+        try {
+        // Obtener los valores de la tabla (asegúrate de que los nombres sean correctos)
+        int idProducto = (int) jTproductoSeleccionado.getValueAt(0, 1);
+        String categoria = (String) jTproductoSeleccionado.getValueAt(1, 1);
+        String nombreProducto = (String) jTproductoSeleccionado.getValueAt(2, 1);
+        String marca = (String) jTproductoSeleccionado.getValueAt(3, 1);
+        String modelo = (String) jTproductoSeleccionado.getValueAt(4, 1);
+        String descripcion = (String) jTproductoSeleccionado.getValueAt(5, 1);
+        Double precio = Double.parseDouble((String) jTproductoSeleccionado.getValueAt(6, 1));
+        int stock = Integer.parseInt((String) jTproductoSeleccionado.getValueAt(7, 1));
+        Boolean activo = true;
+
+        // Crear un nuevo objeto Producto con los valores modificados
+        Producto productoModificado = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precio, stock, true);
+
+        // Actualizar el producto en la base de datos
+        proData.modificarProducto(productoModificado);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al procesar los datos del producto."+e.getMessage());
+    }
+    }//GEN-LAST:event_jBModificarActionPerformed
+
+    private void jBBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBajaActionPerformed
+            try {
+        // Obtener el ID del producto a dar de baja (supongamos que se ingresa un ID en un campo de texto)
+        int idProducto = Integer.parseInt(jTbuscarID.getText().trim());
+
+        // Usar ProductoData para dar de baja el producto en la base de datos
+        proData.bajaProductoPorID(idProducto);
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error al procesar la baja del producto.");
+    }
+    }//GEN-LAST:event_jBBajaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBBaja;
     private javax.swing.JButton jBBuscar;
+    private javax.swing.JButton jBModificar;
     private javax.swing.JLabel jLbuscarProducto;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane1;

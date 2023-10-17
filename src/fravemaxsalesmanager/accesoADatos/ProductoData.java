@@ -70,7 +70,7 @@ public class ProductoData {
     }
     //Método para eliminar un producto - 3;
     public void bajaProductoPorID(int idProducto){
-        String sql = "UPDATE producto set estado= 0 WHERE idProducto = ? AND estado = 1";
+        String sql = "UPDATE producto set estado= 0 WHERE idProducto = ? ";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);

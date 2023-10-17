@@ -17,11 +17,14 @@ import javax.swing.JPanel;
  */
 public class ViewListados extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ViewListados
-     */
+      
+      
+    
     public ViewListados() {
         initComponents();
+        
+        ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
+        
         setBorder(null);
 
     }
