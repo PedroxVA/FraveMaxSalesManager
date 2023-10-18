@@ -15,7 +15,7 @@ public class Conexion {
     private static final String PASSWORD="";
     private static Connection connection;
 
-    private Conexion(){}
+    public Conexion(){}
     
     //Método para establecer una conexión con la base de datos.
     public static Connection getConexion() {
@@ -37,5 +37,11 @@ public class Conexion {
         }
 
         return connection;
+    }
+
+    public static class java {
+
+        public java() {
+        }
     }
 }
