@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -281,20 +282,30 @@ public class ViewClienteNuevo extends javax.swing.JInternalFrame {
         String cpostal =jTCodigoPostal.getText();
         String provincia = (String)jCProvincia.getSelectedItem();
         String pais = jTArgentina.getText();
-        
         String nombre = jTNombreCliente.getText();
         String apellido = jTApellidoCliente.getText();
         String telef = jTTelefono.getText();
         String email = jTCorreoElectronico.getText();
         String cuit = jTCuit.getText();
-        
+        if(direccion.isEmpty() || ciudad.isEmpty() || cpostal.isEmpty() || provincia.isEmpty() || pais.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Error, campos de ubicacion vacíos.");
+        }else if(nombre.isEmpty() || apellido.isEmpty() || telef.isEmpty() || email.isEmpty() || cuit.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Error, campos de cliente vacíos.");
+        }else{
         Ubicacion ubicacion = new Ubicacion(direccion, ciudad, cpostal, provincia, pais);
         
         Cliente cliente = new Cliente(apellido, nombre, telef, email, cuit, ubicacion);
         
         ubiData.altaUbicacion(ubicacion);
                         
-        clieData.altaCliente(cliente);
+        clieData.altaCliente(cliente); 
+        }
+        
+        
+        
+        
+        
+        
         
         
     }//GEN-LAST:event_jBGuardarActionPerformed

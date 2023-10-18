@@ -27,6 +27,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     public ViewMenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**

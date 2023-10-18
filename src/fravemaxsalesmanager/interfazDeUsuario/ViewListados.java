@@ -5,7 +5,12 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.MouseEvent;
+import static java.awt.image.ImageObserver.WIDTH;
 import java.beans.PropertyVetoException;
+import javax.swing.ImageIcon;
 import javax.swing.border.LineBorder;
 
 /**
@@ -21,9 +26,11 @@ public class ViewListados extends javax.swing.JInternalFrame {
         initComponents();
 
         
-        ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).setNorthPane(null);
         
-        setBorder(null);
+        ((javax.swing.plaf.basic.BasicInternalFrameUI)getUI()).setNorthPane(null);
+        MouseEvent click = new MouseEvent(jDPEscritorio, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, rootPaneCheckingEnabled);
+         
+        //setBorder(null);
 
     }
 
@@ -36,20 +43,20 @@ public class ViewListados extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jPanel = new fravemaxsalesmanager.interfazDeUsuario.BackgroundPanel();
-        jDesktopPane = new javax.swing.JDesktopPane();
-        jBVentasPorFecha = new javax.swing.JButton();
+        ImageIcon icono = new ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/1.png"));
+        Image miImagen = icono.getImage();
+        jDPEscritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(miImagen, 0, 0 , getWidth(), getHeight(), this);
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
+            }
+        }
+        ;
+        jBVentasPorFecha = new javax.swing.JButton();
 
         setBorder(null);
         setTitle("Listado de Prueba");
         setFrameIcon(null);
-
-        jPanel.setDoubleBuffered(false);
-        jPanel.setOpaque(false);
 
         jBVentasPorFecha.setText("Listado de Ventas por Fecha");
         jBVentasPorFecha.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,47 +65,40 @@ public class ViewListados extends javax.swing.JInternalFrame {
             }
         });
 
-        jDesktopPane.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
-        jDesktopPane.setLayout(jDesktopPaneLayout);
-        jDesktopPaneLayout.setHorizontalGroup(
-            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPaneLayout.createSequentialGroup()
+        javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
+        jDPEscritorio.setLayout(jDPEscritorioLayout);
+        jDPEscritorioLayout.setHorizontalGroup(
+            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(338, Short.MAX_VALUE))
         );
-        jDesktopPaneLayout.setVerticalGroup(
-            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDesktopPaneLayout.createSequentialGroup()
+        jDPEscritorioLayout.setVerticalGroup(
+            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(311, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
-        jPanel.setLayout(jPanelLayout);
-        jPanelLayout.setHorizontalGroup(
-            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addComponent(jDesktopPane)
-                .addContainerGap())
-        );
-        jPanelLayout.setVerticalGroup(
-            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane)
+                .addContainerGap(289, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(5, 5, 5)
+                .addComponent(jDPEscritorio)
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jDPEscritorio)
+                .addContainerGap())
         );
 
         pack();
@@ -106,7 +106,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
     private void jBVentasPorFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVentasPorFechaMouseClicked
             if (!informeFrame.isVisible()) {
-            jDesktopPane.add(informeFrame);
+            jDPEscritorio.add(informeFrame);
             informeFrame.setVisible(true);
             try {
                 informeFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
@@ -119,9 +119,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBVentasPorFecha;
-    private javax.swing.JDesktopPane jDesktopPane;
-    private javax.swing.JPanel jPanel;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JDesktopPane jDPEscritorio;
     // End of variables declaration//GEN-END:variables
 
 
