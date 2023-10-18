@@ -206,7 +206,7 @@ public class ProductoData {
     public List<Producto> buscarProductoPorFechaDeVenta(LocalDate fechaVenta){
         ArrayList<Producto> listaProductos = new ArrayList();
         
-        String sql= "SELECT p.nombreProducto "
+        String sql= "SELECT p.* "
                 + "FROM producto as p "
                 + "JOIN detalleventa AS dv ON (dv.idProducto=p.idProducto) "
                 + "JOIN venta AS v ON (dv.idVenta=v.idVenta) "

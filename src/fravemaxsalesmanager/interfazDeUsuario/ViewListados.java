@@ -5,6 +5,7 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
+import java.beans.PropertyVetoException;
 import javax.swing.border.LineBorder;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.border.LineBorder;
  */
 public class ViewListados extends javax.swing.JInternalFrame {
 
-      
+      ViewVentasPorFechas informeFrame = new ViewVentasPorFechas();
       
     
     public ViewListados() {
@@ -35,8 +36,13 @@ public class ViewListados extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel = new fravemaxsalesmanager.interfazDeUsuario.BackgroundPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jDesktopPane = new javax.swing.JDesktopPane();
+        jBVentasPorFecha = new javax.swing.JButton();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setBorder(null);
         setTitle("Listado de Prueba");
@@ -45,33 +51,50 @@ public class ViewListados extends javax.swing.JInternalFrame {
         jPanel.setDoubleBuffered(false);
         jPanel.setOpaque(false);
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Listados de Prueba");
+        jBVentasPorFecha.setText("Listado de Ventas por Fecha");
+        jBVentasPorFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBVentasPorFechaMouseClicked(evt);
+            }
+        });
+
+        jDesktopPane.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPaneLayout = new javax.swing.GroupLayout(jDesktopPane);
+        jDesktopPane.setLayout(jDesktopPaneLayout);
+        jDesktopPaneLayout.setHorizontalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(338, Short.MAX_VALUE))
+        );
+        jDesktopPaneLayout.setVerticalGroup(
+            jDesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPaneLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(311, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(157, 157, 157)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addComponent(jDesktopPane)
+                .addContainerGap())
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(351, Short.MAX_VALUE))
+            .addComponent(jDesktopPane)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,10 +104,24 @@ public class ViewListados extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jBVentasPorFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVentasPorFechaMouseClicked
+            if (!informeFrame.isVisible()) {
+            jDesktopPane.add(informeFrame);
+            informeFrame.setVisible(true);
+            try {
+                informeFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
+            } catch (PropertyVetoException ex) {
+                // Manejar la excepción si es necesario
+            }
+        }
+    }//GEN-LAST:event_jBVentasPorFechaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jBVentasPorFecha;
+    private javax.swing.JDesktopPane jDesktopPane;
     private javax.swing.JPanel jPanel;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     // End of variables declaration//GEN-END:variables
 
 
