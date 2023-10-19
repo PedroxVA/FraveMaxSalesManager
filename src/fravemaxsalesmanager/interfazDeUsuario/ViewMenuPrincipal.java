@@ -81,7 +81,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMbajaymodificacion.setText("Baja y Modificación de Proctos");
+        jMbajaymodificacion.setText("Baja y Modificación de Productos");
         jMbajaymodificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMbajaymodificacionActionPerformed(evt);
