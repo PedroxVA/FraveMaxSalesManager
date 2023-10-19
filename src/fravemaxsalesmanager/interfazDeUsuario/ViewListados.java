@@ -27,7 +27,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
         
         
-        ((javax.swing.plaf.basic.BasicInternalFrameUI)getUI()).setNorthPane(null);
+        //((javax.swing.plaf.basic.BasicInternalFrameUI)getUI()).setNorthPane(null);
         MouseEvent click = new MouseEvent(jDPEscritorio, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, rootPaneCheckingEnabled);
          
         //setBorder(null);
@@ -53,6 +53,9 @@ public class ViewListados extends javax.swing.JInternalFrame {
         }
         ;
         jBVentasPorFecha = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setBorder(null);
         setTitle("Listado de Prueba");
@@ -65,7 +68,16 @@ public class ViewListados extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("⮚\tListar todas las ventas en una fecha.");
+
+        jButton2.setText("⮚\tListar todas las ventas de un Cliente X.");
+
+        jButton3.setText("⮚\tMostrar que clientes compraron el producto X.");
+
         jDPEscritorio.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
         jDPEscritorio.setLayout(jDPEscritorioLayout);
@@ -73,7 +85,12 @@ public class ViewListados extends javax.swing.JInternalFrame {
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(338, Short.MAX_VALUE))
         );
         jDPEscritorioLayout.setVerticalGroup(
@@ -81,7 +98,13 @@ public class ViewListados extends javax.swing.JInternalFrame {
             .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addGap(78, 78, 78)
+                .addComponent(jButton1)
+                .addGap(55, 55, 55)
+                .addComponent(jButton2)
+                .addGap(42, 42, 42)
+                .addComponent(jButton3)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,6 +142,9 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBVentasPorFecha;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDPEscritorio;
     // End of variables declaration//GEN-END:variables
 
