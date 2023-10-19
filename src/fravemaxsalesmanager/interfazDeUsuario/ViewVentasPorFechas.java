@@ -8,6 +8,7 @@ package fravemaxsalesmanager.interfazDeUsuario;
 import fravemaxsalesmanager.accesoADatos.ClienteData;
 import fravemaxsalesmanager.accesoADatos.Conexion;
 import fravemaxsalesmanager.accesoADatos.ProductoData;
+import fravemaxsalesmanager.accesoADatos.VentaData;
 import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
@@ -40,9 +41,10 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
     Conexion miConexion = new Conexion();
     ProductoData proData = new ProductoData();
     ClienteData clieData = new ClienteData();
+    VentaData venData = new VentaData();
     
     List<Producto> listaProductos = new ArrayList<>();
-    
+    List<Venta> listaVentas = new ArrayList<>();
     private DefaultTableModel modelo = new DefaultTableModel();
     
     private Double totalVenta = 0.00;
@@ -70,19 +72,19 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTIdVenta = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTTablaInforme = new javax.swing.JTable();
         jBGenerarInforme = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jDCFecha = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         jTTotalVenta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTNombreCliente = new javax.swing.JTextField();
+        jCBVentas = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Ingrese la Fecha: ");
 
-        jLabel2.setText("Ingrese el Id. de la Venta: ");
+        jLabel2.setText("Seleccione la venta: ");
 
         jTTablaInforme.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,9 +106,19 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             }
         });
 
+        jDCFecha.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDCFechaPropertyChange(evt);
+            }
+        });
+
         jLabel3.setText("Total Venta sin Impuestos: ");
 
+        jTTotalVenta.setEditable(false);
+
         jLabel4.setText("Nombre del Cliente:");
+
+        jTNombreCliente.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,9 +133,9 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTIdVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBGenerarInforme, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(71, 71, 71)))
@@ -152,12 +164,12 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                            .addComponent(jDCFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTIdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(43, 43, 43)
+                            .addComponent(jCBVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -169,7 +181,7 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(172, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
 
         pack();
@@ -177,54 +189,82 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
 
     private void jBGenerarInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarInformeActionPerformed
      
-        
-       LocalDate fechaVenta = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-       String idVenta = jTIdVenta.getText();
-       
-       if (fechaVenta == null){
+        try {
+            LocalDate fechaVenta = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String idVentaString = String.valueOf(jCBVentas.getSelectedItem());
+            int idVenta = Integer.parseInt(idVentaString);
+            if (fechaVenta == null){
        
            JOptionPane.showMessageDialog(null, "En esa fecha no hay ventas, ingrese una nueva");
            
-       } else if (idVenta.equals("")) {
        
-           JOptionPane.showMessageDialog(null,"Identificador de ventas no válido, ingrese uno nuevo");
-       }
-       
-       else{
-           Cliente cliente = obtenerClientePorId(idVenta);
+            }else{
+           Cliente cliente = clieData.obtenerClientePorIdVenta(idVenta);
            
            if (cliente != null){
                
                jTNombreCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+               listaProductos = proData.buscarProductoPorFechaDeVenta(fechaVenta);
+               reiniciarTabla();
+               cargarTabla();
                
            } else {
-               
+               reiniciarTabla();
                jTNombreCliente.setText("Cliente no encontrado");
+               JOptionPane.showMessageDialog(null, "No existe tal registro en la fecha indicada.");
+               
+               
            }
            
-           listaProductos = proData.buscarProductoPorFechaDeVenta(fechaVenta);
+          
            
            
            
-           reiniciarTabla();
            
-           cargarTabla();
            
        }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "En esa fecha no hay ventas, ingrese una nueva");
+        } catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"Identificador de ventas no válido, ingrese uno nuevo");
+            jTNombreCliente.setText("");
+            reiniciarTabla();
+            jTTotalVenta.setText("");
+        }
+       
+      
+       
+       
            
            
     }//GEN-LAST:event_jBGenerarInformeActionPerformed
 
+    private void jDCFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDCFechaPropertyChange
+        // TODO add your handling code here:
+        
+        try {
+            jCBVentas.removeAllItems();
+            listaVentas = venData.buscarVentaPorFecha(jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        
+        for (Venta venta : listaVentas) {
+            jCBVentas.addItem(String.valueOf(venta.getIdVenta()));
+        }
+        } catch (NullPointerException e) {
+        }
+        
+        
+    }//GEN-LAST:event_jDCFechaPropertyChange
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGenerarInforme;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JComboBox<String> jCBVentas;
+    private com.toedter.calendar.JDateChooser jDCFecha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTIdVenta;
     private javax.swing.JTextField jTNombreCliente;
     private javax.swing.JTable jTTablaInforme;
     private javax.swing.JTextField jTTotalVenta;
@@ -245,7 +285,7 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
     }
     
     private void cargarTabla() {
-        
+        totalVenta = 0.00;
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
         DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);

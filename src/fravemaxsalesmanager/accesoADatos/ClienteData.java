@@ -108,6 +108,33 @@ public class ClienteData {
         return null;
     }
 
+    public Cliente obtenerClientePorIdVenta(int idVenta) {
+
+        String sql = "SELECT * FROM cliente AS c "
+                + "JOIN venta AS v ON (c.idCliente=v.idCliente) "
+                + "WHERE idVenta = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, idVenta);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    Cliente cliente = new Cliente();
+                    cliente.setIdCliente(resultSet.getInt("idCliente"));
+                    cliente.setApellido(resultSet.getString("apellido"));
+                    cliente.setNombre(resultSet.getString("nombre"));
+                    cliente.setTelef(resultSet.getString("telefono"));
+                    cliente.setEmail(resultSet.getString("email"));
+                    cliente.setCuil(resultSet.getString("cuil"));
+                    cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
+                    return cliente;
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+        }
+        return null;
+    }
+
     // Método para obtener todos los clientes
     public List<Cliente> obtenerTodosLosClientes() {
         List<Cliente> clientes = new ArrayList<>();
