@@ -114,6 +114,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jLabel3.setText("Buscar Cliente por:");
 
         jCBuscarCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBuscarClienteActionPerformed(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -228,7 +233,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -276,14 +281,14 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(79, 79, 79)
-                                .addComponent(jLabel9))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(144, 144, 144)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDCFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,32 +441,62 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
     private void jBFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBFacturarActionPerformed
         // TODO add your handling code here:
+        List<DetalleVenta> listaDetalleVenta = new ArrayList<>();
+        LocalDate fecha = null;
         try {
             int idCliente = cliente.getIdCliente();
-        LocalDate fecha = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        
-        Venta venta = new Venta(idCliente, fecha);
-        venData.altaVenta(venta);
-        for (Producto producto : listaCarrito) {
-            int cantidad = 1;//*****************+
-            int idVenta = venta.getIdVenta();
-            Double precioVenta = producto.getPrecioActual();
-            Double importeBruto = cantidad*precioVenta;
-            Double descuentos = 0.0; //***********+
-            Double IVA = precioVenta*0.21; //*******+
-            int idProducto = producto.getIdProducto();
-            
+            if (idCliente == 0) {
+                JOptionPane.showMessageDialog(null, "¡idCliente no válida!");
+            } else {
+                fecha = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+                Venta venta = new Venta(idCliente, fecha);
+                
+                if(!listaCarrito.isEmpty()){
+                    venData.altaVenta(venta);
+                  for (Producto producto : listaCarrito) {
+                    int cantidad = 1;//*****************+
+                    int idVenta = venta.getIdVenta();
+                    Double precioVenta = producto.getPrecioActual();
+                    Double importeBruto = cantidad * precioVenta;
+                    Double descuentos = 0.0; //***********+
+                    Double IVA = precioVenta * 0.21; //*******+
+                    int idProducto = producto.getIdProducto();
+
+                    DetalleVenta detalleVenta = new DetalleVenta(cantidad, idVenta, precioVenta, importeBruto, descuentos, IVA, idProducto);
+                    listaDetalleVenta.add(detalleVenta);
                     
-            DetalleVenta detalleVenta = new DetalleVenta(cantidad, idVenta, precioVenta, importeBruto, descuentos, IVA, idProducto);
-            deVenData.altaDetalleVenta(detalleVenta);
+                }  
+                for (DetalleVenta detalleVenta : listaDetalleVenta) {
+                    deVenData.altaDetalleVenta(detalleVenta);
+                }
+                //----
+                    String tipoProducto = (String) jCTipoProducto.getSelectedItem();
+                    listaP = proData.buscarProductoPorNombreProducto(tipoProducto);
+                    modeloVenta.setRowCount(0);
+                    for (Producto producto : listaP) {
+                        cargarTablaVenta(producto);
+                }
+                //----
+                }else{
+                    JOptionPane.showMessageDialog(null, "Carrito vacío.");
+                }
+                
+                
+            }
+
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Fecha no válida.");
         }
-        } catch (Exception e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-        
-        
-        
+
+
     }//GEN-LAST:event_jBFacturarActionPerformed
+
+    private void jCBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBuscarClienteActionPerformed
+        // TODO add your handling code here:
+        jTFBuscar.setText("");
+        modeloCliente.setRowCount(0);
+    }//GEN-LAST:event_jCBuscarClienteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregarAlCarrito;
@@ -548,9 +583,15 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     }
 
     private void cargarTablaCliente(Cliente cliente) {
-        modeloCliente.setRowCount(0);
-        modeloCliente.addRow(new Object[]{cliente.getNombre(), cliente.getApellido(), cliente.getCuil(), cliente.getUbicacion().getDireccion(), cliente.getUbicacion().getProvincia()});
-    }
+        
+        try {
+            modeloCliente.setRowCount(0);
+            modeloCliente.addRow(new Object[]{cliente.getNombre(), cliente.getApellido(), cliente.getCuil(), cliente.getUbicacion().getDireccion(), cliente.getUbicacion().getProvincia()});
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Cliente no encontrado.");
+    
+        }}
+        
     
     private void armarTablaVenta() {
         modeloVenta.addColumn("Producto");

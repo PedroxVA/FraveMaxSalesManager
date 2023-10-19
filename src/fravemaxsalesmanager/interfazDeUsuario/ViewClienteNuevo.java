@@ -291,7 +291,10 @@ public class ViewClienteNuevo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error, campos de ubicacion vacíos.");
         }else if(nombre.isEmpty() || apellido.isEmpty() || telef.isEmpty() || email.isEmpty() || cuit.isEmpty()){
             JOptionPane.showMessageDialog(null, "Error, campos de cliente vacíos.");
-        }else{
+        }else if(!email.contains("@") || !email.contains(".com")){
+            JOptionPane.showMessageDialog(null, "Email no válido.");
+        }
+        else{
         Ubicacion ubicacion = new Ubicacion(direccion, ciudad, cpostal, provincia, pais);
         
         Cliente cliente = new Cliente(apellido, nombre, telef, email, cuit, ubicacion);
