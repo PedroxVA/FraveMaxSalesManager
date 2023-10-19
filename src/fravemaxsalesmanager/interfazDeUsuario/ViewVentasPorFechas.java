@@ -185,7 +185,7 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
        
            JOptionPane.showMessageDialog(null, "En esa fecha no hay ventas, ingrese una nueva");
            
-       } else if (idVenta == null) {
+       } else if (idVenta.equals("")) {
        
            JOptionPane.showMessageDialog(null,"Identificador de ventas no válido, ingrese uno nuevo");
        }
