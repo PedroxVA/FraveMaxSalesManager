@@ -13,6 +13,11 @@ import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -94,8 +99,8 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jTablaCompras = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jBAgregarAlCarrito = new javax.swing.JButton();
-        jDCFecha = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
+        jDCFecha = new com.toedter.calendar.JDateChooser();
 
         jLabel2.setText("jLabel2");
 
@@ -235,11 +240,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                         .addGap(97, 97, 97)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBFacturar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(47, 47, 47))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -250,41 +253,37 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                                     .addComponent(jTFIVA)
                                     .addComponent(jTFTotalF)))))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jBBuscar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jCBuscarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jTFBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jBBuscar))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jCCategoriaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jCTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jBAgregarAlCarrito)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jCCategoriaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jCTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBAgregarAlCarrito))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(79, 79, 79)
+                                .addComponent(jLabel9))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)))
-                .addContainerGap())
+                        .addComponent(jDCFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -403,23 +402,31 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
     private void jBAgregarAlCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAgregarAlCarritoActionPerformed
         // TODO add your handling code here:
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        
+        
+        
         try {
             int y = jTablaVenta.getSelectedRow();
             Producto producto = listaP.get(y);
             cargarTablaCompras(producto);
             
+            String precioFormateado = formato.format(producto.getPrecioActual());
+            
             listaCarrito.add(producto);
             //---------------------
             subTotal += producto.getPrecioActual();
-            String subTotalString = String.valueOf(subTotal);
+            String subTotalString = formato.format(subTotal);
             jTFSubTotal.setText(subTotalString);
             
             Double IVA = subTotal*0.21;
-            String IVAString = String.valueOf(IVA);
+            String IVAString = formato.format(IVA);
             jTFIVA.setText(IVAString);
             
             Double factura = subTotal+IVA;
-            String facturaString = String.valueOf(factura);
+            String facturaString = formato.format(factura);
             jTFTotalF.setText(facturaString);
         } catch (Exception e) {
             System.out.println("error: "+e.getMessage());
@@ -554,14 +561,22 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jTablaVenta.setModel(modeloVenta);
     }
     private void cargarTablaVenta(Producto producto){
+        
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+                
         String prod = producto.getNombreProducto();
         String marca = producto.getMarca();
         String modelo = producto.getModelo();
+        
+        String precioFormateado = formato.format(producto.getPrecioActual());
+        
         Double precioU = producto.getPrecioActual();
         int unidades = producto.getStock();
         Double total = unidades*precioU;
         
-        modeloVenta.addRow(new Object[] {prod, marca, modelo, precioU, unidades});
+        modeloVenta.addRow(new Object[] {prod, marca, modelo, precioFormateado, unidades});
     }
     private void armarTablaCompras(){
         modeloCompras.addColumn("Item");
@@ -569,16 +584,27 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jTablaCompras.setModel(modeloCompras);
     }
     private void cargarTablaCompras(Producto producto){
+        
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        
+        
         String prod = producto.getNombreProducto();
         String marca = producto.getMarca();
-        String modelo = producto.getModelo();
+        String modelo = producto.getModelo();  
+
         //---
+        
+        String precioFormateado = formato.format(producto.getPrecioActual());
+        
         Double precioU = producto.getPrecioActual();
         int unidades = producto.getStock();
         //---
         Double total = precioU*unidades;
+        String totalFormateado = formato.format(total);
         
-        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, precioU});
+        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, precioFormateado});
     }
     
 
