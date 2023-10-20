@@ -125,7 +125,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     modelo.setRowCount(0);
      
      for (Venta venta : todasLasVentas) {
-        modelo.addRow(new Object[]{venta.getIdVenta(), venta.getIdCliente(), venta.getFechaVenta()});
+        modelo.addRow(new Object[]{venta.getIdVenta(), venta.getIdCliente(), venta.getFechaVenta(), venta.getImporteBruto()});
     }
    
              

@@ -468,6 +468,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     listaDetalleVenta.add(detalleVenta);
                     
                 }
+                  venta.setImporteBruto(importeBruto);
                   venData.modificarVenta(venta);
                 for (DetalleVenta detalleVenta : listaDetalleVenta) {
                     deVenData.altaDetalleVenta(detalleVenta);

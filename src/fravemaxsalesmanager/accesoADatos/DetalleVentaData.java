@@ -30,9 +30,9 @@ public class DetalleVentaData {
             ps.setInt(1, DetalleVenta.getCantidad());
             ps.setInt(2, DetalleVenta.getIdVenta());
             ps.setDouble(3, DetalleVenta.getPrecioVenta());
-            ps.setDouble(5, DetalleVenta.getDescuentos());
-            ps.setDouble(6, DetalleVenta.getIVA());
-            ps.setInt(7, DetalleVenta.getIdProducto());
+            ps.setDouble(4, DetalleVenta.getDescuentos());
+            ps.setDouble(5, DetalleVenta.getIVA());
+            ps.setInt(6, DetalleVenta.getIdProducto());
 
             if (proData.buscarProductoPorId(DetalleVenta.getIdProducto()).getStock() > 0) {//cartel innecesario
                 ps.executeUpdate();
@@ -128,10 +128,10 @@ public class DetalleVentaData {
             ps.setInt(1, detalleVenta.getCantidad());
             ps.setInt(2, detalleVenta.getIdVenta());
             ps.setDouble(3, detalleVenta.getPrecioVenta());
-            ps.setDouble(5, detalleVenta.getDescuentos());
-            ps.setDouble(6, detalleVenta.getIVA());
-            ps.setInt(7, detalleVenta.getIdProducto());
-            ps.setInt(8, detalleVenta.getIdDetalleVenta());
+            ps.setDouble(4, detalleVenta.getDescuentos());
+            ps.setDouble(5, detalleVenta.getIVA());
+            ps.setInt(6, detalleVenta.getIdProducto());
+            ps.setInt(7, detalleVenta.getIdDetalleVenta());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
