@@ -5,6 +5,7 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -65,11 +66,6 @@ public class ViewListados extends javax.swing.JInternalFrame {
         jBVentasPorFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBVentasPorFechaMouseClicked(evt);
-            }
-        });
-        jBVentasPorFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBVentasPorFechaActionPerformed(evt);
             }
         });
 
@@ -143,6 +139,8 @@ public class ViewListados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBVentasPorFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVentasPorFechaMouseClicked
+                            
+        
             if (!informeFrame.isVisible()) {
             jDPEscritorio.add(informeFrame);
             informeFrame.setVisible(true);
@@ -154,17 +152,13 @@ public class ViewListados extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBVentasPorFechaMouseClicked
 
-    private void jBVentasPorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVentasPorFechaActionPerformed
-             
-    }//GEN-LAST:event_jBVentasPorFechaActionPerformed
-
     private void jBListarTodasLasVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBListarTodasLasVentasMouseClicked
         // TODO add your handling code here:
-         if (!informeFrame.isVisible()) {
-            jDPEscritorio.add(informeFrame);
-            informeFrame.setVisible(true);
+         if (!listarFrame.isVisible()) {
+            jDPEscritorio.add(listarFrame);
+            listarFrame.setVisible(true);
             try {
-                informeFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
+                listarFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
             } catch (PropertyVetoException ex) {
                 // Manejar la excepción si es necesario
             }
@@ -172,7 +166,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBListarTodasLasVentasMouseClicked
 
     private void jBListarTodasLasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBListarTodasLasVentasActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jBListarTodasLasVentasActionPerformed
 
 

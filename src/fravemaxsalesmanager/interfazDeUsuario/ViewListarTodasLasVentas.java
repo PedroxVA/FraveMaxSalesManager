@@ -37,9 +37,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
         initComponents();
         modelo = new DefaultTableModel();
         jTTablaLista.setModel(modelo);
-        modelo.addColumn("ID Venta");
-        modelo.addColumn("ID Cliente");
-        modelo.addColumn("Fecha Venta");
+
          armarTitulosTabla();
     }
 
@@ -120,7 +118,9 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBGenerarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarListaActionPerformed
-       List<Venta> todasLasVentas = venData.buscarVentaPorFecha(LocalDate.MIN);
+        LocalDate fecha = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        
+        List<Venta> todasLasVentas = venData.buscarVentaPorFecha(fecha);
 
     modelo.setRowCount(0);
      
@@ -146,6 +146,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
         modelo.addColumn("ID Venta");
         modelo.addColumn("ID Cliente");
         modelo.addColumn("Fecha Venta");
+        modelo.addColumn("Importe");
        
         jTTablaLista.setModel(modelo);
         
