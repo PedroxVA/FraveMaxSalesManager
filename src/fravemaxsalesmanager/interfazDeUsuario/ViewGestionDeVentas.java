@@ -9,10 +9,16 @@ import fravemaxsalesmanager.accesoADatos.ClienteData;
 import fravemaxsalesmanager.accesoADatos.DetalleVentaData;
 import fravemaxsalesmanager.accesoADatos.ProductoData;
 import fravemaxsalesmanager.accesoADatos.VentaData;
+import fravemaxsalesmanager.clasesExtra.MyEditor;
+import fravemaxsalesmanager.clasesExtra.MyEditorSuma;
+import fravemaxsalesmanager.clasesExtra.MyRenderer;
+import fravemaxsalesmanager.clasesExtra.MyRendererSuma;
 import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -23,8 +29,10 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -52,6 +60,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         armarTablaCliente();
         armarTablaVenta();
         armarTablaCompras();
+        colocarBotonesTablaCompra();
         cargarComboCliente();
         cargarComboCategoria();
         cargarComboNombreProducto();
@@ -204,13 +213,13 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         jTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Item", "Precio Item"
+                "Item", "Precio Item", "+", "Cantidad", "-"
             }
         ));
         jScrollPane3.setViewportView(jTablaCompras);
@@ -237,12 +246,12 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(118, 118, 118)
-                                .addComponent(jLabel4)))
-                        .addGap(97, 97, 97)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jBFacturar, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -625,7 +634,20 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private void armarTablaCompras(){
         modeloCompras.addColumn("Item");
         modeloCompras.addColumn("Precio Item");
+        modeloCompras.addColumn("+");
+        modeloCompras.addColumn("Cantidad");
+        modeloCompras.addColumn("-");
         jTablaCompras.setModel(modeloCompras);
+    }
+    private void colocarBotonesTablaCompra(){
+        TableColumn agregarColumn;
+        agregarColumn = jTablaCompras.getColumnModel().getColumn(4);
+        agregarColumn.setCellEditor(new MyEditor(jTablaCompras));
+        agregarColumn.setCellRenderer(new MyRenderer(true));
+        TableColumn agregarColumnSuma;
+        agregarColumnSuma = jTablaCompras.getColumnModel().getColumn(2);
+        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras));
+        agregarColumnSuma.setCellRenderer(new MyRendererSuma(true));
     }
     private void cargarTablaCompras(Producto producto){
         
@@ -647,8 +669,36 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         //---
         Double total = precioU*unidades;
         String totalFormateado = formato.format(total);
+        int cantidad = 1;
+        //....
+//        JButton botonMas = new JButton("+");
+//        JButton botonMenos = new JButton("+");
+//        botonMas.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e){
+//                int fila = jTablaCompras.getSelectedRow();
+//                int cantidadActual = (int) modeloCompras.getValueAt(fila, 3);
+//                
+//                modeloCompras.setValueAt(cantidadActual+1, fila, 3);
+//            }
+//        });
+//        botonMenos.addActionListener(new ActionListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e){
+//                int fila = jTablaCompras.getSelectedRow();
+//                
+//                int cantidadActual = (int) modeloCompras.getValueAt(fila, 3);
+//                if (cantidadActual>0){
+//                    modeloCompras.setValueAt(cantidadActual-1, fila, 3);
+//                }else{
+//                    JOptionPane.showMessageDialog(null, "No hay mas stock");    
+//                }
+//                
+//            }
+//        });
         
-        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, precioFormateado});
+        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, precioFormateado, null, cantidad,null});
+        
     }
     
 
