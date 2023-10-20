@@ -449,8 +449,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "¡idCliente no válida!");
             } else {
                 fecha = jDCFecha.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                double importeBruto = 0.00;
 
-                Venta venta = new Venta(idCliente, fecha);
+                Venta venta = new Venta(idCliente, fecha, importeBruto);
                 
                 if(!listaCarrito.isEmpty()){
                     venData.altaVenta(venta);
@@ -458,15 +459,16 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     int cantidad = 1;//*****************+
                     int idVenta = venta.getIdVenta();
                     Double precioVenta = producto.getPrecioActual();
-                    Double importeBruto = cantidad * precioVenta;
                     Double descuentos = 0.0; //***********+
                     Double IVA = precioVenta * 0.21; //*******+
                     int idProducto = producto.getIdProducto();
+                    importeBruto += precioVenta*cantidad;
 
-                    DetalleVenta detalleVenta = new DetalleVenta(cantidad, idVenta, precioVenta, importeBruto, descuentos, IVA, idProducto);
+                    DetalleVenta detalleVenta = new DetalleVenta(cantidad, idVenta, precioVenta, descuentos, IVA, idProducto);
                     listaDetalleVenta.add(detalleVenta);
                     
-                }  
+                }
+                  venData.modificarVenta(venta);
                 for (DetalleVenta detalleVenta : listaDetalleVenta) {
                     deVenData.altaDetalleVenta(detalleVenta);
                 }

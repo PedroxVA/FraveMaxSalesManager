@@ -8,7 +8,6 @@ public class DetalleVenta {
     private int cantidad;
     private int idVenta;
     private double precioVenta;
-    private double importeBruto;
     private double descuentos;
     private double IVA;
     private int idProducto;
@@ -17,22 +16,20 @@ public class DetalleVenta {
 
     public DetalleVenta() {}
 
-    public DetalleVenta(int idDetalleVenta, int cantidad, int idVenta, double precioVenta, double importeBruto, double descuentos, double IVA, int idProducto) {
+    public DetalleVenta(int idDetalleVenta, int cantidad, int idVenta, double precioVenta, double descuentos, double IVA, int idProducto) {
         this.idDetalleVenta = idDetalleVenta;
         this.cantidad = cantidad;
         this.idVenta = idVenta;
         this.precioVenta = precioVenta;
-        this.importeBruto = importeBruto;
         this.descuentos = descuentos;
         this.IVA = IVA;
         this.idProducto = idProducto;
     }
 
-    public DetalleVenta(int cantidad, int idVenta, double precioVenta, double importeBruto, double descuentos, double IVA, int idProducto) {
+    public DetalleVenta(int cantidad, int idVenta, double precioVenta, double descuentos, double IVA, int idProducto) {
         this.cantidad = cantidad;
         this.idVenta = idVenta;
         this.precioVenta = precioVenta;
-        this.importeBruto = importeBruto;
         this.descuentos = descuentos;
         this.IVA = IVA;
         this.idProducto = idProducto;
@@ -70,14 +67,6 @@ public class DetalleVenta {
 
     public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
-    }
-
-    public double getImporteBruto() {
-        return importeBruto;
-    }
-
-    public void setImporteBruto(double importeBruto) {
-        this.importeBruto = importeBruto;
     }
 
     public double getDescuentos() {
@@ -120,7 +109,6 @@ public class DetalleVenta {
         hash = 53 * hash + this.cantidad;
         hash = 53 * hash + this.idVenta;
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.precioVenta) ^ (Double.doubleToLongBits(this.precioVenta) >>> 32));
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.importeBruto) ^ (Double.doubleToLongBits(this.importeBruto) >>> 32));
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.descuentos) ^ (Double.doubleToLongBits(this.descuentos) >>> 32));
         hash = 53 * hash + (int) (Double.doubleToLongBits(this.IVA) ^ (Double.doubleToLongBits(this.IVA) >>> 32));
         hash = 53 * hash + this.idProducto;
@@ -149,9 +137,6 @@ public class DetalleVenta {
             return false;
         }
         if (Double.doubleToLongBits(this.precioVenta) != Double.doubleToLongBits(other.precioVenta)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.importeBruto) != Double.doubleToLongBits(other.importeBruto)) {
             return false;
         }
         if (Double.doubleToLongBits(this.descuentos) != Double.doubleToLongBits(other.descuentos)) {

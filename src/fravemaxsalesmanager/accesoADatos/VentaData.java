@@ -25,13 +25,14 @@ public class VentaData {
     ///----------------------------------------------------------------------------------------------------//
     //Método para agregar una venta-  1;
     public void altaVenta(Venta venta){
-        String sql = "INSERT INTO venta(idCliente, fechaVenta)"
-                + "VALUES (? ,? )";
+        String sql = "INSERT INTO venta(idCliente, fechaVenta, importeBruto)"
+                + "VALUES (? ,? ,?)";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, venta.getIdCliente());
             ps.setDate(2,Date.valueOf(venta.getFechaVenta()));
+            ps.setDouble(3, venta.getImporteBruto());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -99,14 +100,15 @@ public class VentaData {
     //Método para modificar na venta - 1;
     public void modificarVenta(Venta Venta){
         String sql = "UPDATE venta SET "
-                + "idCliente= ?,fechaVenta= ? "
+                + "idCliente = ?,fechaVenta = ?, importeBruto = ? "
                 + "WHERE idVenta = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, Venta.getIdCliente());
             ps.setDate(2, Date.valueOf(Venta.getFechaVenta()));
-            ps.setInt(3, Venta.getIdVenta());
+            ps.setDouble(3, Venta.getImporteBruto());
+            ps.setInt(4, Venta.getIdVenta());
 
             
             int exito = ps.executeUpdate();
@@ -134,8 +136,9 @@ public class VentaData {
             if(rs.next()){
                 int idCliente = rs.getInt("idCliente");
                 LocalDate fechaVenta = rs.getDate("fechaVenta").toLocalDate();
+                double importeBruto = rs.getDouble("importeBruto");
                 
-                venta = new Venta(id, idCliente, fechaVenta);
+                venta = new Venta(id, idCliente, fechaVenta, importeBruto);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla detalleVenta)");
@@ -147,7 +150,7 @@ public class VentaData {
     public List<Venta> buscarVentaPorFecha(LocalDate fechaVenta){
         ArrayList<Venta> listaVentas = new ArrayList();
         
-        String sql= "SELECT v.idVenta, v.idCliente, v.fechaVenta "
+        String sql= "SELECT v.idVenta, v.idCliente, v.fechaVenta, v.importeBruto "
                 + "FROM venta as v "
                 + "WHERE v.fechaVenta = ?;";
         
@@ -160,8 +163,9 @@ public class VentaData {
                 int idVenta = rs.getInt("idVenta");
                 int idCliente = rs.getInt("idCliente");
                 LocalDate fecha = rs.getDate("fechaVenta").toLocalDate();
+                double importeBruto = rs.getDouble("importeBruto");
                 
-                Venta venta = new Venta(idVenta, idCliente, fecha);
+                Venta venta = new Venta(idVenta, idCliente, fecha, importeBruto);
                 listaVentas.add(venta);
             }
         } catch (SQLException ex) {
@@ -173,7 +177,7 @@ public class VentaData {
     public List<Venta> buscarVentaPorCliente(int idCliente){
         ArrayList<Venta> listaVentas = new ArrayList();
         
-        String sql= "SELECT v.idVenta, v.idCliente, v.fechaVenta "
+        String sql= "SELECT v.idVenta, v.idCliente, v.fechaVenta, v.importeBruto "
                 + "FROM venta as v "
                 + "WHERE v.idCliente = ?;";
         
@@ -186,8 +190,9 @@ public class VentaData {
                 int idVenta = rs.getInt("idVenta");
                 int id = rs.getInt("idCliente");
                 LocalDate fecha = rs.getDate("fechaVenta").toLocalDate();
+                double importeBruto = rs.getDouble("importeBruto");
                 
-                Venta venta = new Venta(idVenta, id, fecha);
+                Venta venta = new Venta(idVenta, id, fecha, importeBruto);
                 listaVentas.add(venta);
             }
         } catch (SQLException ex) {

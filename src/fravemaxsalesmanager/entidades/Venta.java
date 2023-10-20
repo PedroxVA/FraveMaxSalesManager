@@ -10,23 +10,36 @@ public class Venta {
     private int idVenta;
     private int idCliente;
     private LocalDate fechaVenta;
+    private double importeBruto;
     
 // Constructores
 
     public Venta() {}
 
-    public Venta(int idVenta, int idCliente, LocalDate fechaVenta) {
+    public Venta(int idVenta, int idCliente, LocalDate fechaVenta, double importeBruto) {
         this.idVenta = idVenta;
         this.idCliente = idCliente;
         this.fechaVenta = fechaVenta;
+        this.importeBruto = importeBruto;
     }
 
-    public Venta(int idCliente, LocalDate fechaVenta) {
+    public Venta(int idCliente, LocalDate fechaVenta, double importeBruto) {
         this.idCliente = idCliente;
         this.fechaVenta = fechaVenta;
+        this.importeBruto = importeBruto;
     }
+
     
+
+
     // Getters and Setters
+    
+    public double getImporteBruto() {    
+        return importeBruto;
+    }
+    public void setImporteBruto(double importeBruto) {
+        this.importeBruto = importeBruto;
+    }
 
     public int getIdVenta() {
         return idVenta;
@@ -56,17 +69,18 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "ID " + idVenta + " - Cliente N°" + idCliente + " (" + fechaVenta+")";
+        return "ID " + idVenta + " - Cliente N°" + idCliente + " (" + fechaVenta+") - $"+importeBruto;
     }
     
     // Hashcode & Equals
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + this.idVenta;
-        hash = 71 * hash + this.idCliente;
-        hash = 71 * hash + Objects.hashCode(this.fechaVenta);
+        int hash = 7;
+        hash = 53 * hash + this.idVenta;
+        hash = 53 * hash + this.idCliente;
+        hash = 53 * hash + Objects.hashCode(this.fechaVenta);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.importeBruto) ^ (Double.doubleToLongBits(this.importeBruto) >>> 32));
         return hash;
     }
 
@@ -88,11 +102,16 @@ public class Venta {
         if (this.idCliente != other.idCliente) {
             return false;
         }
+        if (Double.doubleToLongBits(this.importeBruto) != Double.doubleToLongBits(other.importeBruto)) {
+            return false;
+        }
         if (!Objects.equals(this.fechaVenta, other.fechaVenta)) {
             return false;
         }
         return true;
     }
+
+    
     
     
 
