@@ -138,23 +138,24 @@ public class ClienteData {
     // Método para obtener todos los clientes
     public List<Cliente> obtenerTodosLosClientes() {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM Cliente";
-        try (PreparedStatement statement = connection.prepareStatement(sql);
-             ResultSet resultSet = statement.executeQuery()) {
+        String sql = "SELECT * FROM cliente";
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Cliente cliente = new Cliente();
                 
                 cliente.setIdCliente(resultSet.getInt("idCliente"));
                 cliente.setApellido(resultSet.getString("apellido"));
                 cliente.setNombre(resultSet.getString("nombre"));
-                cliente.setTelef(resultSet.getString("telef"));
+                cliente.setTelef(resultSet.getString("telefono"));
                 cliente.setEmail(resultSet.getString("email"));
                 cliente.setCuil(resultSet.getString("cuil"));
                 cliente.setUbicacion(ubiData.buscarUbicacionPorId(resultSet.getInt("idUbicacion")));
                 clientes.add(cliente);
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cliente");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla clientex"+ex.getMessage());
         }
         return clientes;
     }

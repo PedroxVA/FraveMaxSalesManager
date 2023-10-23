@@ -25,7 +25,8 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     ClienteData clieData = new ClienteData();
     VentaData venData = new VentaData();
     DetalleVentaData deVenData = new DetalleVentaData();
-     List<Cliente> clientes  = new ArrayList<>();
+    List<Cliente> clientes  = new ArrayList<>();
+    DefaultTableModel modelo = new DefaultTableModel();
 
 
    
@@ -33,25 +34,32 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     public ViewListarVentasClienteX() {
         initComponents();
         llenarComboxClientes();
-        DefaultTableModel modelo = new DefaultTableModel();
-        jTClientex.setModel(modelo);   
-        modelo.addColumn("ID Venta");
-        modelo.addColumn("Fecha de Venta");
-        modelo.addColumn("Importe Bruto");
+        armarTablaCliente();
+        
     } 
      
       private void llenarComboxClientes(){
          clientes =clieData.obtenerTodosLosClientes();
          
           jCBClientex.removeAllItems();
-          
+          jCBClientex.addItem("------------");
       for (Cliente cliente : clientes){
-          jCBClientex.addItem(cliente.getNombre());
-          System.out.println("cliente");
+          jCBClientex.addItem(String.valueOf(cliente.getIdCliente()));
       }
 
       }
-    
+    private void armarTablaCliente(){
+        modelo.addColumn("ID Venta");
+        modelo.addColumn("Fecha de Venta");
+        modelo.addColumn("Importe Bruto");
+        jTClientex.setModel(modelo);   
+    }
+    private void cargarTablaCliente(List<Venta> ventasDelCliente){
+        modelo.setRowCount(0);
+        for (Venta venta : ventasDelCliente) {
+            modelo.addRow(new Object[]{venta.getIdCliente(), venta.getFechaVenta(), venta.getImporteBruto()});
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,6 +75,7 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
         jCBClientex = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTClientex = new javax.swing.JTable();
+        jTFCliente = new javax.swing.JTextField();
 
         jLabel1.setText("Listado de ventas por Cliente");
 
@@ -92,6 +101,12 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTClientex);
 
+        jTFCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFClienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +120,9 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCBClientex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCBClientex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -119,10 +136,11 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCBClientex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBClientex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,15 +148,17 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
 
     private void jCBClientexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClientexActionPerformed
         // TODO add your handling code here:
-       try {
-    String clienteSeleccionado = (String) jCBClientex.getSelectedItem();
-   if (clienteSeleccionado != null){
-    int idCliente = Integer.parseInt(clienteSeleccionado);
-    List<Venta> ventasDelCliente = venData.buscarVentaPorCliente(idCliente);
-    DefaultTableModel model = (DefaultTableModel) jTClientex.getModel();
-    model.setRowCount(0);
-    
-   }
+        try {
+            String idClienteSeleccionado = (String) jCBClientex.getSelectedItem();
+            if (idClienteSeleccionado != null && !idClienteSeleccionado.equals("------------")) {
+                int idCliente = Integer.parseInt(idClienteSeleccionado);
+                Cliente cliente = clieData.obtenerClientePorId(idCliente);
+                jTFCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
+
+               
+                List<Venta> ventasDelCliente = venData.buscarVentaPorCliente(idCliente);
+                cargarTablaCliente(ventasDelCliente);
+            }
    
 
    
@@ -149,6 +169,10 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jCBClientexActionPerformed
 
+    private void jTFClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFClienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCBClientex;
@@ -156,6 +180,7 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTClientex;
+    private javax.swing.JTextField jTFCliente;
     // End of variables declaration//GEN-END:variables
 
 
