@@ -61,7 +61,7 @@
                       <Component id="jBVentasPorFecha" min="-2" pref="279" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jBListarVentasClienteX" alignment="0" max="32767" attributes="0"/>
                           <Component id="jBListarTodasLasVentas" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -77,7 +77,7 @@
                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                   <Component id="jBListarTodasLasVentas" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBListarVentasClienteX" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Component id="jButton3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="45" max="32767" attributes="0"/>
@@ -103,10 +103,14 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBListarTodasLasVentasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="jBListarVentasClienteX">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x2b9a;&#x9;Listar todas las ventas de un Cliente X."/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBListarVentasClienteXMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBListarVentasClienteXActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>

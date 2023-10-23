@@ -22,7 +22,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
       ViewVentasPorFechas informeFrame = new ViewVentasPorFechas();
       ViewListarTodasLasVentas listarFrame =new ViewListarTodasLasVentas();
-    
+      ViewListarVentasClienteX clienteFrame = new ViewListarVentasClienteX();
     public ViewListados() {
         initComponents();
 
@@ -55,7 +55,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
         ;
         jBVentasPorFecha = new javax.swing.JButton();
         jBListarTodasLasVentas = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jBListarVentasClienteX = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setBorder(null);
@@ -81,13 +81,23 @@ public class ViewListados extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("⮚\tListar todas las ventas de un Cliente X.");
+        jBListarVentasClienteX.setText("⮚\tListar todas las ventas de un Cliente X.");
+        jBListarVentasClienteX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBListarVentasClienteXMouseClicked(evt);
+            }
+        });
+        jBListarVentasClienteX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBListarVentasClienteXActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("⮚\tMostrar que clientes compraron el producto X.");
 
         jDPEscritorio.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDPEscritorio.setLayer(jBListarTodasLasVentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDPEscritorio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDPEscritorio.setLayer(jBListarVentasClienteX, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDPEscritorio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
@@ -100,7 +110,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
                     .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(338, Short.MAX_VALUE))
         );
@@ -112,7 +122,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
                 .addGap(78, 78, 78)
                 .addComponent(jBListarTodasLasVentas)
                 .addGap(55, 55, 55)
-                .addComponent(jButton2)
+                .addComponent(jBListarVentasClienteX)
                 .addGap(42, 42, 42)
                 .addComponent(jButton3)
                 .addContainerGap(45, Short.MAX_VALUE))
@@ -167,13 +177,31 @@ public class ViewListados extends javax.swing.JInternalFrame {
 
     private void jBListarTodasLasVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBListarTodasLasVentasActionPerformed
         
+        
     }//GEN-LAST:event_jBListarTodasLasVentasActionPerformed
+
+    private void jBListarVentasClienteXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBListarVentasClienteXActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBListarVentasClienteXActionPerformed
+
+    private void jBListarVentasClienteXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBListarVentasClienteXMouseClicked
+        // TODO add your handling code here:
+         if (!clienteFrame.isVisible()) {
+            jDPEscritorio.add(clienteFrame);
+            clienteFrame.setVisible(true);
+            try {
+                clienteFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
+            } catch (PropertyVetoException ex) {
+                // Manejar la excepción si es necesario
+            }
+        }
+    }//GEN-LAST:event_jBListarVentasClienteXMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBListarTodasLasVentas;
+    private javax.swing.JButton jBListarVentasClienteX;
     private javax.swing.JButton jBVentasPorFecha;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JDesktopPane jDPEscritorio;
     // End of variables declaration//GEN-END:variables
