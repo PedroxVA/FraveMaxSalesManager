@@ -125,7 +125,12 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     modelo.setRowCount(0);
      
      for (Venta venta : todasLasVentas) {
-        modelo.addRow(new Object[]{venta.getIdVenta(), venta.getIdCliente(), venta.getFechaVenta(), venta.getImporteBruto()});
+         
+        int idCliente = venta.getIdCliente();
+        
+        String nombreCliente = obtenerClientePorId(idCliente);
+         
+        modelo.addRow(new Object[]{venta.getIdVenta(), nombreCliente, venta.getFechaVenta(), venta.getImporteBruto()});
     }
    
              
@@ -154,7 +159,20 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     
     
     }
+ 
+ private String obtenerClientePorId (int idCliente){
+     
+    // Aquí debes implementar la lógica para obtener el nombre del cliente usando el IdCliente.
+    // Puedes usar tu método o clase que se encargue de acceder a los datos de clientes.
+    Cliente cliente = clieData.obtenerClientePorId(idCliente);
     
-
+    if (cliente != null) {
+        return (cliente.getNombre()+ " " + cliente.getApellido()); // Asume que existe un método para obtener el nombre completo.
+    } else {
+        return "Cliente no encontrado";
+ 
+    }
+    
+ }
 
 }

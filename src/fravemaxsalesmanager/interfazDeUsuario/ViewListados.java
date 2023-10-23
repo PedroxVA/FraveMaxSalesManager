@@ -69,7 +69,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
             }
         });
 
-        jBListarTodasLasVentas.setText("⮚\tListar todas las ventas en una fecha.");
+        jBListarTodasLasVentas.setText("Listar todas las ventas en una fecha.");
         jBListarTodasLasVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBListarTodasLasVentasMouseClicked(evt);
@@ -106,12 +106,12 @@ public class ViewListados extends javax.swing.JInternalFrame {
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                     .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(338, Short.MAX_VALUE))
         );
         jDPEscritorioLayout.setVerticalGroup(
@@ -119,9 +119,9 @@ public class ViewListados extends javax.swing.JInternalFrame {
             .addGroup(jDPEscritorioLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
-                .addComponent(jBListarTodasLasVentas)
-                .addGap(55, 55, 55)
+                .addGap(31, 31, 31)
+                .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
                 .addComponent(jBListarVentasClienteX)
                 .addGap(42, 42, 42)
                 .addComponent(jButton3)
