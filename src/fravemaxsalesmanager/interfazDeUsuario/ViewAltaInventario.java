@@ -7,6 +7,8 @@ package fravemaxsalesmanager.interfazDeUsuario;
 
 import fravemaxsalesmanager.accesoADatos.ProductoData;
 import fravemaxsalesmanager.entidades.Producto;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -112,6 +114,11 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         });
 
         jCnombreProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCnombreProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCnombreProductoActionPerformed(evt);
+            }
+        });
 
         jCmodelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCmodelo.addActionListener(new java.awt.event.ActionListener() {
@@ -230,22 +237,25 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBaltaProductoActionPerformed
 
     private void jCcategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcategoriaActionPerformed
-        cargarComboNombreProducto();
+        //cargarComboCategoria();
+
     }//GEN-LAST:event_jCcategoriaActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
-
+        
     private void jCcomboMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCcomboMarcaActionPerformed
-        cargarComboNombreProducto();
-        cargarComboMarca();
+        //cargarComboMarca();
     }//GEN-LAST:event_jCcomboMarcaActionPerformed
 
     private void jCmodeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCmodeloActionPerformed
-        cargarComboMarca();
-        cargarComboModelo();
+        //cargarComboModelo();
     }//GEN-LAST:event_jCmodeloActionPerformed
+
+    private void jCnombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCnombreProductoActionPerformed
+        //cargarComboNombreProducto();
+    }//GEN-LAST:event_jCnombreProductoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -271,25 +281,38 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
 
     private void cargarComboCategoria ()
     {
+        //jCcategoria.removeAllItems();
         List<String> categ = new ArrayList<>();
         categ.add("Electrodomésticos");
         categ.add("Celulares y accesorios");
         categ.add("Tecnología");
-        categ.add("Pequeño Electro");
+        //categ.add("Pequeño Electro");
         
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(categ.toArray(new String[0]));    
         jCcategoria.setModel(comboBoxModel);
         
      
         
-        jCcategoria.addActionListener(jCnombreProducto);
+        jCcategoria.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarComboNombreProducto();
+            }
+        });
+        
+        
+        
          
     }
     
         private void cargarComboNombreProducto ()
     {
-        String categoriaSeleccionada = (String) jCcategoria.getSelectedItem();
         
+        
+        String categoriaSeleccionada = (String) jCcategoria.getSelectedItem();
+       
+        //jCnombreProducto.removeAllItems();
+                
         List<String> nprod = new ArrayList<>();
         
         if (categoriaSeleccionada.equals("Electrodomésticos")){
@@ -312,26 +335,36 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(nprod.toArray(new String[0]));    
         jCnombreProducto.setModel(comboBoxModel);
         
-        jCnombreProducto.addActionListener(jCcomboMarca);
+        jCnombreProducto.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    cargarComboMarca();
+                
+                   
+            }
+        });
     }
     
         private void cargarComboMarca ()
     {
+        String categoriaSeleccionada = (String) jCcategoria.getSelectedItem();
         String productoSeleccionado = (String) jCnombreProducto.getSelectedItem();
         
         List<String> marca = new ArrayList<>();
         
-        if (productoSeleccionado.equals("Heladeras")) {
-        
-            
+       if (productoSeleccionado.equals("Heladeras")) {
+                   
         marca.add("Whirpool");
         marca.add("Siam");
         }
         else if (productoSeleccionado.equals("Teléfonos")) {
-        marca.add("LG");
         marca.add("Samsung");
-        marca.add("Motorola");
-        marca.add("Nokia");
+        
+        }
+        else if (productoSeleccionado.equals("Televisores")) {
+        marca.add("LG");
+        marca.add("TCL");
+
         
         }
         
@@ -339,14 +372,22 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         marca.add("Apple");
         }
         
+               
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(marca.toArray(new String[0]));    
         jCcomboMarca.setModel(comboBoxModel);
         
-        jCcomboMarca.addActionListener(jCmodelo);
+        jCcomboMarca.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarComboModelo();
+            }
+        });
     }
         
      private void cargarComboModelo ()
     {
+        String categoriaSeleccionada = (String) jCcategoria.getSelectedItem();
+        String productoSeleccionado = (String) jCnombreProducto.getSelectedItem();
         String marcaSeleccionada = (String) jCcomboMarca.getSelectedItem();
         
         List<String> modelo = new ArrayList<>();
@@ -356,6 +397,12 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         modelo.add("WRE85AB");
         modelo.add("WRM57K2");
         modelo.add("WRM53JK");
+        }
+        else if (marcaSeleccionada.equals("LG")) {
+        
+        modelo.add("32 pulgadas ");
+        modelo.add("43 pulgadas");
+        modelo.add("60 pulgadas");
         
         }
         else if (marcaSeleccionada.equals("Samsung")){
@@ -364,9 +411,16 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         modelo.add("Galaxy 24");
         }
         
+        else if (marcaSeleccionada.equals("Apple")){
+        modelo.add("Ipad Pro 11");
+        modelo.add("Ipad 9a Generacion");
+        modelo.add("Ipad Air");
+        }
+        
+        
         DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>(modelo.toArray(new String[0]));    
         jCmodelo.setModel(comboBoxModel);
         
-        jCmodelo.addActionListener(jCmodelo);
+        //jCmodelo.addActionListener(jCmodelo);
     }   
 }
