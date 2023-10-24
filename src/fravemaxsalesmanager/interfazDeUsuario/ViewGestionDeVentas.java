@@ -428,20 +428,17 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             String precioFormateado = formato.format(producto.getPrecioActual());
             
             listaCarrito.add(producto);
+            
+            actualizarDatosJTF();
+            //--------------------- futuro metodo para dar formato
+            //String subTotalString = formato.format(subTotal);
+
+            
+            //String IVAString = formato.format(IVA);
+            
+
+            //String facturaString = formato.format(factura);
             //---------------------
-            int cantidad = (int)jTablaCompras.getValueAt(jTablaCompras.getRowCount()-1, 3);
-            Double precio = producto.getPrecioActual();
-            subTotal += precio*cantidad;
-            String subTotalString = formato.format(subTotal);
-            jTFSubTotal.setText(subTotalString);
-            
-            Double IVA = subTotal*0.21;
-            String IVAString = formato.format(IVA);
-            jTFIVA.setText(IVAString);
-            
-            Double factura = subTotal+IVA;
-            String facturaString = formato.format(factura);
-            jTFTotalF.setText(facturaString);
         } catch (Exception e) {
             System.out.println("error: "+e.getMessage());
             e.printStackTrace();
@@ -540,15 +537,19 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTablaVenta;
     // End of variables declaration//GEN-END:variables
 
-    private void actualizarImporteBruto(){
+    private void actualizarDatosJTF(){
         subTotal=0.0;
         int filas = jTablaCompras.getRowCount();
         for (int i = 0; i < filas; i++) {
-            double precio = (Double)jTablaCompras.getValueAt(i, 1);
-            double cantidad = (Double)jTablaCompras.getValueAt(i, 3);;
+            double precio = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 1))) ;
+            double cantidad = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 3))) ; 
             subTotal+= precio*cantidad;
         }
         jTFSubTotal.setText(String.valueOf(subTotal));
+        double iva = subTotal*0.21;
+        jTFIVA.setText(String.valueOf(iva));
+        jTFTotalF.setText(String.valueOf(iva+subTotal));
+        
     }
     private void cargarComboCliente() {
         List<String> buscar = new ArrayList<>();
