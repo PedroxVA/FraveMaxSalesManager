@@ -48,7 +48,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private DefaultTableModel modeloVenta = new DefaultTableModel();
     private DefaultTableModel modeloCompras = new DefaultTableModel();
     private List<Producto> listaP = new ArrayList();
-    private Double subTotal = 0.0;//******************
+    private double subTotal = 0.00;//******************
     private Cliente cliente = new Cliente();
     private List<Producto> listaCarrito = new ArrayList();
 
@@ -431,7 +431,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             
             listaCarrito.add(producto);
             //---------------------
-            subTotal += producto.getPrecioActual();
+            int cantidad = (int)jTablaCompras.getValueAt(jTablaCompras.getRowCount()-1, 3);
+            Double precio = producto.getPrecioActual();
+            subTotal += precio*cantidad;
             String subTotalString = formato.format(subTotal);
             jTFSubTotal.setText(subTotalString);
             
@@ -444,6 +446,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             jTFTotalF.setText(facturaString);
         } catch (Exception e) {
             System.out.println("error: "+e.getMessage());
+            e.printStackTrace();
         }
         
     }//GEN-LAST:event_jBAgregarAlCarritoActionPerformed
@@ -539,6 +542,16 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTablaVenta;
     // End of variables declaration//GEN-END:variables
 
+    private void actualizarImporteBruto(){
+        subTotal=0.0;
+        int filas = jTablaCompras.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            double precio = (Double)jTablaCompras.getValueAt(i, 1);
+            double cantidad = (Double)jTablaCompras.getValueAt(i, 3);;
+            subTotal+= precio*cantidad;
+        }
+        jTFSubTotal.setText(String.valueOf(subTotal));
+    }
     private void cargarComboCliente() {
         List<String> buscar = new ArrayList<>();
         buscar.add("ID Cliente");
@@ -642,11 +655,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private void colocarBotonesTablaCompra(){
         TableColumn agregarColumn;
         agregarColumn = jTablaCompras.getColumnModel().getColumn(4);
-        agregarColumn.setCellEditor(new MyEditor(jTablaCompras));
+        agregarColumn.setCellEditor(new MyEditor(jTablaCompras, jTFSubTotal));
         agregarColumn.setCellRenderer(new MyRenderer(true));
         TableColumn agregarColumnSuma;
         agregarColumnSuma = jTablaCompras.getColumnModel().getColumn(2);
-        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras));
+        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras, jTFSubTotal));
         agregarColumnSuma.setCellRenderer(new MyRendererSuma(true));
     }
     private void cargarTablaCompras(Producto producto){
@@ -662,7 +675,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         //---
         
-        String precioFormateado = formato.format(producto.getPrecioActual());
+        //String precioFormateado = formato.format(producto.getPrecioActual()); genera un error con los botones al hacer un string
         
         Double precioU = producto.getPrecioActual();
         int unidades = producto.getStock();
@@ -697,7 +710,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 //            }
 //        });
         
-        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, precioFormateado, null, cantidad,null});
+        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, producto.getPrecioActual(), null, cantidad,null});
         
     }
     
