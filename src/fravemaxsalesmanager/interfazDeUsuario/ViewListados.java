@@ -23,7 +23,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
       ViewVentasPorFechas informeFrame = new ViewVentasPorFechas();
       ViewListarTodasLasVentas listarFrame =new ViewListarTodasLasVentas();
       ViewListarVentasClienteX clienteFrame = new ViewListarVentasClienteX();
-
+      ViewListarClienteProdX productoXFrame = new  ViewListarClienteProdX();
       
 public ViewListados() {
         initComponents();
@@ -67,6 +67,11 @@ public ViewListados() {
         jLabel1.setText("Menú de Informes - Fravemax");
 
         jButton3.setText("⮚\tMostrar que clientes compraron el producto X.");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jBListarVentasClienteX.setText("Listar todas las ventas de un Cliente X.");
         jBListarVentasClienteX.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -210,6 +215,19 @@ public ViewListados() {
             }
         }
     }//GEN-LAST:event_jBListarVentasClienteXMouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        if (!productoXFrame.isVisible()) {
+            jDesktopPane1.add(productoXFrame);
+            productoXFrame.setVisible(true);
+            try {
+                productoXFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
+            } catch (PropertyVetoException ex) {
+                // Manejar la excepción si es necesario
+            }
+        }
+    }//GEN-LAST:event_jButton3MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
