@@ -23,10 +23,13 @@ import javax.swing.table.DefaultTableModel;
 public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
     ProductoData proData = new ProductoData();
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public ViewModificaInventario() {
       
         initComponents();
+        restringirTabla();
+                
         setBorder(null);
     
     }
@@ -169,6 +172,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBModificarActionPerformed
+             
         try {
         // Obtener los valores de la tabla (asegúrate de que los nombres sean correctos)
         int idProducto = (int) jTproductoSeleccionado.getValueAt(0, 1);
@@ -242,6 +246,9 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
                 jTproductoSeleccionado.setValueAt(producto.getDescripcion(), 5, 1);
                 jTproductoSeleccionado.setValueAt(producto.getPrecioActual(), 6, 1);
                 jTproductoSeleccionado.setValueAt(producto.getStock(), 7, 1);
+    
+                
+                
             }
 
         } catch (NumberFormatException e) {
@@ -250,7 +257,20 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         
     }
     
+        private void restringirTabla (){
+        
+            modelo = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return row != 7; // 7 es el índice de la columna "stock"
+            }
+        };
+        
+        
+     
+    
 }
 
+}
     
 

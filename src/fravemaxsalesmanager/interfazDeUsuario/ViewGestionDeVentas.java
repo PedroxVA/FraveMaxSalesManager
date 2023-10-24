@@ -17,8 +17,6 @@ import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -430,20 +428,17 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             String precioFormateado = formato.format(producto.getPrecioActual());
             
             listaCarrito.add(producto);
+            
+            actualizarDatosJTF();
+            //--------------------- futuro metodo para dar formato
+            //String subTotalString = formato.format(subTotal);
+
+            
+            //String IVAString = formato.format(IVA);
+            
+
+            //String facturaString = formato.format(factura);
             //---------------------
-            int cantidad = (int)jTablaCompras.getValueAt(jTablaCompras.getRowCount()-1, 3);
-            Double precio = producto.getPrecioActual();
-            subTotal += precio*cantidad;
-            String subTotalString = formato.format(subTotal);
-            jTFSubTotal.setText(subTotalString);
-            
-            Double IVA = subTotal*0.21;
-            String IVAString = formato.format(IVA);
-            jTFIVA.setText(IVAString);
-            
-            Double factura = subTotal+IVA;
-            String facturaString = formato.format(factura);
-            jTFTotalF.setText(facturaString);
         } catch (Exception e) {
             System.out.println("error: "+e.getMessage());
             e.printStackTrace();
@@ -542,15 +537,19 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTablaVenta;
     // End of variables declaration//GEN-END:variables
 
-    private void actualizarImporteBruto(){
+    private void actualizarDatosJTF(){
         subTotal=0.0;
         int filas = jTablaCompras.getRowCount();
         for (int i = 0; i < filas; i++) {
-            double precio = (Double)jTablaCompras.getValueAt(i, 1);
-            double cantidad = (Double)jTablaCompras.getValueAt(i, 3);;
+            double precio = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 1))) ;
+            double cantidad = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 3))) ; 
             subTotal+= precio*cantidad;
         }
         jTFSubTotal.setText(String.valueOf(subTotal));
+        double iva = subTotal*0.21;
+        jTFIVA.setText(String.valueOf(iva));
+        jTFTotalF.setText(String.valueOf(iva+subTotal));
+        
     }
     private void cargarComboCliente() {
         List<String> buscar = new ArrayList<>();
@@ -655,11 +654,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private void colocarBotonesTablaCompra(){
         TableColumn agregarColumn;
         agregarColumn = jTablaCompras.getColumnModel().getColumn(4);
-        agregarColumn.setCellEditor(new MyEditor(jTablaCompras, jTFSubTotal));
+        agregarColumn.setCellEditor(new MyEditor(jTablaCompras, jTFSubTotal, jTFIVA, jTFTotalF));
         agregarColumn.setCellRenderer(new MyRenderer(true));
         TableColumn agregarColumnSuma;
         agregarColumnSuma = jTablaCompras.getColumnModel().getColumn(2);
-        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras, jTFSubTotal));
+        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras, jTFSubTotal, jTFIVA, jTFTotalF));
         agregarColumnSuma.setCellRenderer(new MyRendererSuma(true));
     }
     private void cargarTablaCompras(Producto producto){
