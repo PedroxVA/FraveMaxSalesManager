@@ -23,13 +23,14 @@ public class ViewListados extends javax.swing.JInternalFrame {
       ViewVentasPorFechas informeFrame = new ViewVentasPorFechas();
       ViewListarTodasLasVentas listarFrame =new ViewListarTodasLasVentas();
       ViewListarVentasClienteX clienteFrame = new ViewListarVentasClienteX();
-    public ViewListados() {
+
+      
+public ViewListados() {
         initComponents();
 
         
         
-        //((javax.swing.plaf.basic.BasicInternalFrameUI)getUI()).setNorthPane(null);
-        MouseEvent click = new MouseEvent(jDPEscritorio, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH, rootPaneCheckingEnabled);
+
          
         //setBorder(null);
 
@@ -44,28 +45,38 @@ public class ViewListados extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/1.png"));
-        Image miImagen = icono.getImage();
-        jDPEscritorio = new javax.swing.JDesktopPane(){
-            public void paintComponent(Graphics g){
-                g.drawImage(miImagen, 0, 0 , getWidth(), getHeight(), this);
-
+        ImageIcon icono = new ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/3.png"));
+        Image miimagen = icono.getImage();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+            public void paintComponent (Graphics g){
+                g.drawImage(miimagen, 0, 0, getWidth(),getHeight(),this);
             }
-        }
-        ;
-        jBVentasPorFecha = new javax.swing.JButton();
-        jBListarTodasLasVentas = new javax.swing.JButton();
-        jBListarVentasClienteX = new javax.swing.JButton();
+        };
+        jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jBListarVentasClienteX = new javax.swing.JButton();
+        jBListarTodasLasVentas = new javax.swing.JButton();
+        jBVentasPorFecha = new javax.swing.JButton();
 
         setBorder(null);
-        setTitle("Listado de Prueba");
         setFrameIcon(null);
 
-        jBVentasPorFecha.setText("Listado de Ventas por Fecha");
-        jBVentasPorFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Menú de Informes - Fravemax");
+
+        jButton3.setText("⮚\tMostrar que clientes compraron el producto X.");
+
+        jBListarVentasClienteX.setText("Listar todas las ventas de un Cliente X.");
+        jBListarVentasClienteX.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBVentasPorFechaMouseClicked(evt);
+                jBListarVentasClienteXMouseClicked(evt);
+            }
+        });
+        jBListarVentasClienteX.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBListarVentasClienteXActionPerformed(evt);
             }
         });
 
@@ -81,51 +92,58 @@ public class ViewListados extends javax.swing.JInternalFrame {
             }
         });
 
-        jBListarVentasClienteX.setText("⮚\tListar todas las ventas de un Cliente X.");
-        jBListarVentasClienteX.addMouseListener(new java.awt.event.MouseAdapter() {
+        jBVentasPorFecha.setText("Listado de Ventas por Fecha");
+        jBVentasPorFecha.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBListarVentasClienteXMouseClicked(evt);
-            }
-        });
-        jBListarVentasClienteX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBListarVentasClienteXActionPerformed(evt);
+                jBVentasPorFechaMouseClicked(evt);
             }
         });
 
-        jButton3.setText("⮚\tMostrar que clientes compraron el producto X.");
+        jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBListarVentasClienteX, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBListarTodasLasVentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jDPEscritorio.setLayer(jBVentasPorFecha, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDPEscritorio.setLayer(jBListarTodasLasVentas, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDPEscritorio.setLayer(jBListarVentasClienteX, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDPEscritorio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jDPEscritorioLayout = new javax.swing.GroupLayout(jDPEscritorio);
-        jDPEscritorio.setLayout(jDPEscritorioLayout);
-        jDPEscritorioLayout.setHorizontalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDPEscritorioLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                    .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(338, Short.MAX_VALUE))
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 858, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(11, 11, 11)
+                            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(57, 57, 57)
+                            .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE))
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                            .addGap(229, 229, 229)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap()))
         );
-        jDPEscritorioLayout.setVerticalGroup(
-            jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDPEscritorioLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(jBListarVentasClienteX)
-                .addGap(42, 42, 42)
-                .addComponent(jButton3)
-                .addContainerGap(45, Short.MAX_VALUE))
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 486, Short.MAX_VALUE)
+            .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBVentasPorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBListarVentasClienteX, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(69, 69, 69)
+                    .addComponent(jBListarTodasLasVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(112, 112, 112)
+                    .addComponent(jButton3)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,16 +151,12 @@ public class ViewListados extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jDPEscritorio)
-                .addGap(5, 5, 5))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDPEscritorio)
-                .addContainerGap())
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -152,7 +166,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
                             
         
             if (!informeFrame.isVisible()) {
-            jDPEscritorio.add(informeFrame);
+            jDesktopPane1.add(informeFrame);
             informeFrame.setVisible(true);
             try {
                 informeFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
@@ -165,7 +179,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
     private void jBListarTodasLasVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBListarTodasLasVentasMouseClicked
         // TODO add your handling code here:
          if (!listarFrame.isVisible()) {
-            jDPEscritorio.add(listarFrame);
+            jDesktopPane1.add(listarFrame);
             listarFrame.setVisible(true);
             try {
                 listarFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
@@ -187,7 +201,7 @@ public class ViewListados extends javax.swing.JInternalFrame {
     private void jBListarVentasClienteXMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBListarVentasClienteXMouseClicked
         // TODO add your handling code here:
          if (!clienteFrame.isVisible()) {
-            jDPEscritorio.add(clienteFrame);
+            jDesktopPane1.add(clienteFrame);
             clienteFrame.setVisible(true);
             try {
                 clienteFrame.setMaximum(true);  // Opcional: maximiza el JInternalFrame
@@ -203,7 +217,8 @@ public class ViewListados extends javax.swing.JInternalFrame {
     private javax.swing.JButton jBListarVentasClienteX;
     private javax.swing.JButton jBVentasPorFecha;
     private javax.swing.JButton jButton3;
-    private javax.swing.JDesktopPane jDPEscritorio;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
 

@@ -22,11 +22,8 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMbajaymodificacion">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Baja y Modificaci&#xf3;n de Proctos"/>
+                <Property name="text" type="java.lang.String" value="Baja y Modificaci&#xf3;n de Productos"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Baja y Modificaci&#xf3;n de Productos"/>
-              </AccessibilityProperties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMbajaymodificacionActionPerformed"/>
               </Events>
