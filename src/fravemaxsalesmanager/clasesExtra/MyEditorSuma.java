@@ -9,22 +9,25 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 
 /* @author PedroxVA */
 public class MyEditorSuma extends AbstractCellEditor implements TableCellEditor, ActionListener{
 
+    private JTextField jTFSubTotal;
     Boolean currentValue;
     JButton button;
     protected static final String EDIT = "edit";
     private JTable jTable1;
     
-    public MyEditorSuma(JTable jTable1){
+    public MyEditorSuma(JTable jTable1, JTextField subTotal){
         button = new JButton();
         button.setActionCommand(EDIT);
         button.addActionListener(this);
         button.setBorderPainted(false);
         this.jTable1 = jTable1;
+        this.jTFSubTotal = subTotal;
     }
     
     public void actionPerformed(ActionEvent e){
@@ -36,6 +39,16 @@ public class MyEditorSuma extends AbstractCellEditor implements TableCellEditor,
                 }else{
                     JOptionPane.showMessageDialog(null, "Para loco, no somos la fabrica!");    
                 }
+                //------------
+        double subTotal = 0;
+        int filas = jTable1.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            
+            double precio = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, 1))) ;
+            double cantidad = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, 3))) ; 
+            subTotal += precio * cantidad;
+        }
+        jTFSubTotal.setText(String.valueOf(subTotal));
     }
     public Object getCellEditorValue(){
         return currentValue;
