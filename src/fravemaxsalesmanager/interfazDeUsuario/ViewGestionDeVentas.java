@@ -17,8 +17,6 @@ import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -655,11 +653,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
     private void colocarBotonesTablaCompra(){
         TableColumn agregarColumn;
         agregarColumn = jTablaCompras.getColumnModel().getColumn(4);
-        agregarColumn.setCellEditor(new MyEditor(jTablaCompras, jTFSubTotal));
+        agregarColumn.setCellEditor(new MyEditor(jTablaCompras, jTFSubTotal, jTFIVA, jTFTotalF));
         agregarColumn.setCellRenderer(new MyRenderer(true));
         TableColumn agregarColumnSuma;
         agregarColumnSuma = jTablaCompras.getColumnModel().getColumn(2);
-        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras, jTFSubTotal));
+        agregarColumnSuma.setCellEditor(new MyEditorSuma(jTablaCompras, jTFSubTotal, jTFIVA, jTFTotalF));
         agregarColumnSuma.setCellRenderer(new MyRendererSuma(true));
     }
     private void cargarTablaCompras(Producto producto){
