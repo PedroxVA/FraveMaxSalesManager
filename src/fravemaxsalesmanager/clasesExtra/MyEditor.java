@@ -17,18 +17,22 @@ public class MyEditor  extends AbstractCellEditor implements TableCellEditor, Ac
 
 
     private JTextField jTFSubTotal;
+    private JTextField jTFIVA;
+    private JTextField jTFTotalF;
     Boolean currentValue;
     JButton button;
     protected static final String EDIT = "edit";
     private JTable jTable1;
     
-    public MyEditor(JTable jTable1, JTextField subTotal){
+    public MyEditor(JTable jTable1, JTextField subTotal, JTextField IVA, JTextField total){
         button = new JButton();
         button.setActionCommand(EDIT);
         button.addActionListener(this);
         button.setBorderPainted(false);
         this.jTable1 = jTable1;
         this.jTFSubTotal = subTotal;
+        this.jTFIVA = IVA;
+        this.jTFTotalF = total;
     }
     
     public void actionPerformed(ActionEvent e){
@@ -49,6 +53,9 @@ public class MyEditor  extends AbstractCellEditor implements TableCellEditor, Ac
             subTotal+= precio*cantidad;
         }
         jTFSubTotal.setText(String.valueOf(subTotal));
+        double iva = subTotal*0.21;
+        jTFIVA.setText(String.valueOf(iva));
+        jTFTotalF.setText(String.valueOf(subTotal+iva));
  
     }
     public Object getCellEditorValue(){
