@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,12 +24,20 @@ import javax.swing.table.DefaultTableModel;
 public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
     ProductoData proData = new ProductoData();
-    DefaultTableModel modelo = new DefaultTableModel();
+
+    DefaultTableModel modelo = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            if (row == 7 && column == 1){//stock
+                return false;
+            }
+            return true;
+        }
+    };
 
     public ViewModificaInventario() {
       
         initComponents();
-        restringirTabla();
                 
         setBorder(null);
     
@@ -48,7 +57,14 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jTbuscarID = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTproductoSeleccionado = new javax.swing.JTable();
+        jTproductoSeleccionado = new javax.swing.JTable(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 0 || row == 7 || row == 0){return false;}
+
+                return true; // 7 es el índice de la columna "stock"
+            }
+        };
         jBModificar = new javax.swing.JButton();
         jBBaja = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -181,8 +197,8 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         String marca = (String) jTproductoSeleccionado.getValueAt(3, 1);
         String modelo = (String) jTproductoSeleccionado.getValueAt(4, 1);
         String descripcion = (String) jTproductoSeleccionado.getValueAt(5, 1);
-        Double precio = Double.parseDouble((String) jTproductoSeleccionado.getValueAt(6, 1));
-        int stock = Integer.parseInt((String) jTproductoSeleccionado.getValueAt(7, 1));
+        Double precio = Double.parseDouble(String.valueOf(jTproductoSeleccionado.getValueAt(6, 1)) );
+        int stock = Integer.parseInt(String.valueOf(jTproductoSeleccionado.getValueAt(7, 1)) );
         Boolean activo = true;
 
         // Crear un nuevo objeto Producto con los valores modificados
@@ -202,6 +218,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
         // Usar ProductoData para dar de baja el producto en la base de datos
         proData.bajaProductoPorID(idProducto);
+        limpiarTabla();
     } catch (Exception e) {
         JOptionPane.showMessageDialog(null, "Error al procesar la baja del producto.");
     }
@@ -222,20 +239,12 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
     private void cargarDatosTabla() {
         try {
-            
     
             int id = Integer.parseInt(jTbuscarID.getText().replace(" ", ""));
 
             Producto producto = proData.buscarProductoPorId(id);
             if (producto.getIdProducto() == 0) {
-                jTproductoSeleccionado.setValueAt(null, 0, 1);
-                jTproductoSeleccionado.setValueAt(null, 1, 1);
-                jTproductoSeleccionado.setValueAt(null, 2, 1);
-                jTproductoSeleccionado.setValueAt(null, 3, 1);
-                jTproductoSeleccionado.setValueAt(null, 4, 1);
-                jTproductoSeleccionado.setValueAt(null, 5, 1);
-                jTproductoSeleccionado.setValueAt(null, 6, 1);
-                jTproductoSeleccionado.setValueAt(null, 7, 1);
+                limpiarTabla();
                 JOptionPane.showMessageDialog(null, "Error, producto no encontrado.");
             } else {
                 jTproductoSeleccionado.setValueAt(producto.getIdProducto(), 0, 1);
@@ -256,20 +265,16 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         }
         
     }
-    
-        private void restringirTabla (){
-        
-            modelo = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return row != 7; // 7 es el índice de la columna "stock"
-            }
-        };
-        
-        
-     
-    
-}
+   private void limpiarTabla(){
+       jTproductoSeleccionado.setValueAt(null, 0, 1);
+       jTproductoSeleccionado.setValueAt(null, 1, 1);
+       jTproductoSeleccionado.setValueAt(null, 2, 1);
+       jTproductoSeleccionado.setValueAt(null, 3, 1);
+       jTproductoSeleccionado.setValueAt(null, 4, 1);
+       jTproductoSeleccionado.setValueAt(null, 5, 1);
+       jTproductoSeleccionado.setValueAt(null, 6, 1);
+       jTproductoSeleccionado.setValueAt(null, 7, 1);
+   }
 
 }
     

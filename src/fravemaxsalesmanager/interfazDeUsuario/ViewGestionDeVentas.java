@@ -17,6 +17,7 @@ import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
+import java.sql.Date;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -64,6 +65,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         cargarComboCliente();
         cargarComboCategoria();
         cargarComboNombreProducto();
+        jDCFecha.setDate(Date.valueOf(LocalDate.now()));
         //--------
         String tipoProducto = (String)jCTipoProducto.getSelectedItem();
         listaP = proData.buscarProductoPorNombreProducto(tipoProducto);
@@ -480,7 +482,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         
         
         List<DetalleVenta> listaDetalleVenta = new ArrayList<>();
-        LocalDate fecha = null;
+        LocalDate fecha = LocalDate.now();
         try {
             int idCliente = cliente.getIdCliente();
             if (idCliente == 0) {
@@ -493,8 +495,10 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                 
                 if(!listaCarrito.isEmpty()){
                     venData.altaVenta(venta);
+                    int contador = 0;
                   for (Producto producto : listaCarrito) {
-                    int cantidad = 1;//*****************+
+                    
+                    int cantidad = Integer.parseInt(String.valueOf(jTablaCompras.getValueAt(contador, 3)));//*****************+
                     int idVenta = venta.getIdVenta();
                     Double precioVenta = producto.getPrecioActual();
                     Double descuentos = 0.0; //***********+
@@ -504,7 +508,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
                     DetalleVenta detalleVenta = new DetalleVenta(cantidad, idVenta, precioVenta, descuentos, IVA, idProducto);
                     listaDetalleVenta.add(detalleVenta);
-                    
+                    contador ++;
                 }
                   venta.setImporteBruto(importeBruto);
                   venData.modificarVenta(venta);
@@ -523,8 +527,12 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Carrito vacío.");
                 }
                 
-                
+                JOptionPane.showMessageDialog(null, "Se ha facturado con exito!"); 
             }
+            modeloCompras.setRowCount(0);
+            listaCarrito = new ArrayList<>();
+            
+           
 
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Fecha no válida.");

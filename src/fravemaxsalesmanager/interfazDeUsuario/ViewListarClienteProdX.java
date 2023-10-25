@@ -165,7 +165,7 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
         String clienteSeleccionado =jCBCliente.getSelectedItem().toString();
         
         Producto producto = (Producto) productoData.buscarProductoPorNombreProducto(productoSeleccionado);
-        Cliente cliente = clienteData.obtenerClientesPorProducto(clienteSeleccionado);
+        List<Cliente> Listaclientes = clienteData.obtenerClientesPorProducto(producto);
         if (producto != null) {
             DefaultTableModel model = (DefaultTableModel) jTProductosx.getModel();
             model.setRowCount(0);

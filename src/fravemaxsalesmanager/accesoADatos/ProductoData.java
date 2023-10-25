@@ -70,7 +70,12 @@ public class ProductoData {
     }
     //Método para eliminar un producto - 3;
     public void bajaProductoPorID(int idProducto){
-        String sql = "UPDATE producto set estado= 0 WHERE idProducto = ? ";
+        Producto producto = buscarProductoPorId(idProducto);
+        int stock = producto.getStock();
+        if(stock>0){
+            JOptionPane.showMessageDialog(null, "No se puede dar de baja si todavía queda stock.");
+        }else{
+            String sql = "UPDATE producto set estado= 0 WHERE idProducto = ? ";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -86,6 +91,8 @@ public class ProductoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto.");
         }
+        }
+        
     }
     
     public void bajaProductoPorNombre(String nombre){
@@ -164,7 +171,7 @@ public class ProductoData {
             
             int exito = ps.executeUpdate();
             if(exito==1){
-                JOptionPane.showMessageDialog(null, "Producto modificado con exito.");
+                //JOptionPane.showMessageDialog(null, "Producto modificado con exito.");
             }else{
                 JOptionPane.showMessageDialog(null, "Error al modificar");
             }
@@ -179,7 +186,7 @@ public class ProductoData {
     public Producto buscarProductoPorId(int id){
         Producto producto = new Producto();
         
-        String sql = "SELECT * FROM producto WHERE producto.idProducto = ?";
+        String sql = "SELECT * FROM producto WHERE producto.idProducto = ? AND producto.estado = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -242,11 +249,41 @@ public class ProductoData {
         String sql= "SELECT * "
                 + "FROM producto as p "
                 + "WHERE p.nombreProducto = ? "
-                + "AND p.stock >= 1";
+                + "AND p.stock >= 1 AND p.estado = 1";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombreP);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                int idProducto = rs.getInt("idProducto");
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                Producto producto = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                listaProductos.add(producto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+        }
+        return listaProductos;
+    }
+    
+    private List<Producto> buscarProductosDadosDeBaja(){
+        ArrayList<Producto> listaProductos = new ArrayList();
+        
+        String sql= "SELECT p.* "
+                + "FROM producto as p "
+                + "WHERE p.estado = 1;";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){

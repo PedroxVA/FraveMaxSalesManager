@@ -113,7 +113,7 @@ public class VentaData {
             
             int exito = ps.executeUpdate();
             if(exito==1){
-                JOptionPane.showMessageDialog(null, "Venta modificada con exito.");
+                //JOptionPane.showMessageDialog(null, "Venta modificada con exito.");
             }else{
                 JOptionPane.showMessageDialog(null, "Error al modificar");
             }

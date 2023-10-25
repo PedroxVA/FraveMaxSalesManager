@@ -4,6 +4,8 @@ package fravemaxsalesmanager.clasesExtra;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -36,6 +38,12 @@ public class MyEditor  extends AbstractCellEditor implements TableCellEditor, Ac
     }
     
     public void actionPerformed(ActionEvent e){
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        
+        
+        
         int fila = jTable1.getSelectedRow();
 
         int cantidadActual = (int) jTable1.getModel().getValueAt(fila, 3);
@@ -52,11 +60,11 @@ public class MyEditor  extends AbstractCellEditor implements TableCellEditor, Ac
             double cantidad = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, 3)));
             subTotal+= precio*cantidad;
         }
-        jTFSubTotal.setText(String.valueOf(subTotal));
+        jTFSubTotal.setText(formato.format(subTotal));
         double iva = subTotal*0.21;
-        jTFIVA.setText(String.valueOf(iva));
-        jTFTotalF.setText(String.valueOf(subTotal+iva));
- 
+        jTFIVA.setText(formato.format(iva));
+        double total = subTotal+iva;
+        jTFTotalF.setText(formato.format(total));
     }
     public Object getCellEditorValue(){
         return currentValue;
