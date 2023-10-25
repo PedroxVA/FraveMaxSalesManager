@@ -40,7 +40,7 @@ public class DetalleVentaData {
 
                 if (rs.next()) {
                     DetalleVenta.setIdDetalleVenta(rs.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Se ha registrado el DetalleVenta exitosamente.");
+                    //JOptionPane.showMessageDialog(null, "Se ha registrado el DetalleVenta exitosamente.");
 
                     Producto producto = proData.buscarProductoPorId(DetalleVenta.getIdProducto());
                     producto.setStock(producto.getStock() - 1);
