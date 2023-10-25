@@ -11,11 +11,14 @@ import fravemaxsalesmanager.entidades.Venta;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,14 +26,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Belén
  */
 public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
- Conexion miConexion = new Conexion();
+    Conexion miConexion = new Conexion();
     ProductoData proData = new ProductoData();
     ClienteData clieData = new ClienteData();
     VentaData venData = new VentaData();
-    
-     ArrayList<Venta> listaVentas = new ArrayList();
-     List<Producto> listaProductos = new ArrayList<>();
-     private DefaultTableModel modelo = new DefaultTableModel();
+    List<Venta> todasLasVentas = new ArrayList();
+    List<Producto> listaProductos = new ArrayList<>();
+    private DefaultTableModel modelo = new DefaultTableModel();
      
      
     public ViewListarTodasLasVentas() {
@@ -168,7 +170,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     private void jBGenerarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarListaActionPerformed
         LocalDate fecha = jDateChooser1.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         
-        List<Venta> todasLasVentas = venData.buscarVentaPorFecha(fecha);
+        todasLasVentas = venData.buscarVentaPorFecha(fecha);
 
     modelo.setRowCount(0);
      
@@ -178,9 +180,9 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
         
         String nombreCliente = obtenerClientePorId(idCliente);
          
-        modelo.addRow(new Object[]{venta.getIdVenta(), nombreCliente, venta.getFechaVenta(), venta.getImporteBruto()});
+        modelo.addRow(new Object[]{venta.getIdVenta(), nombreCliente, venta.getFechaVenta(), darFormato(venta.getImporteBruto())});
     }
-   
+   calcularTotal();
              
     }//GEN-LAST:event_jBGenerarListaActionPerformed
 
@@ -230,5 +232,28 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     }
     
  }
+
+      public void calcularTotal(){
+        double total = 0;
+        
+         for (Venta venta : todasLasVentas) {
+             total += venta.getImporteBruto();
+         }
+  
+        jTTotalVentas.setText(darFormato(total));
+        jTTotalVentas.setHorizontalAlignment(SwingConstants.RIGHT);
+    }
+    
+    private String darFormato(double nro){
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+
+        return formato.format(nro);
+    }
+    
+    private void limpiarTabla(){
+        modelo.setRowCount(0);
+    }
 
 }

@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -267,10 +268,6 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
            
           
            
-           
-           
-           
-           
        }
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "En esa fecha no hay ventas, ingrese una nueva");
@@ -281,11 +278,8 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             jTTotalVenta.setText("");
         }
        
-      
-       
-       
-           
-           
+
+           //calcularTotal();
     }//GEN-LAST:event_jBGenerarInformeActionPerformed
 
     private void jDCFechaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDCFechaPropertyChange
@@ -381,4 +375,26 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
     // Puedes utilizar tu método obtenerClientePorId aquí
     return clieData.obtenerClientePorId(idVentaInt);
 }
+   /* 
+    public void calcularTotal(){
+        double total = 0;
+        
+        for (int i = 0; i < jTTablaInforme.getColumnCount(); i++) {
+
+            String valor = String.valueOf(jTTablaInforme.getValueAt(i, 3));
+            total += Double.parseDouble(valor);
+            
+        }
+        
+        jTTotalVenta.setText(darFormato(total));
+        jTTotalVenta.setHorizontalAlignment(SwingConstants.RIGHT);
+    }
+    
+    private String darFormato(double nro){
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+
+        return formato.format(nro);
+    }*/
 }

@@ -13,6 +13,9 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import fravemaxsalesmanager.accesoADatos.ClienteData;
 import fravemaxsalesmanager.entidades.Venta;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -27,7 +30,7 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     DetalleVentaData deVenData = new DetalleVentaData();
     List<Cliente> clientes  = new ArrayList<>();
     DefaultTableModel modelo = new DefaultTableModel();
-
+    List<Venta> ventasDelCliente = new ArrayList<>();
 
    
     
@@ -57,7 +60,7 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     private void cargarTablaCliente(List<Venta> ventasDelCliente){
         modelo.setRowCount(0);
         for (Venta venta : ventasDelCliente) {
-            modelo.addRow(new Object[]{venta.getIdVenta(), venta.getFechaVenta(), venta.getImporteBruto()});
+            modelo.addRow(new Object[]{venta.getIdVenta(), venta.getFechaVenta(), darFormato(venta.getImporteBruto())});
         }
     }
 
@@ -102,6 +105,7 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
             }
         });
 
+        jTFCliente.setEditable(false);
         jTFCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFClienteActionPerformed(evt);
@@ -199,8 +203,12 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
                 jTFCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
 
                
-                List<Venta> ventasDelCliente = venData.buscarVentaPorCliente(idCliente);
+                ventasDelCliente = venData.buscarVentaPorCliente(idCliente);
                 cargarTablaCliente(ventasDelCliente);
+                
+                calcularTotal();
+            }else{
+                limpiarTabla();
             }
    
 
@@ -235,5 +243,26 @@ public class ViewListarVentasClienteX extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
 
+     public void calcularTotal(){
+        double total = 0;
+        
+         for (Venta venta : ventasDelCliente) {
+             total += venta.getImporteBruto();
+         }
+  
+        jTTotalVentas.setText(darFormato(total));
+        jTTotalVentas.setHorizontalAlignment(SwingConstants.RIGHT);
+    }
     
+    private String darFormato(double nro){
+        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
+        separadores.setDecimalSeparator('.');
+        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+
+        return formato.format(nro);
+    }
+    
+    private void limpiarTabla(){
+        modelo.setRowCount(0);
+    }
 }
