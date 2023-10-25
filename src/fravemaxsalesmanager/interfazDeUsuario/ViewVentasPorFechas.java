@@ -252,7 +252,8 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
            if (cliente != null){
                
                jTNombreCliente.setText(cliente.getNombre()+" "+cliente.getApellido());
-               listaProductos = proData.buscarProductoPorFechaDeVenta(fechaVenta);
+               listaProductos = proData.buscarProductoPorFechaDeVentaYIdVenta(fechaVenta, idVenta);//++++++
+               
                reiniciarTabla();
                cargarTabla();
                

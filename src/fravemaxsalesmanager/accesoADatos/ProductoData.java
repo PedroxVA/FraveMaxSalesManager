@@ -243,6 +243,40 @@ public class ProductoData {
         return listaProductos;
     }
     
+    public List<Producto> buscarProductoPorFechaDeVentaYIdVenta(LocalDate fechaVenta, int idVenta){
+        ArrayList<Producto> listaProductos = new ArrayList();
+        
+        String sql= "SELECT p.* "
+                + "FROM producto as p "
+                + "JOIN detalleventa AS dv ON (dv.idProducto=p.idProducto) "
+                + "JOIN venta AS v ON (dv.idVenta=v.idVenta) "
+                + "WHERE v.fechaVenta = ? AND v.idVenta = ?;";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fechaVenta));
+            ps.setInt(2, idVenta);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                int idProducto = rs.getInt("idProducto");
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                Producto producto = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                listaProductos.add(producto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+        }
+        return listaProductos;
+    }
+    
     public List<Producto> buscarProductoPorNombreProducto(String nombreP){
         ArrayList<Producto> listaProductos = new ArrayList();
         
