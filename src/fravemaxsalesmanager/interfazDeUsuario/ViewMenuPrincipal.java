@@ -88,7 +88,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMbajaymodificacion);
-        jMbajaymodificacion.getAccessibleContext().setAccessibleName("Baja y Modificación de Productos");
 
         jMenuBar2.add(jMenu1);
 
@@ -118,7 +117,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenu5.setText("Listados");
 
-        jMenuItem3.setText("Listado de Prueba");
+        jMenuItem3.setText("Emisión de Listados");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
