@@ -342,11 +342,11 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
     
     private void cargarTabla() {
         totalVenta = 0.00;
-        // FormatoDeTablas formato = new FormatoDeTablas();
+        FormatoDeTablas formato = new FormatoDeTablas();
         
-        DecimalFormatSymbols separadores = new DecimalFormatSymbols();
-        separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
+        DecimalFormatSymbols separadoresTV = new DecimalFormatSymbols();
+        separadoresTV.setDecimalSeparator('.');
+        DecimalFormat formatoTV = new DecimalFormat("$ #,##0.00", separadoresTV);
         
         for (Producto producto : listaProductos) {
             String nombreProducto = producto.getNombreProducto();
@@ -354,22 +354,22 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             String model = producto.getModelo();
             double precio = producto.getPrecioActual();
             
-            String precioFormateado = formato.format(precio);
+            String precioFormateado = formatoTV.format(precio);  // este formatea una columna de la tabla 
             
             modelo.addRow(new Object[]{nombreProducto,marca,model,precio});
             
-            //int ultimaFila = modelo.getRowCount()-1;
-            //jTTablaInforme.getColumnModel().getColumn(3).setCellRenderer(formato);
-            //jTTablaInforme.setValueAt(precio, ultimaFila, 3);
+            int ultimaFila = modelo.getRowCount()-1;
+            jTTablaInforme.getColumnModel().getColumn(3).setCellRenderer(formato);
+            jTTablaInforme.setValueAt(precio, ultimaFila, 3);
             
-            //totalVenta +=precio;
-            //jTTotalVenta.setText(formato.format(totalVenta));
+            totalVenta +=precio;
+            jTTotalVenta.setText(formatoTV.format(totalVenta));
             
             
             
             
             totalVenta += producto.getPrecioActual();
-            String subTotalString = formato.format(totalVenta);
+            String subTotalString = formatoTV.format(totalVenta);  //
             jTTotalVenta.setText(subTotalString);
             jTTotalVenta.setHorizontalAlignment(SwingConstants.RIGHT);
         }
