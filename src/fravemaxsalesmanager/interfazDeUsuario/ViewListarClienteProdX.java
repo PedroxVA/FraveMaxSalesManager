@@ -17,6 +17,8 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
      
     private ProductoData productoData;
     private ClienteData clienteData;
+    private Producto producto;
+    private List<Producto> listaProductosCB;
 
     
     public ViewListarClienteProdX() {
@@ -24,7 +26,7 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
         productoData = new ProductoData();
         clienteData = new ClienteData();
         llenarComboBoxProductos();
-        llenarComboBoxClientes();
+        this.setBorder(null);
     }
 
     /**
@@ -38,14 +40,13 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel1 = new fravemaxsalesmanager.interfazDeUsuario.Backinformes();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jCBProducto = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         jBGenerarInfoProd = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTProductosx = new javax.swing.JTable();
-        jCBCliente = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,8 +72,6 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setText("Cliente:");
-
         jBGenerarInfoProd.setText("Generar informe");
         jBGenerarInfoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,72 +81,62 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
 
         jTProductosx.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Apellido", "Teléfono", "Email", "Localidad", "Provincia"
             }
         ));
         jScrollPane2.setViewportView(jTProductosx);
 
-        jCBCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jCBCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCBClienteActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCBProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(246, 246, 246)
+                        .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCBProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBProducto, 0, 238, Short.MAX_VALUE)
-                            .addComponent(jCBCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jCBCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(316, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -159,22 +148,23 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
 
     private void jBGenerarInfoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarInfoProdActionPerformed
         // TODO add your handling code here:
+        int index = jCBProducto.getSelectedIndex();
+        producto = listaProductosCB.get(index);
         
-        String productoSeleccionado = jCBProducto.getSelectedItem().toString();
-        String clienteSeleccionado =jCBCliente.getSelectedItem().toString();
-        
-        List<Producto> Listaproductos = productoData.buscarProductoPorNombreProducto(productoSeleccionado);
-        List<Cliente> Listaclientes = clienteData.obtenerClientesPorProducto(productoSeleccionado);
-        if (productoSeleccionado != null) {
+        //List<Producto> Listaproductos = productoData.buscarProductoPorNombreProducto(productoSeleccionado);
+        //List<Cliente> Listaclientes = clienteData.obtenerClientesPorProducto(producto);
+        if (producto != null) {
             DefaultTableModel model = (DefaultTableModel) jTProductosx.getModel();
             model.setRowCount(0);
-            List<Cliente> clientesQueCompraron = clienteData.obtenerClientesPorProducto(productoSeleccionado);
+            List<Cliente> clientesQueCompraron = clienteData.obtenerClientesPorProducto(producto);
             for (Cliente cliente : clientesQueCompraron) {
                 model.addRow(new Object[]{
                     cliente.getNombre(),
                     cliente.getApellido(),
                     cliente.getTelef(),
-                    cliente.getEmail()
+                    cliente.getEmail(),
+                    cliente.getUbicacion().getLocalidad(),
+                    cliente.getUbicacion().getProvincia()
                 });
             }
         } else {
@@ -184,18 +174,13 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jBGenerarInfoProdActionPerformed
 
-    private void jCBClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCBClienteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBGenerarInfoProd;
-    private javax.swing.JComboBox<String> jCBCliente;
     private javax.swing.JComboBox<String> jCBProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTProductosx;
@@ -204,17 +189,10 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
 
 private void llenarComboBoxProductos() {
         jCBProducto.removeAllItems();
-        List<Producto> productos = productoData.obtenerTodosLosProductos();
-        for (Producto producto : productos) {
+        listaProductosCB = productoData.obtenerTodosLosProductos();
+        for (Producto producto : listaProductosCB) {
             String item = (producto.getNombreProducto()+" "+producto.getModelo());
             jCBProducto.addItem(item);
-        }
-    }
- private void llenarComboBoxClientes() {
-        jCBCliente.removeAllItems();
-        List<Cliente> clientes = clienteData.obtenerTodosLosClientes(); // Reemplaza esto con el método adecuado para obtener los clientes
-        for (Cliente cliente : clientes) {
-            jCBCliente.addItem(cliente.getNombre()); // Puedes personalizar la forma en que se muestra el cliente en el JComboBox
         }
     }
 }
