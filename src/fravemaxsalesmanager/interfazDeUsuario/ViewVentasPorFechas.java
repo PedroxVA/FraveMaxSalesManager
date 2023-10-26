@@ -12,6 +12,7 @@ import fravemaxsalesmanager.accesoADatos.VentaData;
 import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Venta;
+import fravemaxsalesmanager.interfazDeUsuario.FormatoDeTablas;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -276,6 +277,7 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             jTNombreCliente.setText("");
             reiniciarTabla();
             jTTotalVenta.setText("");
+            jTTotalVenta.setHorizontalAlignment(SwingConstants.RIGHT);
         }
        
 
@@ -340,9 +342,11 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
     
     private void cargarTabla() {
         totalVenta = 0.00;
+        // FormatoDeTablas formato = new FormatoDeTablas();
+        
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
         for (Producto producto : listaProductos) {
             String nombreProducto = producto.getNombreProducto();
@@ -352,11 +356,22 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             
             String precioFormateado = formato.format(precio);
             
-            modelo.addRow(new Object[]{nombreProducto,marca,model,precioFormateado});
+            modelo.addRow(new Object[]{nombreProducto,marca,model,precio});
+            
+            //int ultimaFila = modelo.getRowCount()-1;
+            //jTTablaInforme.getColumnModel().getColumn(3).setCellRenderer(formato);
+            //jTTablaInforme.setValueAt(precio, ultimaFila, 3);
+            
+            //totalVenta +=precio;
+            //jTTotalVenta.setText(formato.format(totalVenta));
+            
+            
+            
             
             totalVenta += producto.getPrecioActual();
             String subTotalString = formato.format(totalVenta);
             jTTotalVenta.setText(subTotalString);
+            jTTotalVenta.setHorizontalAlignment(SwingConstants.RIGHT);
         }
     
     }

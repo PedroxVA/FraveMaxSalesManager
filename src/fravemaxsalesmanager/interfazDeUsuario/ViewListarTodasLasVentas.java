@@ -247,7 +247,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
     private String darFormato(double nro){
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
 
         return formato.format(nro);
     }

@@ -119,6 +119,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         setBorder(null);
 
+        jPanel1.setBackground(new java.awt.Color(240, 240, 255));
+
+        jTablaCompras.setBackground(new java.awt.Color(240, 240, 240));
         jTablaCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -132,9 +135,11 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         ));
         jScrollPane3.setViewportView(jTablaCompras);
 
+        jLabel4.setBackground(new java.awt.Color(105, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/carrito.png"))); // NOI18N
         jLabel4.setText("Carrito de Compras");
 
+        jBAgregarAlCarrito.setBackground(new java.awt.Color(105, 255, 255));
         jBAgregarAlCarrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/carrito-de-compras2.png"))); // NOI18N
         jBAgregarAlCarrito.setText("Agregar al Carrito");
         jBAgregarAlCarrito.addActionListener(new java.awt.event.ActionListener() {
@@ -145,6 +150,9 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Fecha: ");
 
+        jDCFecha.setBackground(new java.awt.Color(105, 255, 255));
+
+        jBFacturar.setBackground(new java.awt.Color(105, 255, 255));
         jBFacturar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/iconoGuardar.png"))); // NOI18N
         jBFacturar.setText("Aceptar y Facturar");
         jBFacturar.addActionListener(new java.awt.event.ActionListener() {
@@ -154,17 +162,21 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         });
 
         jTFTotalF.setEditable(false);
+        jTFTotalF.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel8.setText("Total Factura: ");
 
         jTFIVA.setEditable(false);
+        jTFIVA.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel7.setText("I.V.A 21 %");
 
         jTFSubTotal.setEditable(false);
+        jTFSubTotal.setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel6.setText("Sub-Total: ");
 
+        jTablaVenta.setBackground(new java.awt.Color(240, 240, 240));
         jTablaVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -187,13 +199,14 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         jTablaVenta.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jTablaVenta);
 
-        jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Gestión de Ventas");
 
         jLabel3.setText("Buscar Cliente por:");
 
+        jCBuscarCliente.setBackground(new java.awt.Color(105, 255, 255));
         jCBuscarCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +214,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBBuscar.setBackground(new java.awt.Color(105, 255, 255));
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +242,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Buscar Producto por:");
 
+        jCCategoriaProducto.setBackground(new java.awt.Color(102, 255, 255));
         jCCategoriaProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCCategoriaProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,6 +250,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             }
         });
 
+        jCTipoProducto.setBackground(new java.awt.Color(105, 255, 255));
         jCTipoProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jCTipoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -242,6 +258,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
             }
         });
 
+        jBSalir.setBackground(new java.awt.Color(105, 255, 255));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrar.png"))); // NOI18N
         jBSalir.setText("Salir sin Facturar");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -459,7 +476,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
         
         
@@ -493,7 +510,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
         
         
@@ -602,7 +619,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
             
         subTotal=0.0;
@@ -785,6 +802,8 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
 //            }
 //        });
         
+      
+
         modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, producto.getPrecioActual(), null, cantidad,null});
         
     }
