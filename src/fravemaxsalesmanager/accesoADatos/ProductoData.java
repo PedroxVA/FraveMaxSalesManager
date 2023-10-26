@@ -309,6 +309,38 @@ public class ProductoData {
         return listaProductos;
     }
     
+        public List<Producto> obtenerTodosLosProductos(){
+        ArrayList<Producto> listaProductos = new ArrayList();
+        
+        String sql= "SELECT * "
+                + "FROM producto AS p "
+                + "WHERE  p. stock >=1 "
+                + "AND p.estado = 1";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                int idProducto = rs.getInt("idProducto");
+                String categoria = rs.getString("categoria");
+                String nombreProducto = rs.getString("nombreProducto");
+                String marca = rs.getString("marca");
+                String modelo = rs.getString("modelo");
+                String descripcion = rs.getString("descripcion");
+                Double precioActual = rs.getDouble("precioActual");
+                int stock = rs.getInt("stock");
+                
+                Producto producto = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precioActual, stock, true);
+                listaProductos.add(producto);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la Base de Datos(Tabla producto)");
+        }
+        return listaProductos;
+    }
+    
+    
     private List<Producto> buscarProductosDadosDeBaja(){
         ArrayList<Producto> listaProductos = new ArrayList();
         

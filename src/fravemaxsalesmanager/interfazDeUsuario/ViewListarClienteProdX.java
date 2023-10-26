@@ -111,12 +111,12 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCBProducto, 0, 143, Short.MAX_VALUE)
+                            .addComponent(jCBProducto, 0, 238, Short.MAX_VALUE)
                             .addComponent(jCBCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                 .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
@@ -147,15 +147,14 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
                     .addComponent(jBGenerarInfoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(312, Short.MAX_VALUE))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBProductoActionPerformed
-        // TODO add your handling code here:
-        
+               
     }//GEN-LAST:event_jCBProductoActionPerformed
 
     private void jBGenerarInfoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGenerarInfoProdActionPerformed
@@ -164,12 +163,12 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
         String productoSeleccionado = jCBProducto.getSelectedItem().toString();
         String clienteSeleccionado =jCBCliente.getSelectedItem().toString();
         
-        Producto producto = (Producto) productoData.buscarProductoPorNombreProducto(productoSeleccionado);
-        List<Cliente> Listaclientes = clienteData.obtenerClientesPorProducto(producto);
-        if (producto != null) {
+        List<Producto> Listaproductos = productoData.buscarProductoPorNombreProducto(productoSeleccionado);
+        List<Cliente> Listaclientes = clienteData.obtenerClientesPorProducto(productoSeleccionado);
+        if (productoSeleccionado != null) {
             DefaultTableModel model = (DefaultTableModel) jTProductosx.getModel();
             model.setRowCount(0);
-            List<Cliente> clientesQueCompraron = clienteData.obtenerClientesPorProducto(producto);
+            List<Cliente> clientesQueCompraron = clienteData.obtenerClientesPorProducto(productoSeleccionado);
             for (Cliente cliente : clientesQueCompraron) {
                 model.addRow(new Object[]{
                     cliente.getNombre(),
@@ -205,9 +204,10 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
 
 private void llenarComboBoxProductos() {
         jCBProducto.removeAllItems();
-        List<Producto> productos = productoData.buscarProductoPorNombreProducto("");
+        List<Producto> productos = productoData.obtenerTodosLosProductos();
         for (Producto producto : productos) {
-            jCBProducto.addItem(producto.getNombreProducto());
+            String item = (producto.getNombreProducto()+" "+producto.getModelo());
+            jCBProducto.addItem(item);
         }
     }
  private void llenarComboBoxClientes() {
