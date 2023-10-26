@@ -23,10 +23,11 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
     
     public ViewListarClienteProdX() {
         initComponents();
+        setBorder(null);
         productoData = new ProductoData();
         clienteData = new ClienteData();
         llenarComboBoxProductos();
-        this.setBorder(null);
+        
     }
 
     /**

@@ -29,10 +29,7 @@ public ViewListados() {
         initComponents();
 
         
-        
-
-         
-        //setBorder(null);
+        jDesktopPane1.setBorder(null);
 
     }
 
@@ -59,8 +56,10 @@ public ViewListados() {
         jBVentasPorFecha = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         setFrameIcon(null);
+
+        jDesktopPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 255));
