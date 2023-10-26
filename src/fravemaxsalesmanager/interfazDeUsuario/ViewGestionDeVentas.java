@@ -625,9 +625,23 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         subTotal=0.0;
         int filas = jTablaCompras.getRowCount();
         for (int i = 0; i < filas; i++) {
-            double precio = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 1))) ;
-            double cantidad = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 3))) ; 
-            subTotal+= precio*cantidad;
+            
+            
+            
+
+                String precio = String.valueOf(jTablaCompras.getValueAt(i, 1)) ;
+                precio = precio.replaceAll("[^0-9]", ""); // Elimina todo excepto números y puntos
+                double valor = Double.parseDouble(precio); // Convierte la cadena en un número
+                valor = valor/100;
+                Double cantidad = Double.parseDouble(String.valueOf(jTablaCompras.getValueAt(i, 3))) ; 
+
+                subTotal+= valor*cantidad;
+
+                
+
+            
+            
+            
         }
         
         jTFSubTotal.setText(formato.format(subTotal));
@@ -722,7 +736,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
                 
         String prod = producto.getNombreProducto();
         String marca = producto.getMarca();
@@ -758,7 +772,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
         
         String prod = producto.getNombreProducto();
@@ -804,7 +818,7 @@ public class ViewGestionDeVentas extends javax.swing.JInternalFrame {
         
       
 
-        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, producto.getPrecioActual(), null, cantidad,null});
+        modeloCompras.addRow(new Object[] {prod+", "+marca+", "+modelo, formato.format(producto.getPrecioActual()), null, cantidad,null});
         
     }
     

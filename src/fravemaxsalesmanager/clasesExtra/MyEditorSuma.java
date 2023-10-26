@@ -39,7 +39,7 @@ public class MyEditorSuma extends AbstractCellEditor implements TableCellEditor,
     public void actionPerformed(ActionEvent e){
         DecimalFormatSymbols separadores = new DecimalFormatSymbols();
         separadores.setDecimalSeparator('.');
-        DecimalFormat formato = new DecimalFormat("#,##0.00", separadores);
+        DecimalFormat formato = new DecimalFormat("$ #,##0.00", separadores);
         
         
         
@@ -56,9 +56,12 @@ public class MyEditorSuma extends AbstractCellEditor implements TableCellEditor,
         int filas = jTable1.getRowCount();
         for (int i = 0; i < filas; i++) {
 
-            double precio = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, 1))) ;
+            String precio = String.valueOf(jTable1.getValueAt(i, 1)) ;
+            precio = precio.replaceAll("[^0-9]", ""); // Elimina todo excepto números y puntos
+            double valor = Double.parseDouble(precio); // Convierte la cadena en un número
+            valor = valor/100;
             double cantidad = Double.parseDouble(String.valueOf(jTable1.getValueAt(i, 3))) ; 
-            subTotal += precio * cantidad;
+            subTotal += valor * cantidad;
         }
         
         jTFSubTotal.setText(formato.format(subTotal));
