@@ -82,7 +82,7 @@ public class UbicacionData {
             ps.setInt(6, ubicacion.getIdUbicacion());
             
             int exito = ps.executeUpdate();
-            if(exito==1){
+            if(exito>=1){
                 JOptionPane.showMessageDialog(null, "Ubicacion modificada con exito.");
             }else{
                 JOptionPane.showMessageDialog(null, "Error al modificar");

@@ -5,8 +5,12 @@
  */
 package fravemaxsalesmanager.interfazDeUsuario;
 
+import fravemaxsalesmanager.accesoADatos.ClienteData;
 import fravemaxsalesmanager.accesoADatos.ProductoData;
+import fravemaxsalesmanager.accesoADatos.UbicacionData;
+import fravemaxsalesmanager.entidades.Cliente;
 import fravemaxsalesmanager.entidades.Producto;
+import fravemaxsalesmanager.entidades.Ubicacion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultCellEditor;
@@ -21,9 +25,10 @@ import javax.swing.table.TableModel;
  *
  * @author jfneg
  */
-public class ViewModificaInventario extends javax.swing.JInternalFrame {
+public class ViewModificaBajaCliente extends javax.swing.JInternalFrame {
 
-    ProductoData proData = new ProductoData();
+    UbicacionData ubiData = new UbicacionData();
+    ClienteData cliData = new ClienteData();
 
     DefaultTableModel modelo = new DefaultTableModel(){
         @Override
@@ -35,7 +40,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         }
     };
 
-    public ViewModificaInventario() {
+    public ViewModificaBajaCliente() {
       
         initComponents();
                 
@@ -57,7 +62,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jTbuscarID = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTproductoSeleccionado = new javax.swing.JTable(){
+        jTClienteSeleccionado = new javax.swing.JTable(){
             @Override
             public boolean isCellEditable(int row, int column) {
                 if(column == 0 || row == 7 || row == 0){return false;}
@@ -73,7 +78,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jPanel.setDoubleBuffered(false);
         jPanel.setOpaque(false);
 
-        jLbuscarProducto.setText("Buscar producto por ID: ");
+        jLbuscarProducto.setText("Buscar cliente por ID: ");
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,24 +87,27 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
             }
         });
 
-        jTproductoSeleccionado.setModel(new javax.swing.table.DefaultTableModel(
+        jTClienteSeleccionado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Id Producto", ""},
-                {"Categoría", ""},
+                {"Id Cliente", ""},
                 {"Nombre", ""},
-                {"Marca", null},
-                {"Modelo", null},
-                {"Descripción", null},
-                {"Precio", null},
-                {"Stock", ""}
+                {"Apellido", ""},
+                {"Cuil", null},
+                {"Teléfono", null},
+                {"E-mail", null},
+                {"Dirección", null},
+                {"Código Postal", ""},
+                {"Localidad", null},
+                {"Provincia", null},
+                {"País", null}
             },
             new String [] {
-                "", "Producto Seleccionado"
+                "", "Cliente Seleccionado"
             }
         ));
-        jScrollPane1.setViewportView(jTproductoSeleccionado);
-        if (jTproductoSeleccionado.getColumnModel().getColumnCount() > 0) {
-            jTproductoSeleccionado.getColumnModel().getColumn(1).setResizable(false);
+        jScrollPane1.setViewportView(jTClienteSeleccionado);
+        if (jTClienteSeleccionado.getColumnModel().getColumnCount() > 0) {
+            jTClienteSeleccionado.getColumnModel().getColumn(1).setResizable(false);
         }
 
         jBModificar.setText("Modificar y Guardar");
@@ -118,7 +126,7 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 102, 255));
-        jLabel1.setText("Modificación y Baja de Productos del Inventario");
+        jLabel1.setText("Modificación y Baja de Clientes");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/cerrar.png"))); // NOI18N
         jButton1.setText("Salir");
@@ -132,10 +140,6 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         jPanel.setLayout(jPanelLayout);
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelLayout.createSequentialGroup()
-                .addGap(163, 163, 163)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                 .addContainerGap(139, Short.MAX_VALUE)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,6 +162,10 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(132, 132, 132))))
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,8 +178,8 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
                     .addComponent(jTbuscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -207,37 +215,45 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
              
         try {
         // Obtener los valores de la tabla (asegúrate de que los nombres sean correctos)
-        int idProducto = (int) jTproductoSeleccionado.getValueAt(0, 1);
-        String categoria = (String) jTproductoSeleccionado.getValueAt(1, 1);
-        String nombreProducto = (String) jTproductoSeleccionado.getValueAt(2, 1);
-        String marca = (String) jTproductoSeleccionado.getValueAt(3, 1);
-        String modelo = (String) jTproductoSeleccionado.getValueAt(4, 1);
-        String descripcion = (String) jTproductoSeleccionado.getValueAt(5, 1);
-        Double precio = Double.parseDouble(String.valueOf(jTproductoSeleccionado.getValueAt(6, 1)) );
-        int stock = Integer.parseInt(String.valueOf(jTproductoSeleccionado.getValueAt(7, 1)) );
-        Boolean activo = true;
+        int idCliente= (int) jTClienteSeleccionado.getValueAt(0, 1);
+        String nombre = (String) jTClienteSeleccionado.getValueAt(1, 1);
+        String apellido = (String) jTClienteSeleccionado.getValueAt(2, 1);
+        String cuil = (String) jTClienteSeleccionado.getValueAt(3, 1);
+        String telefono = (String) jTClienteSeleccionado.getValueAt(4, 1);
+        String email = (String) jTClienteSeleccionado.getValueAt(5, 1);
+        
+        Cliente clienteBusqueda = cliData.obtenerClientePorId(idCliente);
+        int idUbicacion = clienteBusqueda.getUbicacion().getIdUbicacion();
+        String direccion = (String) jTClienteSeleccionado.getValueAt(6, 1);
+        String localidad = (String) jTClienteSeleccionado.getValueAt(7, 1);
+        String codigoPostal = (String) jTClienteSeleccionado.getValueAt(8, 1);
+        String provincia = (String) jTClienteSeleccionado.getValueAt(9, 1);
+        String pais= (String) jTClienteSeleccionado.getValueAt(10, 1);
 
-        // Crear un nuevo objeto Producto con los valores modificados
-        Producto productoModificado = new Producto(idProducto, categoria, nombreProducto, marca, modelo, descripcion, precio, stock, true);
+        // Crear un nuevo objeto Cliente/Ubicacion con los valores modificados
+        
+        Ubicacion ubicacionModificada = new Ubicacion(idUbicacion, direccion, localidad, codigoPostal, provincia, pais);
+        Cliente clienteModificado = new Cliente(idCliente, apellido, nombre, telefono, email, cuil, ubicacionModificada);
 
-        // Actualizar el producto en la base de datos
-        proData.modificarProducto(productoModificado);
-        JOptionPane.showMessageDialog(null, "Producto modificado con exito!");
+        // Actualizar el Cliente/Ubicacion en la base de datos
+        ubiData.modificarUbicacion(ubicacionModificada);
+        cliData.modificarCliente(clienteModificado);
+        JOptionPane.showMessageDialog(null, "Cliente modificado con exito!");
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al procesar los datos del producto."+e.getMessage());
+        JOptionPane.showMessageDialog(null, "Error al procesar los datos del cliente."+e.getMessage());
     }
     }//GEN-LAST:event_jBModificarActionPerformed
 
     private void jBBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBajaActionPerformed
             try {
         // Obtener el ID del producto a dar de baja (supongamos que se ingresa un ID en un campo de texto)
-        int idProducto = Integer.parseInt(jTbuscarID.getText().trim());
+        int idCliente = Integer.parseInt(jTbuscarID.getText().trim());
 
         // Usar ProductoData para dar de baja el producto en la base de datos
-        proData.bajaProductoPorID(idProducto);
+        cliData.eliminarCliente(idCliente);
         limpiarTabla();
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error al procesar la baja del producto.");
+        JOptionPane.showMessageDialog(null, "Error al procesar la baja al cliente.");
     }
     }//GEN-LAST:event_jBBajaActionPerformed
 
@@ -255,8 +271,8 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLbuscarProducto;
     private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTClienteSeleccionado;
     private javax.swing.JTextField jTbuscarID;
-    private javax.swing.JTable jTproductoSeleccionado;
     // End of variables declaration//GEN-END:variables
 
     private void cargarDatosTabla() {
@@ -264,22 +280,23 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
     
             int id = Integer.parseInt(jTbuscarID.getText().replace(" ", ""));
 
-            Producto producto = proData.buscarProductoPorId(id);
-            if (producto.getIdProducto() == 0) {
+            Cliente cliente = cliData.obtenerClientePorId(id);
+            
+            if (cliente.getIdCliente() == 0) {
                 limpiarTabla();
-                JOptionPane.showMessageDialog(null, "Error, producto no encontrado.");
+                JOptionPane.showMessageDialog(null, "Error, cliente no encontrado.");
             } else {
-                jTproductoSeleccionado.setValueAt(producto.getIdProducto(), 0, 1);
-                jTproductoSeleccionado.setValueAt(producto.getCategoria(), 1, 1);
-                jTproductoSeleccionado.setValueAt(producto.getNombreProducto(), 2, 1);
-                jTproductoSeleccionado.setValueAt(producto.getMarca(), 3, 1);
-                jTproductoSeleccionado.setValueAt(producto.getModelo(), 4, 1);
-                jTproductoSeleccionado.setValueAt(producto.getDescripcion(), 5, 1);
-                jTproductoSeleccionado.setValueAt(producto.getPrecioActual(), 6, 1);
-                jTproductoSeleccionado.setValueAt(producto.getStock(), 7, 1);
-    
-                
-                
+                jTClienteSeleccionado.setValueAt(cliente.getIdCliente(), 0, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getNombre(), 1, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getApellido(), 2, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getCuil(), 3, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getTelef(), 4, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getEmail(), 5, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getUbicacion().getDireccion(), 6, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getUbicacion().getCodigoPostal(), 7, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getUbicacion().getLocalidad(), 8, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getUbicacion().getProvincia(), 9, 1);
+                jTClienteSeleccionado.setValueAt(cliente.getUbicacion().getPais(), 10, 1);
             }
 
         } catch (NumberFormatException e) {
@@ -288,14 +305,14 @@ public class ViewModificaInventario extends javax.swing.JInternalFrame {
         
     }
    private void limpiarTabla(){
-       jTproductoSeleccionado.setValueAt(null, 0, 1);
-       jTproductoSeleccionado.setValueAt(null, 1, 1);
-       jTproductoSeleccionado.setValueAt(null, 2, 1);
-       jTproductoSeleccionado.setValueAt(null, 3, 1);
-       jTproductoSeleccionado.setValueAt(null, 4, 1);
-       jTproductoSeleccionado.setValueAt(null, 5, 1);
-       jTproductoSeleccionado.setValueAt(null, 6, 1);
-       jTproductoSeleccionado.setValueAt(null, 7, 1);
+       jTClienteSeleccionado.setValueAt(null, 0, 1);
+       jTClienteSeleccionado.setValueAt(null, 1, 1);
+       jTClienteSeleccionado.setValueAt(null, 2, 1);
+       jTClienteSeleccionado.setValueAt(null, 3, 1);
+       jTClienteSeleccionado.setValueAt(null, 4, 1);
+       jTClienteSeleccionado.setValueAt(null, 5, 1);
+       jTClienteSeleccionado.setValueAt(null, 6, 1);
+       jTClienteSeleccionado.setValueAt(null, 7, 1);
    }
 
 }

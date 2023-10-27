@@ -46,7 +46,8 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMbajaymodificacion = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        JMIAltaClientes = new javax.swing.JMenuItem();
+        JMIBajaModifClientes = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMGestionDeVentas = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -96,13 +97,21 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/ClienteIcono.png"))); // NOI18N
         jMenu3.setText("Clientes");
 
-        jMenuItem2.setText("Alta de Clientes");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        JMIAltaClientes.setText("Alta de Clientes");
+        JMIAltaClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                JMIAltaClientesActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        jMenu3.add(JMIAltaClientes);
+
+        JMIBajaModifClientes.setText("Baja y Modificación Clientes");
+        JMIBajaModifClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMIBajaModifClientesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(JMIBajaModifClientes);
 
         jMenuBar2.add(jMenu3);
 
@@ -185,14 +194,14 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       modificacion.moveToFront();
     }//GEN-LAST:event_jMbajaymodificacionActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void JMIAltaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIAltaClientesActionPerformed
       jPanel1.removeAll();
       jPanel1.repaint();
       ViewClienteNuevo cliente = new ViewClienteNuevo();
       cliente.setVisible(true);
       jPanel1.add(cliente);
       cliente.moveToFront(); 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_JMIAltaClientesActionPerformed
 
     private void jMGestionDeVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMGestionDeVentasActionPerformed
       jPanel1.removeAll();
@@ -219,6 +228,16 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
       jPanel1.add(listado);
       listado.moveToFront();
     }//GEN-LAST:event_ViewListadosActionPerformed
+
+    private void JMIBajaModifClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIBajaModifClientesActionPerformed
+        // TODO add your handling code here:
+      jPanel1.removeAll();
+      jPanel1.repaint();
+      ViewModificaBajaCliente cliente = new  ViewModificaBajaCliente();
+      cliente.setVisible(true);
+      jPanel1.add(cliente);
+      cliente.moveToFront(); 
+    }//GEN-LAST:event_JMIBajaModifClientesActionPerformed
 
 
     /**
@@ -258,6 +277,8 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem JMIAltaClientes;
+    private javax.swing.JMenuItem JMIBajaModifClientes;
     private javax.swing.JMenuItem ViewListados;
     private javax.swing.JMenuItem jMGestionDeVentas;
     private javax.swing.JMenuItem jMbajaymodificacion;
@@ -268,7 +289,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
