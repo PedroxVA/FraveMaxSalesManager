@@ -182,7 +182,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
          
         modelo.addRow(new Object[]{venta.getIdVenta(), nombreCliente, venta.getFechaVenta(), darFormato(venta.getImporteBruto())});
     }
-   calcularTotal();
+         calcularTotal();
              
     }//GEN-LAST:event_jBGenerarListaActionPerformed
 

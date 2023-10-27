@@ -360,8 +360,8 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
             jTTablaInforme.getColumnModel().getColumn(3).setCellRenderer(formato);
             jTTablaInforme.setValueAt(precio, ultimaFila, 3);
             
-            totalVenta +=precio;
-            jTTotalVenta.setText(formatoTV.format(totalVenta));
+            //totalVenta +=precio;
+            //jTTotalVenta.setText(formatoTV.format(totalVenta));
             
             
             
