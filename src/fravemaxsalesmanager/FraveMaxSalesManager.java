@@ -11,11 +11,40 @@ import fravemaxsalesmanager.entidades.DetalleVenta;
 import fravemaxsalesmanager.entidades.Producto;
 import fravemaxsalesmanager.entidades.Ubicacion;
 import fravemaxsalesmanager.entidades.Venta;
+import fravemaxsalesmanager.interfazDeUsuario.ViewMenuPrincipal;
 
 /* @author PedroxVA */
 public class FraveMaxSalesManager {
 
     public static void main(String[] args) {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ViewMenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ViewMenuPrincipal().setVisible(true);
+            }
+        });
+                
+
+        
     //Prueba de los métodos de ProductoData
     //ProductoData proData = new ProductoData();
     //UbicacionData ubiData = new UbicacionData();

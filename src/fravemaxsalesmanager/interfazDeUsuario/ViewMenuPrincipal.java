@@ -23,7 +23,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private JButton btnAbrirJBInventario;
     
     
-    
     public ViewMenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
