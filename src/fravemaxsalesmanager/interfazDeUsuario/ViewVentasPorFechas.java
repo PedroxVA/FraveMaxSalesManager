@@ -59,6 +59,7 @@ public class ViewVentasPorFechas extends javax.swing.JInternalFrame {
         
                
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
         armarTitulosTabla();
       
        

@@ -23,6 +23,7 @@ public class ViewListarClienteProdX extends javax.swing.JInternalFrame {
     
     public ViewListarClienteProdX() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
         setBorder(null);
         productoData = new ProductoData();
         clienteData = new ClienteData();

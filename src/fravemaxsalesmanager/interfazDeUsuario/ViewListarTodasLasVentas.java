@@ -37,6 +37,7 @@ public class ViewListarTodasLasVentas extends javax.swing.JInternalFrame {
      
     public ViewListarTodasLasVentas() {
         initComponents();
+        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
         modelo = new DefaultTableModel();
         jTTablaLista.setModel(modelo);
 

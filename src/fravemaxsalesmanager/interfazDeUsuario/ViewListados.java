@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.beans.PropertyVetoException;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.border.LineBorder;
@@ -34,6 +35,7 @@ public ViewListados() {
    
                       
         initComponents();
+        //((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
         informeFrame = new ViewVentasPorFechas();
         listarFrame = new ViewListarTodasLasVentas();
         clienteFrame = new ViewListarVentasClienteX();
@@ -43,6 +45,7 @@ public ViewListados() {
     informeFrame.setMaximizable(false);
     informeFrame.setIconifiable(false);
     informeFrame.setBorder(null);
+    //informeFrame.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 
     listarFrame.setClosable(false);
     listarFrame.setMaximizable(false);
@@ -78,7 +81,7 @@ public ViewListados() {
         jBVentasPorFecha = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        setBorder(null);
         setFrameIcon(null);
 
         jDesktopPane1.setBorder(null);
@@ -156,7 +159,7 @@ public ViewListados() {
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap(442, Short.MAX_VALUE)
+                .addContainerGap(444, Short.MAX_VALUE)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

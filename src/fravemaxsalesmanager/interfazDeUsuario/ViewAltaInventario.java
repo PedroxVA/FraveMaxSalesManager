@@ -28,6 +28,7 @@ public class ViewAltaInventario extends javax.swing.JInternalFrame {
         
           
         initComponents();
+        //((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
         cargarComboCategoria();
         cargarComboNombreProducto();
         cargarComboMarca();

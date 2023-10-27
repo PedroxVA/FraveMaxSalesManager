@@ -9,9 +9,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.border.Border;
 
 /**
  *
@@ -48,7 +50,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMGestionDeVentas = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        ViewListados = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -65,6 +67,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 667, Short.MAX_VALUE)
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/InventarioIcono.png"))); // NOI18N
         jMenu1.setText("Inventario");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +93,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu1);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/ClienteIcono.png"))); // NOI18N
         jMenu3.setText("Clientes");
 
         jMenuItem2.setText("Alta de Clientes");
@@ -102,6 +106,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/VentasIcono.png"))); // NOI18N
         jMenu4.setText("Ventas");
 
         jMGestionDeVentas.setText("Gestión de Ventas");
@@ -114,15 +119,16 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu4);
 
+        jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fravemaxsalesmanager/recursos/ListadosIcono.png"))); // NOI18N
         jMenu5.setText("Listados");
 
-        jMenuItem3.setText("Emisión de Listados");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        ViewListados.setText("Emisión de Listados");
+        ViewListados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                ViewListadosActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuItem3);
+        jMenu5.add(ViewListados);
 
         jMenuBar2.add(jMenu5);
 
@@ -204,14 +210,15 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jMenu2MouseClicked
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void ViewListadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewListadosActionPerformed
       jPanel1.removeAll();
       jPanel1.repaint();
       ViewListados listado = new ViewListados();
+      listado.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
       listado.setVisible(true);
       jPanel1.add(listado);
       listado.moveToFront();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_ViewListadosActionPerformed
 
 
     /**
@@ -251,6 +258,7 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ViewListados;
     private javax.swing.JMenuItem jMGestionDeVentas;
     private javax.swing.JMenuItem jMbajaymodificacion;
     private javax.swing.JMenu jMenu1;
@@ -261,7 +269,6 @@ public class ViewMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
