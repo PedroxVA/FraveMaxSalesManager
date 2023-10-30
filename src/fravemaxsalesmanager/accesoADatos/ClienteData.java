@@ -59,9 +59,21 @@ public class ClienteData {
 
     // Método para eliminar un cliente de la base de datos
     public void eliminarCliente(int clienteId) {
-        int resultado = JOptionPane.showConfirmDialog(null, "¿Estas seguro?¡Se eliminaran todas las ventas y detallesVentas relacionadas!");
-        if(resultado==0){
-            List<Venta> listaVentas = venData.buscarVentaPorCliente(clienteId);
+        
+        // Verifica si existen ventas asociadas al cliente
+        List<Venta> listaVentas = venData.buscarVentaPorCliente(clienteId);
+        
+        if (!listaVentas.isEmpty()){
+        // Muestra un mensaje para indicar que hay ventas asociadas a ese cliente
+        
+            JOptionPane.showMessageDialog(null,"No se puede eliminar ese cliente porque registra ventas asociadas");
+        
+        } else{
+        
+            int resultado = JOptionPane.showConfirmDialog(null, "¿Estas seguro?¡Se eliminaran todas las ventas y detallesVentas relacionadas!");
+        
+                        if(resultado==0){
+            // List<Venta> listaVentas = venData.buscarVentaPorCliente(clienteId);
             for (Venta venta : listaVentas) {
                 deVenData.bajaDetalleVentaPorIdVenta(venta.getIdVenta());}
             venData.bajaVentaPorIdCliente(clienteId);
@@ -80,7 +92,7 @@ public class ClienteData {
             }
         }
     }
-
+    }
     // Método para obtener un cliente por su ID
     
     public Cliente obtenerClientePorId(int clienteId) {
