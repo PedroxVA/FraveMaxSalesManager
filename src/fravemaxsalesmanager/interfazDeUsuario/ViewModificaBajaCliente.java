@@ -62,7 +62,14 @@ public class ViewModificaBajaCliente extends javax.swing.JInternalFrame {
         jTbuscarID = new javax.swing.JTextField();
         jBBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTClienteSeleccionado = new javax.swing.JTable();
+        jTClienteSeleccionado = new javax.swing.JTable(){
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                if(column == 0 || row == 0){return false;}
+
+                return true; // 7 es el índice de la columna "stock"
+            }
+        };
         jBModificar = new javax.swing.JButton();
         jBBaja = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();

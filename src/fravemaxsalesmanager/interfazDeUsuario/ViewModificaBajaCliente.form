@@ -181,6 +181,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xd;&#xa;    @Override&#xd;&#xa;    public boolean isCellEditable(int row, int column) {&#xd;&#xa;        if(column == 0 || row == 0){return false;}&#xd;&#xa;&#xd;&#xa;        return true; // 7 es el &#xed;ndice de la columna &quot;stock&quot;&#xd;&#xa;    }&#xd;&#xa;}"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
